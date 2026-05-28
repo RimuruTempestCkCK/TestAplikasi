@@ -1,0 +1,356 @@
+﻿@{
+    ViewBag.Title = "Laporan";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*{{!-- ===== FILTER LAPORAN ===== --}}*@
+<div class="row">
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Filter Laporan</h4>
+                <p class="card-description">Pilih rentang tanggal dan kategori laporan yang ingin ditampilkan.</p>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="tanggalMulai">Tanggal Mulai</label>
+                            <input type="date" class="form-control" id="tanggalMulai" />
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="tanggalAkhir">Tanggal Akhir</label>
+                            <input type="date" class="form-control" id="tanggalAkhir" />
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="kategoriLaporan">Kategori</label>
+                            <select class="form-select" id="kategoriLaporan">
+                                <option value="semua">Semua Kategori</option>
+                                <option value="penjualan">Penjualan</option>
+                                <option value="pengguna">Pengguna</option>
+                                <option value="transaksi">Transaksi</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3 d-flex align-items-end">
+                        <div class="form-group w-100">
+                            <button type="button" class="btn btn-primary btn-fw me-2" id="btnFilter">
+                                <i class="ti-filter me-1"></i> Tampilkan
+                            </button>
+                            <button type="button" class="btn btn-outline-secondary btn-fw" id="btnReset">
+                                <i class="ti-reload me-1"></i> Reset
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*{{!-- ===== RINGKASAN STATISTIK ===== --}}*@
+<div class="row">
+    <div class="col-md-3 grid-margin stretch-card">
+        <div class="card card-tale">
+            <div class="card-body">
+                <p class="mb-4">Total Transaksi</p>
+                <p class="fs-30 mb-2">8,540</p>
+                <p><i class="ti-arrow-up text-white me-1"></i>12.5% dari bulan lalu</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 grid-margin stretch-card">
+        <div class="card card-dark-blue">
+            <div class="card-body">
+                <p class="mb-4">Total Pendapatan</p>
+                <p class="fs-30 mb-2">Rp 124 Jt</p>
+                <p><i class="ti-arrow-up text-white me-1"></i>8.3% dari bulan lalu</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 grid-margin stretch-card">
+        <div class="card card-light-blue">
+            <div class="card-body">
+                <p class="mb-4">Pengguna Aktif</p>
+                <p class="fs-30 mb-2">3,210</p>
+                <p><i class="ti-arrow-up text-white me-1"></i>5.1% dari bulan lalu</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 grid-margin stretch-card">
+        <div class="card card-light-danger">
+            <div class="card-body">
+                <p class="mb-4">Laporan Pending</p>
+                <p class="fs-30 mb-2">47</p>
+                <p><i class="ti-arrow-down text-white me-1"></i>3.2% dari bulan lalu</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*{{!-- ===== GRAFIK BARIS 1 ===== --}}*@
+<div class="row">
+    <div class="col-lg-8 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="card-title mb-0">Tren Transaksi Bulanan</h4>
+                    <div class="dropdown">
+                        <button class="btn btn-sm btn-light bg-white dropdown-toggle" type="button"
+                                data-bs-toggle="dropdown">
+                            <i class="mdi mdi-calendar"></i> 2024
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="#">2024</a>
+                            <a class="dropdown-item" href="#">2023</a>
+                            <a class="dropdown-item" href="#">2022</a>
+                        </div>
+                    </div>
+                </div>
+                <canvas id="lineChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Distribusi Kategori</h4>
+                <div class="doughnutjs-wrapper d-flex justify-content-center">
+                    <canvas id="doughnutChart"></canvas>
+                </div>
+                <div id="doughnutLegend" class="mt-3"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*{{!-- ===== GRAFIK BARIS 2 ===== --}}*@
+<div class="row">
+    <div class="col-lg-6 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Pendapatan per Kategori</h4>
+                <canvas id="barChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Persentase Status Laporan</h4>
+                <div class="doughnutjs-wrapper d-flex justify-content-center">
+                    <canvas id="pieChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*{{!-- ===== TABEL DETAIL LAPORAN ===== --}}*@
+<div class="row">
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="card-title mb-0">Detail Laporan Transaksi</h4>
+                    <button type="button" class="btn btn-success btn-sm" onclick="exportLaporan()">
+                        <i class="ti-export me-1"></i> Export Excel
+                    </button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-borderless">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Tanggal</th>
+                                <th>Kode Transaksi</th>
+                                <th>Kategori</th>
+                                <th>Jumlah</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>01 Jan 2024</td>
+                                <td>TRX-20240101-001</td>
+                                <td>Penjualan</td>
+                                <td class="font-weight-bold">Rp 2.500.000</td>
+                                <td><label class="badge badge-success">Selesai</label></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>02 Jan 2024</td>
+                                <td>TRX-20240102-002</td>
+                                <td>Transaksi</td>
+                                <td class="font-weight-bold">Rp 1.200.000</td>
+                                <td><label class="badge badge-warning">Pending</label></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>03 Jan 2024</td>
+                                <td>TRX-20240103-003</td>
+                                <td>Penjualan</td>
+                                <td class="font-weight-bold">Rp 3.750.000</td>
+                                <td><label class="badge badge-success">Selesai</label></td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>04 Jan 2024</td>
+                                <td>TRX-20240104-004</td>
+                                <td>Pengguna</td>
+                                <td class="font-weight-bold">Rp 800.000</td>
+                                <td><label class="badge badge-danger">Dibatalkan</label></td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>05 Jan 2024</td>
+                                <td>TRX-20240105-005</td>
+                                <td>Transaksi</td>
+                                <td class="font-weight-bold">Rp 4.100.000</td>
+                                <td><label class="badge badge-success">Selesai</label></td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>06 Jan 2024</td>
+                                <td>TRX-20240106-006</td>
+                                <td>Penjualan</td>
+                                <td class="font-weight-bold">Rp 950.000</td>
+                                <td><label class="badge badge-warning">Pending</label></td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>07 Jan 2024</td>
+                                <td>TRX-20240107-007</td>
+                                <td>Pengguna</td>
+                                <td class="font-weight-bold">Rp 2.200.000</td>
+                                <td><label class="badge badge-info">Diproses</label></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+     //===== LINE CHART: Tren Transaksi =====
+    var ctxLine = document.getElementById('lineChart').getContext('2d');
+    new Chart(ctxLine, {
+        type: 'line',
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Ags', 'Sep', 'Okt', 'Nov', 'Des'],
+            datasets: [{
+                label: 'Transaksi 2024',
+                data: [520, 680, 740, 610, 820, 910, 870, 950, 1020, 890, 760, 1100],
+                borderColor: '#4B49AC',
+                backgroundColor: 'rgba(75, 73, 172, 0.1)',
+                borderWidth: 2,
+                fill: true,
+                tension: 0.4,
+                pointBackgroundColor: '#4B49AC',
+                pointRadius: 4
+            }, {
+                label: 'Transaksi 2023',
+                data: [410, 530, 600, 490, 710, 780, 720, 800, 860, 740, 650, 920],
+                borderColor: '#98BDFF',
+                backgroundColor: 'rgba(152, 189, 255, 0.1)',
+                borderWidth: 2,
+                fill: true,
+                tension: 0.4,
+                pointBackgroundColor: '#98BDFF',
+                pointRadius: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: { legend: { position: 'bottom' } },
+            scales: {
+                y: { beginAtZero: true, grid: { color: 'rgba(0,0,0,0.05)' } },
+                x: { grid: { display: false } }
+            }
+        }
+    });
+
+    // ===== BAR CHART: Pendapatan per Kategori =====
+    var ctxBar = document.getElementById('barChart').getContext('2d');
+    new Chart(ctxBar, {
+        type: 'bar',
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Ags', 'Sep', 'Okt', 'Nov', 'Des'],
+            datasets: [{
+                label: 'Penjualan',
+                data: [42, 58, 65, 47, 73, 88, 76, 91, 85, 69, 54, 98],
+                backgroundColor: '#4B49AC'
+            }, {
+                label: 'Transaksi',
+                data: [28, 35, 42, 31, 55, 61, 58, 67, 72, 48, 39, 74],
+                backgroundColor: '#98BDFF'
+            }, {
+                label: 'Pengguna',
+                data: [15, 22, 28, 19, 34, 41, 37, 45, 38, 29, 24, 51],
+                backgroundColor: '#F9E59B'
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: { legend: { position: 'bottom' } },
+            scales: {
+                y: { beginAtZero: true, grid: { color: 'rgba(0,0,0,0.05)' } },
+                x: { grid: { display: false } }
+            }
+        }
+    });
+
+    // ===== DOUGHNUT CHART: Distribusi Kategori =====
+    var ctxDoughnut = document.getElementById('doughnutChart').getContext('2d');
+    new Chart(ctxDoughnut, {
+        type: 'doughnut',
+        data: {
+            labels: ['Penjualan', 'Transaksi', 'Pengguna', 'Lainnya'],
+            datasets: [{
+                data: [45, 30, 18, 7],
+                backgroundColor: ['#4B49AC', '#98BDFF', '#F9E59B', '#F3B729'],
+                borderWidth: 0,
+                hoverOffset: 8
+            }]
+        },
+        options: {
+            responsive: true,
+            cutout: '70%',
+            plugins: {
+                legend: { position: 'bottom' }
+            }
+        }
+    });
+
+    // ===== PIE CHART: Status Laporan =====
+    var ctxPie = document.getElementById('pieChart').getContext('2d');
+    new Chart(ctxPie, {
+        type: 'pie',
+        data: {
+            labels: ['Selesai', 'Pending', 'Diproses', 'Dibatalkan'],
+            datasets: [{
+                data: [62, 18, 12, 8],
+                backgroundColor: ['#00d25b', '#ffab00', '#4B49AC', '#fc424a'],
+                borderWidth: 2,
+                borderColor: '#fff',
+                hoverOffset: 8
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { position: 'bottom' }
+            }
+        }
+    });
+
+    // ===== EXPORT (placeholder) =====
+    function exportLaporan() {
+        alert('Fitur export akan dihubungkan ke controller.');
+    }
+</script>
