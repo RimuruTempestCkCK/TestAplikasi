@@ -189,9 +189,11 @@
     <Content Include="Views\Admin\User.cshtml" />
     <Content Include="Views\Admin\Laporan.cshtml" />
     <Content Include="Views\Admin\Produk.cshtml" />
+    <Content Include="Views\Account\Profile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\uploads\profil\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

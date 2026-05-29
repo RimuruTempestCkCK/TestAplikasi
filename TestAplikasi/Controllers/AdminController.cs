@@ -14,26 +14,17 @@ namespace TestAplikasi.Controllers
             .ConnectionStrings["DBConnection"]
             .ConnectionString;
 
-        // =============================================
-        // Cek Login
-        // =============================================
         private bool IsLoggedIn()
         {
             return Session["Id"] != null;
         }
 
-        // =============================================
-        // Cek Role Admin
-        // =============================================
         private bool IsAdmin()
         {
             return Session["Role"] != null &&
                    Session["Role"].ToString() == "Admin";
         }
 
-        // =============================================
-        // Validasi Akses
-        // =============================================
         private ActionResult CheckAccess()
         {
             if (!IsLoggedIn())
@@ -51,20 +42,18 @@ namespace TestAplikasi.Controllers
         public ActionResult Dashboard()
         {
             var access = CheckAccess();
-            if (access != null)
-                return access;
+            if (access != null) return access;
 
             return View();
         }
 
         // =============================================
-        // USER
+        // USER - GET
         // =============================================
         public ActionResult User()
         {
             var access = CheckAccess();
-            if (access != null)
-                return access;
+            if (access != null) return access;
 
             var listUser = new List<UserModel>();
 
@@ -76,13 +65,8 @@ namespace TestAplikasi.Controllers
                     conn.Open();
 
                     string query = @"
-                        SELECT
-                            Id,
-                            NamaLengkap,
-                            Username,
-                            Email,
-                            Role,
-                            Status
+                        SELECT Id, NamaLengkap, Username,
+                               Email, Role, Status
                         FROM dbo.Users
                         ORDER BY Id";
 
@@ -115,6 +99,9 @@ namespace TestAplikasi.Controllers
             return View(listUser);
         }
 
+        // =============================================
+        // USER - CREATE
+        // =============================================
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(
@@ -126,8 +113,7 @@ namespace TestAplikasi.Controllers
             string Status)
         {
             var access = CheckAccess();
-            if (access != null)
-                return access;
+            if (access != null) return access;
 
             try
             {
@@ -136,84 +122,160 @@ namespace TestAplikasi.Controllers
                 {
                     conn.Open();
 
-                    string cekQuery = @"
-                        SELECT COUNT(*)
-                        FROM dbo.Users
-                        WHERE Username = @Username";
+                    string cekQuery =
+                        "SELECT COUNT(*) FROM dbo.Users WHERE Username = @Username";
 
                     using (SqlCommand cekCmd =
                         new SqlCommand(cekQuery, conn))
                     {
-                        cekCmd.Parameters.AddWithValue(
-                            "@Username",
-                            Username);
-
-                        int jumlah =
-                            (int)cekCmd.ExecuteScalar();
+                        cekCmd.Parameters.AddWithValue("@Username", Username);
+                        int jumlah = (int)cekCmd.ExecuteScalar();
 
                         if (jumlah > 0)
                         {
                             TempData["ErrorMessage"] =
                                 "Username sudah digunakan.";
-
                             return RedirectToAction("User");
                         }
                     }
 
                     string query = @"
                         INSERT INTO dbo.Users
-                        (
-                            NamaLengkap,
-                            Username,
-                            Email,
-                            Password,
-                            Role,
-                            Status
-                        )
+                        (NamaLengkap, Username, Email, Password, Role, Status)
                         VALUES
-                        (
-                            @NamaLengkap,
-                            @Username,
-                            @Email,
-                            @Password,
-                            @Role,
-                            @Status
-                        )";
+                        (@NamaLengkap, @Username, @Email, @Password, @Role, @Status)";
 
                     using (SqlCommand cmd =
                         new SqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@NamaLengkap", NamaLengkap);
                         cmd.Parameters.AddWithValue("@Username", Username);
-                        cmd.Parameters.AddWithValue("@Email", Email);
+                        cmd.Parameters.AddWithValue("@Email", Email ?? "");
                         cmd.Parameters.AddWithValue("@Password", Password);
                         cmd.Parameters.AddWithValue("@Role", Role);
                         cmd.Parameters.AddWithValue("@Status", Status);
-
                         cmd.ExecuteNonQuery();
                     }
-
-                    TempData["SuccessMessage"] =
-                        "User berhasil ditambahkan.";
                 }
+
+                TempData["SuccessMessage"] = "User berhasil ditambahkan.";
             }
             catch (Exception ex)
             {
                 TempData["ErrorMessage"] =
-                    "Gagal menambahkan user: " +
-                    ex.Message;
+                    "Gagal menambahkan user: " + ex.Message;
             }
 
             return RedirectToAction("User");
         }
 
+        // =============================================
+        // USER - EDIT
+        // =============================================
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(
+            int Id,
+            string NamaLengkap,
+            string Username,
+            string Email,
+            string Password,
+            string Role,
+            string Status)
+        {
+            var access = CheckAccess();
+            if (access != null) return access;
+
+            try
+            {
+                using (SqlConnection conn =
+                    new SqlConnection(connStr))
+                {
+                    conn.Open();
+
+                    // Cek username dipakai user lain
+                    string cekQuery = @"
+                        SELECT COUNT(*) FROM dbo.Users
+                        WHERE Username = @Username AND Id <> @Id";
+
+                    using (SqlCommand cekCmd =
+                        new SqlCommand(cekQuery, conn))
+                    {
+                        cekCmd.Parameters.AddWithValue("@Username", Username);
+                        cekCmd.Parameters.AddWithValue("@Id", Id);
+                        int jumlah = (int)cekCmd.ExecuteScalar();
+
+                        if (jumlah > 0)
+                        {
+                            TempData["ErrorMessage"] =
+                                "Username sudah digunakan user lain.";
+                            return RedirectToAction("User");
+                        }
+                    }
+
+                    string query;
+
+                    if (!string.IsNullOrEmpty(Password))
+                    {
+                        query = @"
+                            UPDATE dbo.Users
+                            SET NamaLengkap = @NamaLengkap,
+                                Username    = @Username,
+                                Email       = @Email,
+                                Password    = @Password,
+                                Role        = @Role,
+                                Status      = @Status
+                            WHERE Id = @Id";
+                    }
+                    else
+                    {
+                        query = @"
+                            UPDATE dbo.Users
+                            SET NamaLengkap = @NamaLengkap,
+                                Username    = @Username,
+                                Email       = @Email,
+                                Role        = @Role,
+                                Status      = @Status
+                            WHERE Id = @Id";
+                    }
+
+                    using (SqlCommand cmd =
+                        new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@Id", Id);
+                        cmd.Parameters.AddWithValue("@NamaLengkap", NamaLengkap);
+                        cmd.Parameters.AddWithValue("@Username", Username);
+                        cmd.Parameters.AddWithValue("@Email", Email ?? "");
+                        cmd.Parameters.AddWithValue("@Role", Role);
+                        cmd.Parameters.AddWithValue("@Status", Status);
+
+                        if (!string.IsNullOrEmpty(Password))
+                            cmd.Parameters.AddWithValue("@Password", Password);
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                TempData["SuccessMessage"] = "User berhasil diperbarui.";
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] =
+                    "Gagal memperbarui user: " + ex.Message;
+            }
+
+            return RedirectToAction("User");
+        }
+
+        // =============================================
+        // USER - DELETE
+        // =============================================
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int Id)
         {
             var access = CheckAccess();
-            if (access != null)
-                return access;
+            if (access != null) return access;
 
             try
             {
@@ -222,7 +284,6 @@ namespace TestAplikasi.Controllers
                 {
                     TempData["ErrorMessage"] =
                         "Tidak bisa menghapus akun sendiri.";
-
                     return RedirectToAction("User");
                 }
 
@@ -242,30 +303,26 @@ namespace TestAplikasi.Controllers
                     }
                 }
 
-                TempData["SuccessMessage"] =
-                    "User berhasil dihapus.";
+                TempData["SuccessMessage"] = "User berhasil dihapus.";
             }
             catch (Exception ex)
             {
                 TempData["ErrorMessage"] =
-                    "Gagal menghapus user: " +
-                    ex.Message;
+                    "Gagal menghapus user: " + ex.Message;
             }
 
             return RedirectToAction("User");
         }
 
         // =============================================
-        // PRODUK
+        // PRODUK - GET
         // =============================================
         public ActionResult Produk()
         {
             var access = CheckAccess();
-            if (access != null)
-                return access;
+            if (access != null) return access;
 
-            var listProduk =
-                new List<ProdukModel>();
+            var listProduk = new List<ProdukModel>();
 
             try
             {
@@ -275,11 +332,7 @@ namespace TestAplikasi.Controllers
                     conn.Open();
 
                     string query = @"
-                        SELECT
-                            Id,
-                            NamaProduk,
-                            Harga,
-                            Deskripsi
+                        SELECT Id, NamaProduk, Harga, Deskripsi
                         FROM dbo.Produk
                         ORDER BY Id DESC";
 
@@ -290,25 +343,13 @@ namespace TestAplikasi.Controllers
                     {
                         while (reader.Read())
                         {
-                            listProduk.Add(
-                                new ProdukModel
-                                {
-                                    Id =
-                                        Convert.ToInt32(
-                                            reader["Id"]),
-
-                                    NamaProduk =
-                                        reader["NamaProduk"]
-                                        ?.ToString(),
-
-                                    Harga =
-                                        Convert.ToDecimal(
-                                            reader["Harga"]),
-
-                                    Deskripsi =
-                                        reader["Deskripsi"]
-                                        ?.ToString()
-                                });
+                            listProduk.Add(new ProdukModel
+                            {
+                                Id = Convert.ToInt32(reader["Id"]),
+                                NamaProduk = reader["NamaProduk"]?.ToString(),
+                                Harga = Convert.ToDecimal(reader["Harga"]),
+                                Deskripsi = reader["Deskripsi"]?.ToString()
+                            });
                         }
                     }
                 }
@@ -316,13 +357,15 @@ namespace TestAplikasi.Controllers
             catch (Exception ex)
             {
                 TempData["ErrorMessage"] =
-                    "Gagal memuat produk: "
-                    + ex.Message;
+                    "Gagal memuat produk: " + ex.Message;
             }
 
             return View(listProduk);
         }
 
+        // =============================================
+        // PRODUK - CREATE
+        // =============================================
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreateProduk(
@@ -331,8 +374,7 @@ namespace TestAplikasi.Controllers
             string Deskripsi)
         {
             var access = CheckAccess();
-            if (access != null)
-                return access;
+            if (access != null) return access;
 
             try
             {
@@ -343,53 +385,44 @@ namespace TestAplikasi.Controllers
 
                     string query = @"
                         INSERT INTO dbo.Produk
-                        (
-                            NamaProduk,
-                            Harga,
-                            Deskripsi
-                        )
+                        (NamaProduk, Harga, Deskripsi)
                         VALUES
-                        (
-                            @NamaProduk,
-                            @Harga,
-                            @Deskripsi
-                        )";
+                        (@NamaProduk, @Harga, @Deskripsi)";
 
                     using (SqlCommand cmd =
                         new SqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@NamaProduk", NamaProduk);
                         cmd.Parameters.AddWithValue("@Harga", Harga);
-                        cmd.Parameters.AddWithValue("@Deskripsi", Deskripsi);
-
+                        cmd.Parameters.AddWithValue("@Deskripsi", Deskripsi ?? "");
                         cmd.ExecuteNonQuery();
                     }
                 }
 
-                TempData["SuccessMessage"] =
-                    "Produk berhasil ditambahkan.";
+                TempData["SuccessMessage"] = "Produk berhasil ditambahkan.";
             }
             catch (Exception ex)
             {
                 TempData["ErrorMessage"] =
-                    "Gagal tambah produk: "
-                    + ex.Message;
+                    "Gagal tambah produk: " + ex.Message;
             }
 
             return RedirectToAction("Produk");
         }
 
+        // =============================================
+        // PRODUK - EDIT
+        // =============================================
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult EditProduk(
-    int Id,
-    string NamaProduk,
-    decimal Harga,
-    string Deskripsi)
+            int Id,
+            string NamaProduk,
+            decimal Harga,
+            string Deskripsi)
         {
             var access = CheckAccess();
-            if (access != null)
-                return access;
+            if (access != null) return access;
 
             try
             {
@@ -399,56 +432,43 @@ namespace TestAplikasi.Controllers
                     conn.Open();
 
                     string query = @"
-                UPDATE dbo.Produk
-                SET NamaProduk = @NamaProduk,
-                    Harga = @Harga,
-                    Deskripsi = @Deskripsi
-                WHERE Id = @Id";
+                        UPDATE dbo.Produk
+                        SET NamaProduk = @NamaProduk,
+                            Harga      = @Harga,
+                            Deskripsi  = @Deskripsi
+                        WHERE Id = @Id";
 
                     using (SqlCommand cmd =
                         new SqlCommand(query, conn))
                     {
-                        cmd.Parameters.AddWithValue(
-                            "@Id",
-                            Id);
-
-                        cmd.Parameters.AddWithValue(
-                            "@NamaProduk",
-                            NamaProduk);
-
-                        cmd.Parameters.AddWithValue(
-                            "@Harga",
-                            Harga);
-
-                        cmd.Parameters.AddWithValue(
-                            "@Deskripsi",
-                            Deskripsi);
-
+                        cmd.Parameters.AddWithValue("@Id", Id);
+                        cmd.Parameters.AddWithValue("@NamaProduk", NamaProduk);
+                        cmd.Parameters.AddWithValue("@Harga", Harga);
+                        cmd.Parameters.AddWithValue("@Deskripsi", Deskripsi ?? "");
                         cmd.ExecuteNonQuery();
                     }
                 }
 
-                TempData["SuccessMessage"] =
-                    "Produk berhasil diperbarui.";
+                TempData["SuccessMessage"] = "Produk berhasil diperbarui.";
             }
             catch (Exception ex)
             {
                 TempData["ErrorMessage"] =
-                    "Gagal update produk: "
-                    + ex.Message;
+                    "Gagal update produk: " + ex.Message;
             }
 
             return RedirectToAction("Produk");
         }
 
-
+        // =============================================
+        // PRODUK - DELETE
+        // =============================================
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteProduk(int Id)
         {
             var access = CheckAccess();
-            if (access != null)
-                return access;
+            if (access != null) return access;
 
             try
             {
@@ -468,14 +488,12 @@ namespace TestAplikasi.Controllers
                     }
                 }
 
-                TempData["SuccessMessage"] =
-                    "Produk berhasil dihapus.";
+                TempData["SuccessMessage"] = "Produk berhasil dihapus.";
             }
             catch (Exception ex)
             {
                 TempData["ErrorMessage"] =
-                    "Gagal hapus produk: "
-                    + ex.Message;
+                    "Gagal hapus produk: " + ex.Message;
             }
 
             return RedirectToAction("Produk");
@@ -487,8 +505,7 @@ namespace TestAplikasi.Controllers
         public ActionResult Laporan()
         {
             var access = CheckAccess();
-            if (access != null)
-                return access;
+            if (access != null) return access;
 
             return View();
         }

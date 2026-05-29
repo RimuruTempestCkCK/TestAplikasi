@@ -15,5 +15,7 @@
         public string Role { get; set; }
 
         public string Status { get; set; }
+
+        public string FotoProfil { get; set; }
     }
 }

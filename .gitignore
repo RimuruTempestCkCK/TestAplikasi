@@ -1,0 +1,20 @@
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build files
+bin/
+obj/
+
+# Logs
+*.log
+
+# Database local
+*.mdf
+*.ldf
+
+# Uploads
+TestAplikasi/Content/uploads/

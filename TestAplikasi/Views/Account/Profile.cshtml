@@ -1,0 +1,183 @@
+﻿@model TestAplikasi.Models.UserModel
+@{
+    ViewBag.Title = "Edit Profil";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Berhasil!</strong> @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Error!</strong> @TempData["ErrorMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<div class="row">
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Edit Profil</h4>
+                <p class="card-description">Perbarui informasi profil Anda.</p>
+
+                @using (Html.BeginForm("Profile", "Account", FormMethod.Post,
+                    new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="row">
+
+                        @*{{-- Kolom Foto --}}*@
+                        <div class="col-md-3 text-center mb-4">
+                            @{
+                                string fotoSrc = Model.FotoProfil != null
+                                    ? Url.Content("~/Content/uploads/profil/" + Model.FotoProfil)
+                                    : Url.Content("~/Content/templete/dist/assets/images/faces/face28.jpg");
+                            }
+                            <img id="previewFoto"
+                                 src="@fotoSrc"
+                                 alt="Foto Profil"
+                                 class="img-thumbnail rounded-circle mb-3"
+                                 style="width:150px; height:150px; object-fit:cover;" />
+
+                            <div>
+                                <label class="btn btn-outline-primary btn-sm">
+                                    <i class="ti-camera me-1"></i> Ganti Foto
+                                    <input type="file"
+                                           name="FotoFile"
+                                           id="FotoFile"
+                                           accept="image/*"
+                                           style="display:none;"
+                                           onchange="previewGambar(this)" />
+                                </label>
+                            </div>
+                            <small class="text-muted d-block mt-1">
+                                Format: jpg, jpeg, png, gif
+                            </small>
+                        </div>
+
+                        @*{{-- Kolom Form --}}*@
+                        <div class="col-md-9">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Username</label>
+                                <div class="col-sm-9">
+                                    <input type="text"
+                                           class="form-control bg-light"
+                                           value="@Model.Username"
+                                           readonly />
+                                    <small class="text-muted">Username tidak dapat diubah.</small>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">
+                                    Nama Lengkap <span class="text-danger">*</span>
+                                </label>
+                                <div class="col-sm-9">
+                                    <input type="text"
+                                           class="form-control"
+                                           name="NamaLengkap"
+                                           value="@Model.NamaLengkap"
+                                           placeholder="Masukkan nama lengkap"
+                                           required />
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Email</label>
+                                <div class="col-sm-9">
+                                    <input type="email"
+                                           class="form-control"
+                                           name="Email"
+                                           value="@Model.Email"
+                                           placeholder="Masukkan email" />
+                                </div>
+                            </div>
+
+                            <hr />
+                            <p class="text-muted small mb-3">
+                                Kosongkan kolom password di bawah jika tidak ingin mengubah password.
+                            </p>
+
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Password Lama</label>
+                                <div class="col-sm-9">
+                                    <input type="password"
+                                           class="form-control"
+                                           name="PasswordLama"
+                                           placeholder="Masukkan password lama" />
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Password Baru</label>
+                                <div class="col-sm-9">
+                                    <input type="password"
+                                           class="form-control"
+                                           name="PasswordBaru"
+                                           id="passwordBaru"
+                                           placeholder="Masukkan password baru" />
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Konfirmasi Password</label>
+                                <div class="col-sm-9">
+                                    <input type="password"
+                                           class="form-control"
+                                           id="konfirmPassword"
+                                           placeholder="Ulangi password baru" />
+                                </div>
+                            </div>
+
+                            <div class="form-group row mt-4">
+                                <div class="col-sm-9 offset-sm-3">
+                                    <button type="submit" class="btn btn-primary me-2">
+                                        <i class="ti-save me-1"></i> Simpan Perubahan
+                                    </button>
+                                    <a href="javascript:history.back()"
+                                       class="btn btn-light">
+                                        Batal
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Preview foto sebelum upload
+        function previewGambar(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById('previewFoto').src = e.target.result;
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // Validasi konfirmasi password
+        document.querySelector('form').addEventListener('submit', function (e) {
+            var baru    = document.getElementById('passwordBaru').value;
+            var konfirm = document.getElementById('konfirmPassword').value;
+
+            if (baru !== '' && baru !== konfirm) {
+                e.preventDefault();
+                alert('Konfirmasi password tidak cocok!');
+            }
+        });
+    </script>
+}
