@@ -1,4 +1,4 @@
-﻿@model List<TestAplikasi.Models.UserModel>
+﻿﻿@model List<TestAplikasi.Models.UserModel>
 @{
     ViewBag.Title = "Manajemen User";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -49,58 +49,58 @@
                             {
                                 int no = 1;
                                 @*foreach (var user in Model)
-            {
-                @{
-                    string badgeRole = "badge-secondary";
+                                    {
+                                        @{
+                                            string badgeRole = "badge-secondary";
 
-                    if (user.Role == "Admin")
-                    {
-                        badgeRole = "badge-info";
-                    }
+                                            if (user.Role == "Admin")
+                                            {
+                                                badgeRole = "badge-info";
+                                            }
 
-                    if (user.Role == "Pimpinan")
-                    {
-                        badgeRole = "badge-warning";
-                    }
+                                            if (user.Role == "Pimpinan")
+                                            {
+                                                badgeRole = "badge-warning";
+                                            }
 
-                    string badgeStatus = user.Status == "Aktif"
-                        ? "badge-success"
-                        : "badge-danger";
-                }
+                                            string badgeStatus = user.Status == "Aktif"
+                                                ? "badge-success"
+                                                : "badge-danger";
+                                        }
 
-                <tr>
-                    <td>@no</td>
-                    <td>@user.NamaLengkap</td>
-                    <td>@user.Username</td>
-                    <td>@user.Email</td>
-                    <td><label class="badge @badgeRole">@user.Role</label></td>
-                    <td><label class="badge @badgeStatus">@user.Status</label></td>
-                    <td>
-                        <button class="btn btn-inverse-warning btn-icon-text btn-sm btnEdit"
-                                data-id="@user.Id"
-                                data-nama="@user.NamaLengkap"
-                                data-username="@user.Username"
-                                data-email="@user.Email"
-                                data-role="@user.Role"
-                                data-status="@user.Status"
-                                data-bs-toggle="modal"
-                                data-bs-target="#modalEditUser">
-                            <i class="ti-pencil btn-icon-prepend"></i> Edit
-                        </button>
-                        @if (Convert.ToInt32(Session["Id"]) != user.Id)
-                        {
-                            <button class="btn btn-inverse-danger btn-icon-text btn-sm btnHapus"
-                                    data-id="@user.Id"
-                                    data-nama="@user.NamaLengkap"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#modalHapusUser">
-                                <i class="ti-trash btn-icon-prepend"></i> Hapus
-                            </button>
-                        }
-                    </td>
-                </tr>
-                no++;
-            }*@
+                                        <tr>
+                                            <td>@no</td>
+                                            <td>@user.NamaLengkap</td>
+                                            <td>@user.Username</td>
+                                            <td>@user.Email</td>
+                                            <td><label class="badge @badgeRole">@user.Role</label></td>
+                                            <td><label class="badge @badgeStatus">@user.Status</label></td>
+                                            <td>
+                                                <button class="btn btn-inverse-warning btn-icon-text btn-sm btnEdit"
+                                                        data-id="@user.Id"
+                                                        data-nama="@user.NamaLengkap"
+                                                        data-username="@user.Username"
+                                                        data-email="@user.Email"
+                                                        data-role="@user.Role"
+                                                        data-status="@user.Status"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#modalEditUser">
+                                                    <i class="ti-pencil btn-icon-prepend"></i> Edit
+                                                </button>
+                                                @if (Convert.ToInt32(Session["Id"]) != user.Id)
+                                                {
+                                                    <button class="btn btn-inverse-danger btn-icon-text btn-sm btnHapus"
+                                                            data-id="@user.Id"
+                                                            data-nama="@user.NamaLengkap"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#modalHapusUser">
+                                                        <i class="ti-trash btn-icon-prepend"></i> Hapus
+                                                    </button>
+                                                }
+                                            </td>
+                                        </tr>
+                                        no++;
+                                    }*@
 
                                 foreach (var user in Model)
                                 {
