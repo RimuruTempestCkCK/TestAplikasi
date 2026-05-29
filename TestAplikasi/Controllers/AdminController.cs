@@ -381,6 +381,69 @@ namespace TestAplikasi.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        public ActionResult EditProduk(
+    int Id,
+    string NamaProduk,
+    decimal Harga,
+    string Deskripsi)
+        {
+            var access = CheckAccess();
+            if (access != null)
+                return access;
+
+            try
+            {
+                using (SqlConnection conn =
+                    new SqlConnection(connStr))
+                {
+                    conn.Open();
+
+                    string query = @"
+                UPDATE dbo.Produk
+                SET NamaProduk = @NamaProduk,
+                    Harga = @Harga,
+                    Deskripsi = @Deskripsi
+                WHERE Id = @Id";
+
+                    using (SqlCommand cmd =
+                        new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue(
+                            "@Id",
+                            Id);
+
+                        cmd.Parameters.AddWithValue(
+                            "@NamaProduk",
+                            NamaProduk);
+
+                        cmd.Parameters.AddWithValue(
+                            "@Harga",
+                            Harga);
+
+                        cmd.Parameters.AddWithValue(
+                            "@Deskripsi",
+                            Deskripsi);
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                TempData["SuccessMessage"] =
+                    "Produk berhasil diperbarui.";
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] =
+                    "Gagal update produk: "
+                    + ex.Message;
+            }
+
+            return RedirectToAction("Produk");
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult DeleteProduk(int Id)
         {
             var access = CheckAccess();
