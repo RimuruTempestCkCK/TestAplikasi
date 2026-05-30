@@ -15,7 +15,12 @@ namespace TestAplikasi.Controllers
         public ActionResult Login()
         {
             if (Session["Id"] != null)
-                return RedirectToAction("Dashboard", "Admin");
+            {
+                string role = Session["Role"]?.ToString();
+                if (role == "Admin") return RedirectToAction("Dashboard", "Admin");
+                if (role == "Pimpinan") return RedirectToAction("Dashboard", "Pimpinan");
+                if (role == "Kasir") return RedirectToAction("Dashboard", "Kasir");
+            }
             return View();
         }
 
@@ -58,8 +63,10 @@ namespace TestAplikasi.Controllers
                             return RedirectToAction("Dashboard", "Admin");
                         else if (role == "Pimpinan")
                             return RedirectToAction("Dashboard", "Pimpinan");
+                        else if (role == "Kasir")
+                            return RedirectToAction("Dashboard", "Kasir");
                         else
-                            return RedirectToAction("Dashboard", "Admin");
+                            return RedirectToAction("Login", "Account");
                     }
 
                     ViewBag.Error =

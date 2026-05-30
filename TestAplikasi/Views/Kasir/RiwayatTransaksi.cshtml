@@ -1,0 +1,76 @@
+﻿@model List<TestAplikasi.Models.TransaksiModel>
+@{
+    ViewBag.Title = "Riwayat Transaksi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Berhasil!</strong> @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<div class="row">
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="card-title mb-0">
+                        <i class="mdi mdi-history me-2"></i>Riwayat Transaksi
+                    </h4>
+                    <a href="@Url.Action("Transaksi","Kasir")" class="btn btn-primary btn-sm">
+                        <i class="mdi mdi-plus me-1"></i> Transaksi Baru
+                    </a>
+                </div>
+                <p class="card-description">Semua transaksi yang telah Anda lakukan.</p>
+                <div class="table-responsive">
+                    <table class="table table-striped table-borderless" id="tabelRiwayat">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>No. Transaksi</th>
+                                <th>Total</th>
+                                <th>Bayar</th>
+                                <th>Kembalian</th>
+                                <th>Tanggal</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null && Model.Count > 0)
+                            {
+                                int no = 1;
+                                foreach (var tx in Model)
+                                {
+                                    <tr>
+                                        <td>@no</td>
+                                        <td><span class="badge badge-info">@tx.NomorTransaksi</span></td>
+                                        <td class="font-weight-bold">Rp @tx.TotalHarga.ToString("N0")</td>
+                                        <td>Rp @tx.Bayar.ToString("N0")</td>
+                                        <td class="text-success">Rp @tx.Kembalian.ToString("N0")</td>
+                                        <td>@tx.TanggalTransaksi.ToString("dd MMM yyyy, HH:mm")</td>
+                                        <td>
+                                            <a href="@Url.Action("StrukTransaksi","Kasir", new { id = tx.Id })"
+                                               class="btn btn-inverse-info btn-icon-text btn-sm">
+                                                <i class="mdi mdi-receipt btn-icon-prepend"></i> Struk
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    no++;
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="7" class="text-center text-muted">Belum ada riwayat transaksi.</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

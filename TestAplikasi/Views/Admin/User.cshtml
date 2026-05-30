@@ -116,6 +116,11 @@
                                         badgeRole = "badge-warning";
                                     }
 
+                                    if (user.Role == "Kasir")
+                                    {
+                                        badgeRole = "badge-success";
+                                    }
+
                                     string badgeStatus = user.Status == "Aktif"
                                         ? "badge-success"
                                         : "badge-danger";
@@ -224,7 +229,7 @@
                             <option value="">-- Pilih Role --</option>
                             <option value="Admin">Admin</option>
                             <option value="Pimpinan">Pimpinan</option>
-                            <option value="User">User</option>
+                            <option value="Kasir">Kasir</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -287,7 +292,7 @@
                             <option value="">-- Pilih Role --</option>
                             <option value="Admin">Admin</option>
                             <option value="Pimpinan">Pimpinan</option>
-                            <option value="User">User</option>
+                            <option value="Kasir">Kasir</option>
                         </select>
                     </div>
                     <div class="form-group">

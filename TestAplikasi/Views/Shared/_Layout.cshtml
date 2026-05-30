@@ -286,42 +286,37 @@
 
                 <ul class="nav">
 
-                    <!-- Dashboard -->
+                    <!-- Dashboard — arahkan sesuai role -->
                     <li class="nav-item">
                         <a class="nav-link"
-                           href="@Url.Action("Dashboard", role == "Pimpinan" ? "Pimpinan" : "Admin")">
-
+                           href="@(role == "Pimpinan" ? Url.Action("Dashboard","Pimpinan") :
+                   role == "Kasir"    ? Url.Action("Dashboard","Kasir") :
+                                        Url.Action("Dashboard","Admin"))">
                             <i class="icon-grid menu-icon"></i>
                             <span class="menu-title">Dashboard</span>
                         </a>
                     </li>
 
-                    <li class="nav-item">
+                    @*<li class="nav-item">
                         <a class="nav-link" href="@Url.Action("Profile", "Account")">
                             <i class="ti-user menu-icon"></i>
                             <span class="menu-title">Profil Saya</span>
                         </a>
-                    </li>
+                    </li>*@
 
                     <!-- Khusus Admin -->
                     @if (role == "Admin")
                     {
                         <li class="nav-item">
-                            <a class="nav-link"
-                               href="@Url.Action("User", "Admin")">
-
+                            <a class="nav-link" href="@Url.Action("User", "Admin")">
                                 <i class="icon-head menu-icon"></i>
                                 <span class="menu-title">User</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link"
-                               href="@Url.Action("Produk", "Admin")">
-
+                            <a class="nav-link" href="@Url.Action("Produk", "Admin")">
                                 <i class="mdi mdi-package-variant menu-icon"></i>
-                                <span class="menu-title">
-                                    Kelola Produk
-                                </span>
+                                <span class="menu-title">Kelola Produk</span>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -332,13 +327,29 @@
                         </li>
                     }
 
+                    <!-- Khusus Kasir -->
+                    @if (role == "Kasir")
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Transaksi", "Kasir")">
+                                <i class="mdi mdi-point-of-sale menu-icon"></i>
+                                <span class="menu-title">Transaksi</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("RiwayatTransaksi", "Kasir")">
+                                <i class="mdi mdi-history menu-icon"></i>
+                                <span class="menu-title">Riwayat Transaksi</span>
+                            </a>
+                        </li>
+                    }
+
                     <!-- Laporan -->
                     @if (role == "Admin" || role == "Pimpinan")
                     {
                         <li class="nav-item">
                             <a class="nav-link"
                                href="@Url.Action("Laporan", role == "Pimpinan" ? "Pimpinan" : "Admin")">
-
                                 <i class="icon-paper menu-icon"></i>
                                 <span class="menu-title">Laporan</span>
                             </a>

@@ -1,0 +1,138 @@
+﻿@model TestAplikasi.Models.TransaksiModel
+@{
+    ViewBag.Title = "Struk Transaksi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="card-title mb-0">
+                        <i class="mdi mdi-receipt me-2 text-primary"></i>Struk Transaksi
+                    </h4>
+                    <div>
+                        <button onclick="cetakStruk()" class="btn btn-primary btn-sm">
+                            <i class="mdi mdi-printer me-1"></i> Cetak
+                        </button>
+                        <a href="@Url.Action("Transaksi","Kasir")" class="btn btn-success btn-sm ms-1">
+                            <i class="mdi mdi-plus me-1"></i> Transaksi Baru
+                        </a>
+                    </div>
+                </div>
+
+                @if (Model != null)
+                {
+                    <div id="areaStruk">
+                        <div class="text-center mb-3">
+                            <h5 class="font-weight-bold mb-0">TOKO KAMI</h5>
+                            <small class="text-muted">Sistem Kasir POS</small>
+                            <hr>
+                        </div>
+
+                        <table class="table table-sm table-borderless mb-1">
+                            <tr>
+                                <td class="text-muted" style="width:40%">No. Transaksi</td>
+                                <td>: <strong>@Model.NomorTransaksi</strong></td>
+                            </tr>
+                            <tr>
+                                <td class="text-muted">Kasir</td>
+                                <td>: @Model.NamaKasir</td>
+                            </tr>
+                            <tr>
+                                <td class="text-muted">Tanggal</td>
+                                <td>: @Model.TanggalTransaksi.ToString("dd MMM yyyy, HH:mm")</td>
+                            </tr>
+                        </table>
+
+                        <hr>
+
+                        <table class="table table-sm table-borderless">
+                            <thead>
+                                <tr>
+                                    <th>Produk</th>
+                                    <th class="text-center">Qty</th>
+                                    <th class="text-right">Harga</th>
+                                    <th class="text-right">Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Details != null)
+                                {
+                                    foreach (var d in Model.Details)
+                                    {
+                                        <tr>
+                                            <td>@d.NamaProduk</td>
+                                            <td class="text-center">@d.Jumlah</td>
+                                            <td class="text-right">Rp @d.HargaJual.ToString("N0")</td>
+                                            <td class="text-right">Rp @d.Subtotal.ToString("N0")</td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+
+                        <hr>
+
+                        <table class="table table-sm table-borderless mb-0">
+                            <tr>
+                                <td class="text-right"><strong>Total</strong></td>
+                                <td class="text-right" style="width:35%">
+                                    <strong>Rp @Model.TotalHarga.ToString("N0")</strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-right">Bayar</td>
+                                <td class="text-right">Rp @Model.Bayar.ToString("N0")</td>
+                            </tr>
+                            <tr>
+                                <td class="text-right text-success"><strong>Kembalian</strong></td>
+                                <td class="text-right text-success">
+                                    <strong>Rp @Model.Kembalian.ToString("N0")</strong>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <hr>
+                        <p class="text-center text-muted small mb-0">Terima kasih telah berbelanja!</p>
+                    </div>
+                }
+                else
+                {
+                    <div class="text-center text-muted py-4">
+                        <i class="ti-alert" style="font-size:3rem;"></i>
+                        <p class="mt-2">Data transaksi tidak ditemukan.</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <style>
+        @@media print {
+            body * {
+                visibility: hidden;
+            }
+
+            #areaStruk, #areaStruk * {
+                visibility: visible;
+            }
+
+            #areaStruk {
+                position: fixed;
+                left: 0;
+                top: 0;
+                width: 80mm;
+                font-size: 11px;
+            }
+        }
+    </style>
+    <script>
+        function cetakStruk() {
+            window.print();
+        }
+    </script>
+}

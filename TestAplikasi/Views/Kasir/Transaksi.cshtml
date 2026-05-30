@@ -1,0 +1,243 @@
+﻿@{
+    ViewBag.Title = "Transaksi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var listProduk = ViewBag.ListProduk as List<TestAplikasi.Models.ProdukModel>;
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Error!</strong> @TempData["ErrorMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<div class="row">
+    @*{{-- Panel Pilih Produk --}}*@
+    <div class="col-lg-7 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">
+                    <i class="mdi mdi-package-variant me-2 text-primary"></i>Pilih Produk
+                </h4>
+                <p class="card-description">Klik produk untuk menambahkan ke keranjang.</p>
+
+                <div class="form-group mb-3">
+                    <input type="text" class="form-control" id="cariProduk"
+                           placeholder="Cari nama produk...">
+                </div>
+
+                <div class="row" id="gridProduk">
+                    @if (listProduk != null && listProduk.Count > 0)
+                    {
+                        foreach (var p in listProduk)
+                        {
+                            <div class="col-md-6 col-lg-4 mb-3 produk-item"
+                                 data-nama="@p.NamaProduk.ToLower()">
+                                <div class="card border produk-card h-100"
+                                     style="cursor:pointer;"
+                                     onclick="tambahKeranjang(@p.Id, '@p.NamaProduk.Replace("'","\\'")', @p.HargaJual.ToString(System.Globalization.CultureInfo.InvariantCulture), @p.JumlahTersedia)">
+                                    <div class="card-body p-3">
+                                        <h6 class="font-weight-bold mb-1">@p.NamaProduk</h6>
+                                        <p class="text-primary mb-1 font-weight-bold">
+                                            Rp @p.HargaJual.ToString("N0")
+                                        </p>
+                                        <small class="text-muted">Stok: @p.JumlahTersedia</small>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="col-12">
+                            <p class="text-muted text-center">Tidak ada produk dengan stok tersedia.</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*{{-- Panel Keranjang --}}*@
+    <div class="col-lg-5 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body d-flex flex-column">
+                <h4 class="card-title">
+                    <i class="mdi mdi-cart me-2 text-success"></i>Keranjang
+                </h4>
+
+                <div class="table-responsive flex-grow-1">
+                    <table class="table table-sm table-borderless" id="tabelKeranjang">
+                        <thead>
+                            <tr>
+                                <th>Produk</th>
+                                <th class="text-center">Qty</th>
+                                <th class="text-right">Subtotal</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="keranjangBody">
+                            <tr id="emptyRow">
+                                <td colspan="4" class="text-center text-muted py-4">
+                                    Keranjang kosong
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <hr>
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h5 class="mb-0">Total:</h5>
+                    <h5 class="mb-0 text-primary font-weight-bold" id="labelTotal">Rp 0</h5>
+                </div>
+
+                <div class="form-group">
+                    <label>Uang Bayar <span class="text-danger">*</span></label>
+                    <input type="number" class="form-control" id="inputBayar"
+                           placeholder="Masukkan nominal bayar" min="0" step="1000"
+                           oninput="hitungKembalian()">
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-muted">Kembalian:</span>
+                    <span class="font-weight-bold text-success" id="labelKembalian">Rp 0</span>
+                </div>
+
+                @using (Html.BeginForm("SimpanTransaksi", "Kasir", FormMethod.Post, new { id = "formTransaksi" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" id="hiddenProdukIds" name="produkIds" />
+                    <input type="hidden" id="hiddenJumlahs" name="jumlahs" />
+                    <input type="hidden" id="hiddenBayar" name="bayar" />
+                    <button type="button" class="btn btn-success btn-block btn-lg"
+                            onclick="prosesTransaksi()">
+                        <i class="mdi mdi-check-circle me-1"></i> Proses Transaksi
+                    </button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        var keranjang = [];
+
+        function tambahKeranjang(id, nama, harga, stok) {
+            id = parseInt(id);
+            harga = parseFloat(String(harga).replace(/[^0-9.]/g, ''));
+            stok = parseInt(stok);
+
+            var idx = keranjang.findIndex(function (x) { return x.id === id; });
+            if (idx >= 0) {
+                if (keranjang[idx].qty >= stok) {
+                    alert('Stok ' + nama + ' hanya ' + stok + ' unit.');
+                    return;
+                }
+                keranjang[idx].qty++;
+            } else {
+                keranjang.push({ id: id, nama: nama, harga: harga, stok: stok, qty: 1 });
+            }
+            renderKeranjang();
+        }
+
+        function ubahQty(id, delta) {
+            id = parseInt(id);
+            delta = parseInt(delta);
+
+            var idx = keranjang.findIndex(function (x) { return x.id === id; });
+            if (idx < 0) return;
+
+            var newQty = keranjang[idx].qty + delta;
+
+            if (newQty <= 0) {
+                keranjang.splice(idx, 1);
+            } else if (newQty > keranjang[idx].stok) {
+                alert('Stok maksimal: ' + keranjang[idx].stok + ' unit.');
+            } else {
+                keranjang[idx].qty = newQty;
+            }
+            renderKeranjang();
+        }
+
+        function hapusItem(id) {
+            id = parseInt(id);
+            keranjang = keranjang.filter(function (x) { return x.id !== id; });
+            renderKeranjang();
+        }
+
+        function formatRp(angka) {
+            return 'Rp ' + angka.toLocaleString('id-ID');
+        }
+
+        function renderKeranjang() {
+            var tbody = document.getElementById('keranjangBody');
+            var total = 0;
+
+            if (keranjang.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4" class="text-center text-muted py-4">Keranjang kosong</td></tr>';
+            } else {
+                var html = '';
+                keranjang.forEach(function (item) {
+                    var subtotal = item.harga * item.qty;
+                    total += subtotal;
+                    html +=
+                        '<tr>' +
+                        '<td class="align-middle">' + item.nama + '</td>' +
+                        '<td class="align-middle text-center">' +
+                        '<div class="d-flex align-items-center justify-content-center" style="gap:4px;">' +
+                        '<button type="button" class="btn btn-sm btn-light px-2" onclick="ubahQty(' + item.id + ', -1)">&#8722;</button>' +
+                        '<span style="min-width:28px;text-align:center;font-weight:bold;">' + item.qty + '</span>' +
+                        '<button type="button" class="btn btn-sm btn-light px-2" onclick="ubahQty(' + item.id + ', 1)">&#43;</button>' +
+                        '</div>' +
+                        '</td>' +
+                        '<td class="align-middle text-right">' + formatRp(subtotal) + '</td>' +
+                        '<td class="align-middle text-center">' +
+                        '<button type="button" class="btn btn-sm btn-inverse-danger" onclick="hapusItem(' + item.id + ')">' +
+                        '<i class="ti-trash"></i></button>' +
+                        '</td>' +
+                        '</tr>';
+                });
+                tbody.innerHTML = html;
+            }
+
+            document.getElementById('labelTotal').textContent = formatRp(total);
+            hitungKembalian();
+        }
+
+        function hitungKembalian() {
+            var total = keranjang.reduce(function (s, x) { return s + x.harga * x.qty; }, 0);
+            var bayar = parseFloat(document.getElementById('inputBayar').value) || 0;
+            var kembalian = bayar - total;
+            var el = document.getElementById('labelKembalian');
+            el.textContent = formatRp(Math.max(kembalian, 0));
+            el.className = kembalian < 0 ? 'font-weight-bold text-danger' : 'font-weight-bold text-success';
+        }
+
+        function prosesTransaksi() {
+            if (keranjang.length === 0) {
+                alert('Keranjang masih kosong!');
+                return;
+            }
+            var total = keranjang.reduce(function (s, x) { return s + x.harga * x.qty; }, 0);
+            var bayar = parseFloat(document.getElementById('inputBayar').value) || 0;
+            if (bayar < total) {
+                alert('Uang bayar kurang!\nTotal: ' + formatRp(total));
+                return;
+            }
+            document.getElementById('hiddenProdukIds').value = keranjang.map(function (x) { return x.id; }).join(',');
+            document.getElementById('hiddenJumlahs').value = keranjang.map(function (x) { return x.qty; }).join(',');
+            document.getElementById('hiddenBayar').value = bayar;
+            document.getElementById('formTransaksi').submit();
+        }
+
+        document.getElementById('cariProduk').addEventListener('input', function () {
+            var q = this.value.toLowerCase();
+            document.querySelectorAll('.produk-item').forEach(function (el) {
+                el.style.display = el.dataset.nama.includes(q) ? '' : 'none';
+            });
+        });
+    </script>
+}

@@ -123,12 +123,14 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KasirController.cs" />
     <Compile Include="Controllers\PimpinanController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ProdukModel.cs" />
     <Compile Include="Models\StokProdukModel.cs" />
+    <Compile Include="Models\TransaksiModel.cs" />
     <Compile Include="Models\UserMode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -192,6 +194,10 @@
     <Content Include="Views\Admin\Produk.cshtml" />
     <Content Include="Views\Account\Profile.cshtml" />
     <Content Include="Views\Admin\Stok.cshtml" />
+    <Content Include="Views\Kasir\Dashboard.cshtml" />
+    <Content Include="Views\Kasir\Transaksi.cshtml" />
+    <Content Include="Views\Kasir\StrukTransaksi.cshtml" />
+    <Content Include="Views\Kasir\RiwayatTransaksi.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
