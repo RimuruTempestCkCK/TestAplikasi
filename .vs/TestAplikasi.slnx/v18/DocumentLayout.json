@@ -7,60 +7,80 @@
       "RelativeMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|solutionrelative:testaplikasi\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|c:\\users\\maxtop\\documents\\newtest\\testaplikasi\\testaplikasi\\controllers\\pimpinancontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|solutionrelative:testaplikasi\\controllers\\pimpinancontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|c:\\users\\maxtop\\documents\\newtest\\testaplikasi\\testaplikasi\\views\\admin\\stok.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|solutionrelative:testaplikasi\\views\\admin\\stok.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|c:\\users\\maxtop\\documents\\newtest\\testaplikasi\\testaplikasi\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|c:\\users\\maxtop\\documents\\newtest\\testaplikasi\\testaplikasi\\views\\admin\\produk.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|solutionrelative:testaplikasi\\views\\admin\\produk.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\testaplikasi\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|solutionrelative:testaplikasi\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|c:\\users\\maxtop\\documents\\newtest\\testaplikasi\\testaplikasi\\models\\usermode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|solutionrelative:testaplikasi\\models\\usermode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|c:\\users\\maxtop\\documents\\newtest\\testaplikasi\\testaplikasi\\models\\produkmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|solutionrelative:testaplikasi\\models\\produkmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|c:\\users\\maxtop\\documents\\newtest\\testaplikasi\\testaplikasi\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|solutionrelative:testaplikasi\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|c:\\users\\maxtop\\documents\\newtest\\testaplikasi\\testaplikasi\\models\\stokprodukmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|solutionrelative:testaplikasi\\models\\stokprodukmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|c:\\users\\maxtop\\documents\\newtest\\testaplikasi\\testaplikasi\\views\\admin\\user.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|solutionrelative:testaplikasi\\views\\admin\\user.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|c:\\users\\maxtop\\documents\\newtest\\testaplikasi\\testaplikasi\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|solutionrelative:testaplikasi\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|c:\\users\\maxtop\\documents\\newtest\\testaplikasi\\testaplikasi\\app_start\\routeconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|solutionrelative:testaplikasi\\app_start\\routeconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|c:\\users\\maxtop\\documents\\newtest\\testaplikasi\\testaplikasi\\views\\admin\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\testaplikasi\\views\\admin\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|solutionrelative:testaplikasi\\views\\admin\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|c:\\users\\maxtop\\documents\\newtest\\testaplikasi\\testaplikasi\\views\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|solutionrelative:testaplikasi\\views\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+      "AbsoluteMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\testaplikasi\\models\\usermode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|solutionrelative:testaplikasi\\models\\usermode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|c:\\users\\maxtop\\documents\\newtest\\testaplikasi\\testaplikasi\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "AbsoluteMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\testaplikasi\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|solutionrelative:testaplikasi\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\testaplikasi\\views\\admin\\user.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|solutionrelative:testaplikasi\\views\\admin\\user.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\testaplikasi\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
       "RelativeMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|solutionrelative:testaplikasi\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|c:\\users\\maxtop\\documents\\newtest\\testaplikasi\\testaplikasi\\views\\admin\\laporan.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|solutionrelative:testaplikasi\\views\\admin\\laporan.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\testaplikasi\\views\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|solutionrelative:testaplikasi\\views\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|c:\\users\\maxtop\\documents\\newtest\\testaplikasi\\testaplikasi\\views\\pimpinan\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|c:\\users\\maxtop\\documents\\newtest\\testaplikasi\\testaplikasi\\views\\account\\profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|solutionrelative:testaplikasi\\views\\account\\profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\testaplikasi\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|solutionrelative:testaplikasi\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\testaplikasi\\views\\pimpinan\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|solutionrelative:testaplikasi\\views\\pimpinan\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\testaplikasi\\controllers\\pimpinancontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|solutionrelative:testaplikasi\\controllers\\pimpinancontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\testaplikasi\\views\\pimpinan\\laporan.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|solutionrelative:testaplikasi\\views\\pimpinan\\laporan.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\testaplikasi\\app_start\\routeconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|solutionrelative:testaplikasi\\app_start\\routeconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\testaplikasi\\views\\admin\\laporan.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|solutionrelative:testaplikasi\\views\\admin\\laporan.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\testaplikasi\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|solutionrelative:testaplikasi\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|c:\\users\\maxtop\\documents\\newtest\\testaplikasi\\testaplikasi\\views\\pimpinan\\laporan.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|solutionrelative:testaplikasi\\views\\pimpinan\\laporan.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\testaplikasi\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -74,7 +94,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Bookmark",
@@ -93,33 +113,55 @@
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
-            },
-            {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "PimpinanController.cs",
-              "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Controllers\\PimpinanController.cs",
-              "RelativeDocumentMoniker": "TestAplikasi\\Controllers\\PimpinanController.cs",
-              "ToolTip": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Controllers\\PimpinanController.cs",
-              "RelativeToolTip": "TestAplikasi\\Controllers\\PimpinanController.cs",
-              "ViewState": "AgIAAD4AAAAAAAAAAAAwwEcAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-28T03:03:36.158Z",
+              "Title": "Stok.cshtml",
+              "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Admin\\Stok.cshtml",
+              "RelativeDocumentMoniker": "TestAplikasi\\Views\\Admin\\Stok.cshtml",
+              "ToolTip": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Admin\\Stok.cshtml",
+              "RelativeToolTip": "TestAplikasi\\Views\\Admin\\Stok.cshtml",
+              "ViewState": "AgIAAG4AAAAAAAAAAAAYwIIAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-30T08:34:07.38Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "UserMode.cs",
-              "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Models\\UserMode.cs",
-              "RelativeDocumentMoniker": "TestAplikasi\\Models\\UserMode.cs",
-              "ToolTip": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Models\\UserMode.cs",
-              "RelativeToolTip": "TestAplikasi\\Models\\UserMode.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAsAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "StokProdukModel.cs",
+              "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Models\\StokProdukModel.cs",
+              "RelativeDocumentMoniker": "TestAplikasi\\Models\\StokProdukModel.cs",
+              "ToolTip": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Models\\StokProdukModel.cs",
+              "RelativeToolTip": "TestAplikasi\\Models\\StokProdukModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-28T04:10:17.753Z",
+              "WhenOpened": "2026-05-30T08:29:55.649Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ProdukModel.cs",
+              "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Models\\ProdukModel.cs",
+              "RelativeDocumentMoniker": "TestAplikasi\\Models\\ProdukModel.cs",
+              "ToolTip": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Models\\ProdukModel.cs",
+              "RelativeToolTip": "TestAplikasi\\Models\\ProdukModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-29T02:52:09.592Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Produk.cshtml",
+              "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Admin\\Produk.cshtml",
+              "RelativeDocumentMoniker": "TestAplikasi\\Views\\Admin\\Produk.cshtml",
+              "ToolTip": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Admin\\Produk.cshtml",
+              "RelativeToolTip": "TestAplikasi\\Views\\Admin\\Produk.cshtml",
+              "ViewState": "AgIAAOUAAAAAAAAAAAAYwPMAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-29T02:55:01.174Z",
               "EditorCaption": ""
             },
             {
@@ -130,100 +172,61 @@
               "RelativeDocumentMoniker": "TestAplikasi\\Views\\Shared\\_Layout.cshtml",
               "ToolTip": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Shared\\_Layout.cshtml",
               "RelativeToolTip": "TestAplikasi\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAACMBAAAAAAAAAAAAAC8BAAAdAAAAAAAAAA==",
+              "ViewState": "AgIAADEBAAAAAAAAAAAIwD8BAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2026-05-27T09:48:25.294Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "AdminController.cs",
-              "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Controllers\\AdminController.cs",
-              "RelativeDocumentMoniker": "TestAplikasi\\Controllers\\AdminController.cs",
-              "ToolTip": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Controllers\\AdminController.cs",
-              "RelativeToolTip": "TestAplikasi\\Controllers\\AdminController.cs",
-              "ViewState": "AgIAAHoBAAAAAAAAAAAswIQBAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-28T03:03:19.85Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "AccountController.cs",
-              "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Controllers\\AccountController.cs",
-              "RelativeDocumentMoniker": "TestAplikasi\\Controllers\\AccountController.cs",
-              "ToolTip": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Controllers\\AccountController.cs",
-              "RelativeToolTip": "TestAplikasi\\Controllers\\AccountController.cs",
-              "ViewState": "AgIAADwAAAAAAAAAAAAkwFUAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-28T02:42:01.651Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "User.cshtml",
-              "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Admin\\User.cshtml",
-              "RelativeDocumentMoniker": "TestAplikasi\\Views\\Admin\\User.cshtml",
-              "ToolTip": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Admin\\User.cshtml",
-              "RelativeToolTip": "TestAplikasi\\Views\\Admin\\User.cshtml",
-              "ViewState": "AgIAAGABAAAAAAAAAAAAAHEBAAAtAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-05-28T03:05:01.004Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "Login.cshtml",
-              "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Account\\Login.cshtml",
-              "RelativeDocumentMoniker": "TestAplikasi\\Views\\Account\\Login.cshtml",
-              "ToolTip": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Account\\Login.cshtml",
-              "RelativeToolTip": "TestAplikasi\\Views\\Account\\Login.cshtml",
-              "ViewState": "AgIAAEEAAAAAAAAAAAAAADwAAABEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-05-28T02:46:44.165Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Web.config",
-              "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Web.config",
-              "RelativeDocumentMoniker": "TestAplikasi\\Views\\Web.config",
-              "ToolTip": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Web.config",
-              "RelativeToolTip": "TestAplikasi\\Views\\Web.config",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAABoAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
-              "WhenOpened": "2026-05-28T04:13:20.85Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
               "Title": "Dashboard.cshtml",
               "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Admin\\Dashboard.cshtml",
               "RelativeDocumentMoniker": "TestAplikasi\\Views\\Admin\\Dashboard.cshtml",
               "ToolTip": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Admin\\Dashboard.cshtml",
               "RelativeToolTip": "TestAplikasi\\Views\\Admin\\Dashboard.cshtml",
-              "ViewState": "AgIAAIUAAAAAAAAAAAAAwKAAAAAGAAAAAAAAAA==",
+              "ViewState": "AgIAAH4AAAAAAAAAAAAYwI0AAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2026-05-28T02:58:28.073Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "RouteConfig.cs",
-              "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\App_Start\\RouteConfig.cs",
-              "RelativeDocumentMoniker": "TestAplikasi\\App_Start\\RouteConfig.cs",
-              "ToolTip": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\App_Start\\RouteConfig.cs",
-              "RelativeToolTip": "TestAplikasi\\App_Start\\RouteConfig.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAWAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "AdminController.cs",
+              "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Controllers\\AdminController.cs",
+              "RelativeDocumentMoniker": "TestAplikasi\\Controllers\\AdminController.cs",
+              "ToolTip": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Controllers\\AdminController.cs",
+              "RelativeToolTip": "TestAplikasi\\Controllers\\AdminController.cs",
+              "ViewState": "AgIAAEgCAAAAAAAAAAAUwFgCAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-28T04:23:30.472Z",
+              "WhenOpened": "2026-05-28T03:03:19.85Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "UserMode.cs",
+              "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Models\\UserMode.cs",
+              "RelativeDocumentMoniker": "TestAplikasi\\Models\\UserMode.cs",
+              "ToolTip": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Models\\UserMode.cs",
+              "RelativeToolTip": "TestAplikasi\\Models\\UserMode.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-28T04:10:17.753Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "TestAplikasi\\Controllers\\AccountController.cs",
+              "ToolTip": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "TestAplikasi\\Controllers\\AccountController.cs",
+              "ViewState": "AgIAAOUAAAAAAAAAAAAmwAQBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-28T02:42:01.651Z",
               "EditorCaption": ""
             },
             {
@@ -234,53 +237,96 @@
               "RelativeDocumentMoniker": "TestAplikasi\\Web.config",
               "ToolTip": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Web.config",
               "RelativeToolTip": "TestAplikasi\\Web.config",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAVAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAABbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
               "WhenOpened": "2026-05-28T04:05:34.058Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "Laporan.cshtml",
-              "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Admin\\Laporan.cshtml",
-              "RelativeDocumentMoniker": "TestAplikasi\\Views\\Admin\\Laporan.cshtml",
-              "ToolTip": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Admin\\Laporan.cshtml",
-              "RelativeToolTip": "TestAplikasi\\Views\\Admin\\Laporan.cshtml",
-              "ViewState": "AgIAAN4AAAAAAAAAAAAAAOoAAAAOAAAAAAAAAA==",
+              "DocumentIndex": 9,
+              "Title": "User.cshtml",
+              "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Admin\\User.cshtml",
+              "RelativeDocumentMoniker": "TestAplikasi\\Views\\Admin\\User.cshtml",
+              "ToolTip": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Admin\\User.cshtml",
+              "RelativeToolTip": "TestAplikasi\\Views\\Admin\\User.cshtml",
+              "ViewState": "AgIAAF4BAAAAAAAAAAAuwHABAABHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-05-28T03:05:14.637Z",
+              "WhenOpened": "2026-05-28T03:05:01.004Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Web.config",
+              "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Web.config",
+              "RelativeDocumentMoniker": "TestAplikasi\\Views\\Web.config",
+              "ToolTip": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Web.config",
+              "RelativeToolTip": "TestAplikasi\\Views\\Web.config",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAuwCsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2026-05-28T04:13:20.85Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 12,
+              "Title": "Profile.cshtml",
+              "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Account\\Profile.cshtml",
+              "RelativeDocumentMoniker": "TestAplikasi\\Views\\Account\\Profile.cshtml",
+              "ToolTip": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Account\\Profile.cshtml",
+              "RelativeToolTip": "TestAplikasi\\Views\\Account\\Profile.cshtml",
+              "ViewState": "AgIAAJQAAAAAAAAAAAAuwLYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-29T07:47:47.391Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Account\\Login.cshtml",
+              "RelativeDocumentMoniker": "TestAplikasi\\Views\\Account\\Login.cshtml",
+              "ToolTip": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Account\\Login.cshtml",
+              "RelativeToolTip": "TestAplikasi\\Views\\Account\\Login.cshtml",
+              "ViewState": "AgIAADIAAAAAAAAAAAAuwFQAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-28T02:46:44.165Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
               "Title": "Dashboard.cshtml",
               "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Pimpinan\\Dashboard.cshtml",
               "RelativeDocumentMoniker": "TestAplikasi\\Views\\Pimpinan\\Dashboard.cshtml",
               "ToolTip": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Pimpinan\\Dashboard.cshtml",
               "RelativeToolTip": "TestAplikasi\\Views\\Pimpinan\\Dashboard.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAA8AAAAAAAAAA==",
+              "ViewState": "AgIAAEMBAAAAAAAAAAAuwFkBAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2026-05-28T03:04:31.015Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Home\\Index.cshtml",
-              "RelativeDocumentMoniker": "TestAplikasi\\Views\\Home\\Index.cshtml",
-              "ToolTip": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Home\\Index.cshtml",
-              "RelativeToolTip": "TestAplikasi\\Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAA9AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-05-27T09:56:20.585Z",
+              "DocumentIndex": 15,
+              "Title": "PimpinanController.cs",
+              "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Controllers\\PimpinanController.cs",
+              "RelativeDocumentMoniker": "TestAplikasi\\Controllers\\PimpinanController.cs",
+              "ToolTip": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Controllers\\PimpinanController.cs",
+              "RelativeToolTip": "TestAplikasi\\Controllers\\PimpinanController.cs",
+              "ViewState": "AgIAACsAAAAAAAAAAAAIwEgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-28T03:03:36.158Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 16,
               "Title": "Laporan.cshtml",
               "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Pimpinan\\Laporan.cshtml",
               "RelativeDocumentMoniker": "TestAplikasi\\Views\\Pimpinan\\Laporan.cshtml",
@@ -293,7 +339,43 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 17,
+              "Title": "RouteConfig.cs",
+              "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\App_Start\\RouteConfig.cs",
+              "RelativeDocumentMoniker": "TestAplikasi\\App_Start\\RouteConfig.cs",
+              "ToolTip": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\App_Start\\RouteConfig.cs",
+              "RelativeToolTip": "TestAplikasi\\App_Start\\RouteConfig.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-28T04:23:30.472Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Laporan.cshtml",
+              "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Admin\\Laporan.cshtml",
+              "RelativeDocumentMoniker": "TestAplikasi\\Views\\Admin\\Laporan.cshtml",
+              "ToolTip": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Admin\\Laporan.cshtml",
+              "RelativeToolTip": "TestAplikasi\\Views\\Admin\\Laporan.cshtml",
+              "ViewState": "AgIAAN4AAAAAAAAAAAAAAOoAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-28T03:05:14.637Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "TestAplikasi\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "TestAplikasi\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-27T09:56:20.585Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
               "Title": "_ViewStart.cshtml",
               "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\_ViewStart.cshtml",
               "RelativeDocumentMoniker": "TestAplikasi\\Views\\_ViewStart.cshtml",

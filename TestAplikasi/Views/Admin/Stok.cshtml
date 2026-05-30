@@ -1,0 +1,145 @@
+﻿@model List<TestAplikasi.Models.StokProdukModel>
+@{
+    ViewBag.Title = "Kelola Stok";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var listProduk = ViewBag.ListProduk as List<TestAplikasi.Models.ProdukModel>;
+    int? filterProdukId = ViewBag.FilterProdukId;
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Berhasil!</strong> @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Error!</strong> @TempData["ErrorMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<div class="row">
+    @*{{-- FORM TAMBAH STOK --}}*@
+    <div class="col-lg-4 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">
+                    <i class="mdi mdi-plus-circle text-success me-2"></i>Tambah Stok
+                </h4>
+                <p class="card-description">Pilih produk dan masukkan jumlah stok yang masuk.</p>
+
+                @using (Html.BeginForm("TambahStok", "Admin", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <label>Produk <span class="text-danger">*</span></label>
+                        <select class="form-control" name="ProdukId" id="selectProduk" required>
+                            <option value="">-- Pilih Produk --</option>
+                            @if (listProduk != null)
+                            {
+                                foreach (var p in listProduk)
+                                {
+                                    <option value="@p.Id"
+                                            @(filterProdukId.HasValue && filterProdukId.Value == p.Id ? "selected" : "")>
+                                        @p.NamaProduk
+                                    </option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Jumlah Stok Masuk <span class="text-danger">*</span></label>
+                        <input type="number" class="form-control" name="Jumlah"
+                               placeholder="Masukkan jumlah" min="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Keterangan</label>
+                        <textarea class="form-control" name="Keterangan"
+                                  placeholder="Contoh: Pembelian dari supplier A" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-success btn-block">
+                        <i class="ti-save me-1"></i> Simpan Stok
+                    </button>
+                }
+            </div>
+        </div>
+    </div>
+
+    @*{{-- RIWAYAT STOK --}}*@
+    <div class="col-lg-8 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                    <h4 class="card-title mb-0">
+                        <i class="mdi mdi-history me-2"></i>Riwayat Penambahan Stok
+                    </h4>
+                    <a href="@Url.Action("Stok", "Admin")" class="btn btn-light btn-sm">
+                        <i class="ti-reload me-1"></i> Tampilkan Semua
+                    </a>
+                </div>
+
+                @*{{-- Filter per produk --}}*@
+                <div class="form-group mb-3">
+                    <label>Filter Produk</label>
+                    <select class="form-control" id="filterProdukSelect"
+                            onchange="window.location='@Url.Action("Stok","Admin")?produkId='+this.value">
+                        <option value="">-- Semua Produk --</option>
+                        @if (listProduk != null)
+                        {
+                            foreach (var p in listProduk)
+                            {
+                                <option value="@p.Id"
+                                        @(filterProdukId.HasValue && filterProdukId.Value == p.Id ? "selected" : "")>
+                                    @p.NamaProduk
+                                </option>
+                            }
+                        }
+                    </select>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-striped table-borderless">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Produk</th>
+                                <th>Jumlah Masuk</th>
+                                <th>Keterangan</th>
+                                <th>Tanggal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null && Model.Count > 0)
+                            {
+                                int no = 1;
+                                foreach (var stok in Model)
+                                {
+                                    <tr>
+                                        <td>@no</td>
+                                        <td>@stok.NamaProduk</td>
+                                        <td>
+                                            <span class="badge badge-success">+@stok.Jumlah</span>
+                                        </td>
+                                        <td>@(string.IsNullOrEmpty(stok.Keterangan) ? "-" : stok.Keterangan)</td>
+                                        <td>@stok.TanggalMasuk.ToString("dd MMM yyyy, HH:mm")</td>
+                                    </tr>
+                                    no++;
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="5" class="text-center text-muted">Belum ada riwayat stok.</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -326,20 +326,20 @@ namespace TestAplikasi.Controllers
 
             try
             {
-                using (SqlConnection conn =
-                    new SqlConnection(connStr))
+                using (SqlConnection conn = new SqlConnection(connStr))
                 {
                     conn.Open();
 
                     string query = @"
-                        SELECT Id, NamaProduk, Harga, Deskripsi
-                        FROM dbo.Produk
-                        ORDER BY Id DESC";
+                SELECT p.Id, p.NamaProduk, p.HargaModal, p.HargaJual, p.Deskripsi,
+                       ISNULL(SUM(s.Jumlah), 0) AS JumlahTersedia
+                FROM dbo.Produk p
+                LEFT JOIN dbo.StokProduk s ON s.ProdukId = p.Id
+                GROUP BY p.Id, p.NamaProduk, p.HargaModal, p.HargaJual, p.Deskripsi
+                ORDER BY p.Id DESC";
 
-                    using (SqlCommand cmd =
-                        new SqlCommand(query, conn))
-                    using (SqlDataReader reader =
-                        cmd.ExecuteReader())
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
@@ -347,8 +347,10 @@ namespace TestAplikasi.Controllers
                             {
                                 Id = Convert.ToInt32(reader["Id"]),
                                 NamaProduk = reader["NamaProduk"]?.ToString(),
-                                Harga = Convert.ToDecimal(reader["Harga"]),
-                                Deskripsi = reader["Deskripsi"]?.ToString()
+                                HargaModal = Convert.ToDecimal(reader["HargaModal"]),
+                                HargaJual = Convert.ToDecimal(reader["HargaJual"]),
+                                Deskripsi = reader["Deskripsi"]?.ToString(),
+                                JumlahTersedia = Convert.ToInt32(reader["JumlahTersedia"])
                             });
                         }
                     }
@@ -356,8 +358,7 @@ namespace TestAplikasi.Controllers
             }
             catch (Exception ex)
             {
-                TempData["ErrorMessage"] =
-                    "Gagal memuat produk: " + ex.Message;
+                TempData["ErrorMessage"] = "Gagal memuat produk: " + ex.Message;
             }
 
             return View(listProduk);
@@ -368,43 +369,34 @@ namespace TestAplikasi.Controllers
         // =============================================
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateProduk(
-            string NamaProduk,
-            decimal Harga,
-            string Deskripsi)
+        public ActionResult CreateProduk(string NamaProduk, decimal HargaModal, decimal HargaJual, string Deskripsi)
         {
             var access = CheckAccess();
             if (access != null) return access;
 
             try
             {
-                using (SqlConnection conn =
-                    new SqlConnection(connStr))
+                using (SqlConnection conn = new SqlConnection(connStr))
                 {
                     conn.Open();
-
                     string query = @"
-                        INSERT INTO dbo.Produk
-                        (NamaProduk, Harga, Deskripsi)
-                        VALUES
-                        (@NamaProduk, @Harga, @Deskripsi)";
+                INSERT INTO dbo.Produk (NamaProduk, HargaModal, HargaJual, Harga, Deskripsi)
+                VALUES (@NamaProduk, @HargaModal, @HargaJual, @HargaJual, @Deskripsi)";
 
-                    using (SqlCommand cmd =
-                        new SqlCommand(query, conn))
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@NamaProduk", NamaProduk);
-                        cmd.Parameters.AddWithValue("@Harga", Harga);
+                        cmd.Parameters.AddWithValue("@HargaModal", HargaModal);
+                        cmd.Parameters.AddWithValue("@HargaJual", HargaJual);
                         cmd.Parameters.AddWithValue("@Deskripsi", Deskripsi ?? "");
                         cmd.ExecuteNonQuery();
                     }
                 }
-
                 TempData["SuccessMessage"] = "Produk berhasil ditambahkan.";
             }
             catch (Exception ex)
             {
-                TempData["ErrorMessage"] =
-                    "Gagal tambah produk: " + ex.Message;
+                TempData["ErrorMessage"] = "Gagal tambah produk: " + ex.Message;
             }
 
             return RedirectToAction("Produk");
@@ -415,46 +407,40 @@ namespace TestAplikasi.Controllers
         // =============================================
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditProduk(
-            int Id,
-            string NamaProduk,
-            decimal Harga,
-            string Deskripsi)
+        public ActionResult EditProduk(int Id, string NamaProduk, decimal HargaModal, decimal HargaJual, string Deskripsi)
         {
             var access = CheckAccess();
             if (access != null) return access;
 
             try
             {
-                using (SqlConnection conn =
-                    new SqlConnection(connStr))
+                using (SqlConnection conn = new SqlConnection(connStr))
                 {
                     conn.Open();
-
                     string query = @"
-                        UPDATE dbo.Produk
-                        SET NamaProduk = @NamaProduk,
-                            Harga      = @Harga,
-                            Deskripsi  = @Deskripsi
-                        WHERE Id = @Id";
+                UPDATE dbo.Produk
+                SET NamaProduk = @NamaProduk,
+                    HargaModal = @HargaModal,
+                    HargaJual  = @HargaJual,
+                    Harga      = @HargaJual,
+                    Deskripsi  = @Deskripsi
+                WHERE Id = @Id";
 
-                    using (SqlCommand cmd =
-                        new SqlCommand(query, conn))
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@Id", Id);
                         cmd.Parameters.AddWithValue("@NamaProduk", NamaProduk);
-                        cmd.Parameters.AddWithValue("@Harga", Harga);
+                        cmd.Parameters.AddWithValue("@HargaModal", HargaModal);
+                        cmd.Parameters.AddWithValue("@HargaJual", HargaJual);
                         cmd.Parameters.AddWithValue("@Deskripsi", Deskripsi ?? "");
                         cmd.ExecuteNonQuery();
                     }
                 }
-
                 TempData["SuccessMessage"] = "Produk berhasil diperbarui.";
             }
             catch (Exception ex)
             {
-                TempData["ErrorMessage"] =
-                    "Gagal update produk: " + ex.Message;
+                TempData["ErrorMessage"] = "Gagal update produk: " + ex.Message;
             }
 
             return RedirectToAction("Produk");
@@ -498,6 +484,120 @@ namespace TestAplikasi.Controllers
 
             return RedirectToAction("Produk");
         }
+
+        // =============================================
+        // STOK - GET
+        // =============================================
+        public ActionResult Stok(int? produkId)
+        {
+            var access = CheckAccess();
+            if (access != null) return access;
+
+            // Dropdown list produk
+            var listProduk = new List<ProdukModel>();
+            var listStok = new List<StokProdukModel>();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    conn.Open();
+
+                    // Ambil semua produk untuk dropdown
+                    string qProduk = "SELECT Id, NamaProduk FROM dbo.Produk ORDER BY NamaProduk";
+                    using (SqlCommand cmd = new SqlCommand(qProduk, conn))
+                    using (SqlDataReader r = cmd.ExecuteReader())
+                    {
+                        while (r.Read())
+                        {
+                            listProduk.Add(new ProdukModel
+                            {
+                                Id = Convert.ToInt32(r["Id"]),
+                                NamaProduk = r["NamaProduk"]?.ToString()
+                            });
+                        }
+                    }
+
+                    // Riwayat stok — semua atau filter per produk
+                    string qStok = @"
+                SELECT s.Id, s.ProdukId, p.NamaProduk, s.Jumlah, s.Keterangan, s.TanggalMasuk
+                FROM dbo.StokProduk s
+                INNER JOIN dbo.Produk p ON p.Id = s.ProdukId
+                " + (produkId.HasValue ? "WHERE s.ProdukId = @ProdukId " : "") + @"
+                ORDER BY s.TanggalMasuk DESC";
+
+                    using (SqlCommand cmd = new SqlCommand(qStok, conn))
+                    {
+                        if (produkId.HasValue)
+                            cmd.Parameters.AddWithValue("@ProdukId", produkId.Value);
+
+                        using (SqlDataReader r = cmd.ExecuteReader())
+                        {
+                            while (r.Read())
+                            {
+                                listStok.Add(new StokProdukModel
+                                {
+                                    Id = Convert.ToInt32(r["Id"]),
+                                    ProdukId = Convert.ToInt32(r["ProdukId"]),
+                                    NamaProduk = r["NamaProduk"]?.ToString(),
+                                    Jumlah = Convert.ToInt32(r["Jumlah"]),
+                                    Keterangan = r["Keterangan"]?.ToString(),
+                                    TanggalMasuk = Convert.ToDateTime(r["TanggalMasuk"])
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "Gagal memuat stok: " + ex.Message;
+            }
+
+            ViewBag.ListProduk = listProduk;
+            ViewBag.FilterProdukId = produkId;
+            return View(listStok);
+        }
+
+        // =============================================
+        // STOK - TAMBAH
+        // =============================================
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult TambahStok(int ProdukId, int Jumlah, string Keterangan)
+        {
+            var access = CheckAccess();
+            if (access != null) return access;
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    conn.Open();
+                    string query = @"
+                INSERT INTO dbo.StokProduk (ProdukId, Jumlah, Keterangan, TanggalMasuk)
+                VALUES (@ProdukId, @Jumlah, @Keterangan, GETDATE())";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@ProdukId", ProdukId);
+                        cmd.Parameters.AddWithValue("@Jumlah", Jumlah);
+                        cmd.Parameters.AddWithValue("@Keterangan", Keterangan ?? "");
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                TempData["SuccessMessage"] = "Stok berhasil ditambahkan.";
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "Gagal tambah stok: " + ex.Message;
+            }
+
+            return RedirectToAction("Stok", new { produkId = ProdukId });
+        }
+
+
+
 
         // =============================================
         // LAPORAN

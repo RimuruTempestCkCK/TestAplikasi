@@ -128,6 +128,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ProdukModel.cs" />
+    <Compile Include="Models\StokProdukModel.cs" />
     <Compile Include="Models\UserMode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -190,6 +191,7 @@
     <Content Include="Views\Admin\Laporan.cshtml" />
     <Content Include="Views\Admin\Produk.cshtml" />
     <Content Include="Views\Account\Profile.cshtml" />
+    <Content Include="Views\Admin\Stok.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
