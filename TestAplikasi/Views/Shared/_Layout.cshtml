@@ -26,6 +26,37 @@
     <!-- favicon -->
     <link rel="shortcut icon"
           href="@Url.Content("~/Content/templete/dist/assets/images/favicon.png")" />
+
+    <style>
+        /* Penyesuaian agar tampilan lebih 'clean' */
+        .brand-text {
+            font-size: 1.8rem; /* Sedikit dikecilkan agar proporsional di navbar */
+            font-weight: 700;
+            color: #4B49AC; /* Warna utama khas Skydash */
+            margin-bottom: 0px; /* Diubah ke 0 agar sejajar vertikal */
+            letter-spacing: -1px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+            .brand-text span {
+                color: #7DA0FA; /* Warna sekunder untuk variasi .exe */
+            }
+
+/*        .auth-form-light {
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .form-control {
+            border-radius: 8px !important;
+        }
+
+        .auth-form-btn {
+            border-radius: 8px !important;
+            box-shadow: 0 4px 10px rgba(75, 73, 172, 0.3);
+        }*/
+    </style>
 </head>
 <body>
 
@@ -59,12 +90,17 @@
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
 
-                <a class="navbar-brand brand-logo me-5"
-                   href="@Url.Action("Index", "Home")">
+                @*<a class="navbar-brand brand-logo me-5"
+           href="@Url.Action("Index", "Home")">
 
-                    <img src="@Url.Content("~/Content/templete/dist/assets/images/logo.svg")"
-                         class="me-2"
-                         alt="logo" />
+            <img src="@Url.Content("~/Content/templete/dist/assets/images/logo.svg")"
+                 class="me-2"
+                 alt="logo" />
+        </a>*@
+
+                <!-- Logo diganti teks SiKasir.exe -->
+                <a class="navbar-brand brand-logo me-5 d-flex align-items-center" href="@Url.Action("Index", "Home")" style="text-decoration: none;">
+                    <h2 class="brand-text m-0">SiKasir<span>.exe</span></h2>
                 </a>
 
                 <a class="navbar-brand brand-logo-mini"
