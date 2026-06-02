@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|c:\\users\\maxtop\\documents\\newtest\\testaplikasi\\testaplikasi\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|solutionrelative:testaplikasi\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|c:\\users\\maxtop\\documents\\newtest\\testaplikasi\\testaplikasi\\views\\kasir\\transaksi.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|solutionrelative:testaplikasi\\views\\kasir\\transaksi.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -25,10 +29,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|c:\\users\\maxtop\\documents\\newtest\\testaplikasi\\testaplikasi\\views\\admin\\stok.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|solutionrelative:testaplikasi\\views\\admin\\stok.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|c:\\users\\maxtop\\documents\\newtest\\testaplikasi\\testaplikasi\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|solutionrelative:testaplikasi\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\testaplikasi\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -118,7 +118,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Bookmark",
@@ -142,20 +142,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "RiwayatTransaksi.cshtml",
-              "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Kasir\\RiwayatTransaksi.cshtml",
-              "RelativeDocumentMoniker": "TestAplikasi\\Views\\Kasir\\RiwayatTransaksi.cshtml",
-              "ToolTip": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Kasir\\RiwayatTransaksi.cshtml",
-              "RelativeToolTip": "TestAplikasi\\Views\\Kasir\\RiwayatTransaksi.cshtml",
-              "ViewState": "AgIAACkAAAAAAAAAAAAuwEsAAAAGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-05-30T08:58:00.326Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "StrukTransaksi.cshtml",
               "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Kasir\\StrukTransaksi.cshtml",
               "RelativeDocumentMoniker": "TestAplikasi\\Views\\Kasir\\StrukTransaksi.cshtml",
@@ -168,20 +155,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Transaksi.cshtml",
               "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Kasir\\Transaksi.cshtml",
               "RelativeDocumentMoniker": "TestAplikasi\\Views\\Kasir\\Transaksi.cshtml",
               "ToolTip": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Kasir\\Transaksi.cshtml",
               "RelativeToolTip": "TestAplikasi\\Views\\Kasir\\Transaksi.cshtml",
-              "ViewState": "AgIAANAAAAAAAAAAAAAuwNwAAAAxAAAAAAAAAA==",
+              "ViewState": "AgIAANAAAAAAAAAAAAAuwN4AAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2026-05-30T08:56:52.876Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "Dashboard.cshtml",
               "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Kasir\\Dashboard.cshtml",
               "RelativeDocumentMoniker": "TestAplikasi\\Views\\Kasir\\Dashboard.cshtml",
@@ -190,6 +177,32 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAABDAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2026-05-30T08:42:58.773Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "TestAplikasi\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "TestAplikasi\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAADkAAAAAAAAAAAAAABUAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-27T09:48:25.294Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "RiwayatTransaksi.cshtml",
+              "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Kasir\\RiwayatTransaksi.cshtml",
+              "RelativeDocumentMoniker": "TestAplikasi\\Views\\Kasir\\RiwayatTransaksi.cshtml",
+              "ToolTip": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Kasir\\RiwayatTransaksi.cshtml",
+              "RelativeToolTip": "TestAplikasi\\Views\\Kasir\\RiwayatTransaksi.cshtml",
+              "ViewState": "AgIAACkAAAAAAAAAAAAuwEsAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-30T08:58:00.326Z",
               "EditorCaption": ""
             },
             {
@@ -208,19 +221,6 @@
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "TestAplikasi\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "TestAplikasi\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAEQBAAAAAAAAAAAYwE8BAAA4AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-05-27T09:48:25.294Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
               "Title": "Stok.cshtml",
               "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Admin\\Stok.cshtml",
               "RelativeDocumentMoniker": "TestAplikasi\\Views\\Admin\\Stok.cshtml",
@@ -233,7 +233,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "User.cshtml",
               "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Admin\\User.cshtml",
               "RelativeDocumentMoniker": "TestAplikasi\\Views\\Admin\\User.cshtml",
