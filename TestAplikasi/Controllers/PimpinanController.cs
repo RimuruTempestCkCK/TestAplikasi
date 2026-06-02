@@ -237,15 +237,167 @@ namespace TestAplikasi.Controllers
         }
 
         // =============================================
-        // GET: Pimpinan/Laporan
+        // GET: Pimpinan/Laporan Transaksi
         // =============================================
-        public ActionResult Laporan()
+        public ActionResult LaporanTransaksi()
         {
             var access = CheckAccess();
 
             if (access != null)
                 return access;
 
+            var listTransaksi = new List<dynamic>();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    conn.Open();
+
+                    string query = @"
+                        SELECT t.Id, t.NoTransaksi, t.TanggalTransaksi, 
+                               u.NamaLengkap AS NamaKasir, t.TotalHarga, t.JumlahItem
+                        FROM dbo.Transaksi t
+                        JOIN dbo.Users u ON u.Id = t.KasirId
+                        ORDER BY t.TanggalTransaksi DESC";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                listTransaksi.Add(new
+                                {
+                                    Id = Convert.ToInt32(reader["Id"]),
+                                    NoTransaksi = reader["NoTransaksi"]?.ToString(),
+                                    TanggalTransaksi = Convert.ToDateTime(reader["TanggalTransaksi"]),
+                                    NamaKasir = reader["NamaKasir"]?.ToString(),
+                                    TotalHarga = Convert.ToDecimal(reader["TotalHarga"]),
+                                    JumlahItem = Convert.ToInt32(reader["JumlahItem"])
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "Gagal memuat laporan transaksi: " + ex.Message;
+            }
+
+            ViewBag.DataLaporan = listTransaksi;
+            return View();
+        }
+
+        // =============================================
+        // GET: Pimpinan/Laporan Stok Terkini
+        // =============================================
+        public ActionResult LaporanStok()
+        {
+            var access = CheckAccess();
+
+            if (access != null)
+                return access;
+
+            var listStok = new List<dynamic>();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    conn.Open();
+
+                    string query = @"
+                        SELECT p.Id, p.NamaProduk, p.Harga, p.Kategori,
+                               ISNULL(SUM(s.Jumlah), 0) AS TotalStok,
+                               p.Status
+                        FROM dbo.Produk p
+                        LEFT JOIN dbo.StokProduk s ON s.ProdukId = p.Id
+                        GROUP BY p.Id, p.NamaProduk, p.Harga, p.Kategori, p.Status
+                        ORDER BY p.NamaProduk";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                listStok.Add(new
+                                {
+                                    Id = Convert.ToInt32(reader["Id"]),
+                                    NamaProduk = reader["NamaProduk"]?.ToString(),
+                                    Harga = Convert.ToDecimal(reader["Harga"]),
+                                    Kategori = reader["Kategori"]?.ToString(),
+                                    TotalStok = Convert.ToInt32(reader["TotalStok"]),
+                                    Status = reader["Status"]?.ToString()
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "Gagal memuat laporan stok: " + ex.Message;
+            }
+
+            ViewBag.DataLaporan = listStok;
+            return View();
+        }
+
+        // =============================================
+        // GET: Pimpinan/Laporan Penambahan Stok
+        // =============================================
+        public ActionResult LaporanPenambahStok()
+        {
+            var access = CheckAccess();
+
+            if (access != null)
+                return access;
+
+            var listPenambahan = new List<dynamic>();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    conn.Open();
+
+                    string query = @"
+                        SELECT s.Id, p.NamaProduk, s.Jumlah, s.Keterangan, 
+                               s.TanggalMasuk, p.Harga
+                        FROM dbo.StokProduk s
+                        JOIN dbo.Produk p ON p.Id = s.ProdukId
+                        ORDER BY s.TanggalMasuk DESC";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                listPenambahan.Add(new
+                                {
+                                    Id = Convert.ToInt32(reader["Id"]),
+                                    NamaProduk = reader["NamaProduk"]?.ToString(),
+                                    Jumlah = Convert.ToInt32(reader["Jumlah"]),
+                                    Keterangan = reader["Keterangan"]?.ToString(),
+                                    TanggalMasuk = Convert.ToDateTime(reader["TanggalMasuk"]),
+                                    Harga = Convert.ToDecimal(reader["Harga"]),
+                                    NilaiStok = Convert.ToDecimal(reader["Harga"]) * Convert.ToInt32(reader["Jumlah"])
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "Gagal memuat laporan penambahan stok: " + ex.Message;
+            }
+
+            ViewBag.DataLaporan = listPenambahan;
             return View();
         }
     }

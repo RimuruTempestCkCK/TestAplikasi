@@ -8,39 +8,54 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Filter Laporan</h4>
-                <p class="card-description">Pilih rentang tanggal dan kategori laporan yang ingin ditampilkan.</p>
-                <div class="row">
-                    <div class="col-md-3">
+                <h4 class="card-title mb-1">
+                    <i class="mdi mdi-filter me-2"></i>Filter Laporan
+                </h4>
+                <p class="card-description mb-4">Pilih rentang tanggal dan kategori laporan yang ingin ditampilkan</p>
+                <div class="row g-3">
+                    <div class="col-md-2">
                         <div class="form-group">
-                            <label for="tanggalMulai">Tanggal Mulai</label>
-                            <input type="date" class="form-control" id="tanggalMulai" />
+                            <label for="tanggalMulai" class="form-label fw-600">Tanggal Mulai</label>
+                            <input type="date" class="form-control form-control-sm" id="tanggalMulai" />
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="tanggalAkhir" class="form-label fw-600">Tanggal Akhir</label>
+                            <input type="date" class="form-control form-control-sm" id="tanggalAkhir" />
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="tanggalAkhir">Tanggal Akhir</label>
-                            <input type="date" class="form-control" id="tanggalAkhir" />
+                            <label for="kategoriLaporan" class="form-label fw-600">Kategori Laporan</label>
+                            <select class="form-select form-select-sm" id="kategoriLaporan">
+                                <option value="">-- Pilih Kategori --</option>
+                                <option value="transaksi">Laporan Transaksi</option>
+                                <option value="stok">Laporan Stok</option>
+                                <option value="penambahan">Laporan Penambahan Stok</option>
+                            </select>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <div class="form-group">
-                            <label for="kategoriLaporan">Kategori</label>
-                            <select class="form-select" id="kategoriLaporan">
-                                <option value="semua">Semua Kategori</option>
-                                <option value="penjualan">Penjualan</option>
-                                <option value="pengguna">Pengguna</option>
-                                <option value="transaksi">Transaksi</option>
+                            <label for="sortBy" class="form-label fw-600">Urutkan</label>
+                            <select class="form-select form-select-sm" id="sortBy">
+                                <option value="terbaru">Terbaru</option>
+                                <option value="terlama">Terlama</option>
+                                <option value="jumlah">Jumlah</option>
                             </select>
                         </div>
                     </div>
                     <div class="col-md-3 d-flex align-items-end">
-                        <div class="form-group w-100">
-                            <button type="button" class="btn btn-primary btn-fw me-2" id="btnFilter">
-                                <i class="ti-filter me-1"></i> Tampilkan
+                        <div class="btn-group w-100" role="group">
+                            <button type="button" class="btn btn-primary btn-sm" id="btnFilter">
+                                <i class="mdi mdi-magnify me-1"></i> Cari
                             </button>
-                            <button type="button" class="btn btn-outline-secondary btn-fw" id="btnReset">
-                                <i class="ti-reload me-1"></i> Reset
+                            <button type="button" class="btn btn-outline-secondary btn-sm" id="btnReset">
+                                <i class="mdi mdi-refresh me-1"></i> Reset
+                            </button>
+                            <button type="button" class="btn btn-outline-success btn-sm" id="btnExport">
+                                <i class="mdi mdi-download me-1"></i> Export
                             </button>
                         </div>
                     </div>
@@ -237,6 +252,50 @@
 </div>
 
 <script>
+    // ===== FILTER FUNCTIONALITY =====
+    document.getElementById('btnFilter').addEventListener('click', function() {
+        const kategori = document.getElementById('kategoriLaporan').value;
+        const tglMulai = document.getElementById('tanggalMulai').value;
+        const tglAkhir = document.getElementById('tanggalAkhir').value;
+
+        if (!kategori) {
+            alert('Pilih kategori laporan terlebih dahulu');
+            return;
+        }
+
+        if (tglMulai && tglAkhir) {
+            if (new Date(tglMulai) > new Date(tglAkhir)) {
+                alert('Tanggal mulai tidak boleh lebih besar dari tanggal akhir');
+                return;
+            }
+        }
+
+        // Redirect ke laporan yang dipilih
+        const routes = {
+            'transaksi': '@Url.Action("LaporanTransaksi", "Admin")',
+            'stok': '@Url.Action("LaporanStok", "Admin")',
+            'penambahan': '@Url.Action("LaporanPenambahStok", "Admin")'
+        };
+
+        if (routes[kategori]) {
+            let url = routes[kategori];
+            if (tglMulai) url += '?mulai=' + tglMulai;
+            if (tglAkhir) url += (tglMulai ? '&' : '?') + 'akhir=' + tglAkhir;
+            window.location.href = url;
+        }
+    });
+
+    document.getElementById('btnReset').addEventListener('click', function() {
+        document.getElementById('tanggalMulai').value = '';
+        document.getElementById('tanggalAkhir').value = '';
+        document.getElementById('kategoriLaporan').value = '';
+        document.getElementById('sortBy').value = 'terbaru';
+    });
+
+    document.getElementById('btnExport').addEventListener('click', function() {
+        alert('Fitur export akan dihubungkan ke controller');
+    });
+
      //===== LINE CHART: Tren Transaksi =====
     var ctxLine = document.getElementById('lineChart').getContext('2d');
     new Chart(ctxLine, {
@@ -348,9 +407,103 @@
             }
         }
     });
-
-    // ===== EXPORT (placeholder) =====
-    function exportLaporan() {
-        alert('Fitur export akan dihubungkan ke controller.');
-    }
 </script>
+
+<style>
+    /* Filter Card Styling */
+    .card-body .row {
+        gap: 1rem;
+    }
+
+    .form-label {
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        color: #666;
+        letter-spacing: 0.5px;
+    }
+
+    .form-control-sm, .form-select-sm {
+        border-radius: 6px;
+        border: 1px solid #e0e0e0;
+        transition: all 0.3s ease;
+    }
+
+    .form-control-sm:focus, .form-select-sm:focus {
+        border-color: #4B49AC;
+        box-shadow: 0 0 0 0.2rem rgba(75, 73, 172, 0.15);
+    }
+
+    .btn-group .btn {
+        border-radius: 6px;
+        font-size: 0.85rem;
+        transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #4B49AC 0%, #5d5abf 100%);
+        border: none;
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(75, 73, 172, 0.3);
+    }
+
+    .btn-outline-secondary:hover {
+        border-color: #4B49AC;
+        color: #4B49AC;
+    }
+
+    .btn-outline-success:hover {
+        border-color: #00d25b;
+        color: #00d25b;
+    }
+
+    /* Table Styling */
+    .table thead th {
+        background-color: #f8f9fa;
+        font-weight: 600;
+        border-bottom: 2px solid #dee2e6;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        color: #666;
+    }
+
+    .table tbody tr {
+        transition: all 0.2s ease;
+    }
+
+    .table-striped tbody tr:hover {
+        background-color: #f0f2f5;
+    }
+
+    .badge {
+        padding: 0.5rem 0.75rem;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 0.75rem;
+    }
+
+    /* Card Improvements */
+    .card {
+        border: none;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        border-radius: 10px;
+        transition: all 0.3s ease;
+    }
+
+    .card:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    }
+
+    .card-title {
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 0.5rem;
+    }
+
+    .card-description {
+        font-size: 0.9rem;
+        color: #999;
+    }
+</style>

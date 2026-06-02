@@ -1,0 +1,155 @@
+@{
+    ViewBag.Title = "Laporan Transaksi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Error!</strong> @TempData["ErrorMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-12 grid-margin">
+        <div class="row">
+            <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+                <h3 class="font-weight-bold">
+                    <i class="mdi mdi-file-document me-2"></i>Laporan Transaksi
+                </h3>
+                <h6 class="font-weight-normal mb-0">
+                    Daftar seluruh transaksi yang telah dilakukan &mdash; @DateTime.Now.ToString("dddd, dd MMMM yyyy", new System.Globalization.CultureInfo("id-ID"))
+                </h6>
+            </div>
+            <div class="col-12 col-xl-4">
+                <div class="justify-content-end d-flex gap-2">
+                    <button class="btn btn-primary btn-sm" onclick="window.print()">
+                        <i class="mdi mdi-printer me-1"></i> Cetak
+                    </button>
+                    <button class="btn btn-success btn-sm" onclick="exportToExcel()">
+                        <i class="mdi mdi-download me-1"></i> Export
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <p class="card-title mb-0">
+                        <i class="mdi mdi-filter me-2"></i>Daftar Transaksi
+                    </p>
+                    <div class="d-flex gap-2">
+                        <input type="date" class="form-control form-control-sm" id="filterTglMulai" style="width: 150px;">
+                        <input type="date" class="form-control form-control-sm" id="filterTglAkhir" style="width: 150px;">
+                        <button class="btn btn-outline-primary btn-sm" onclick="filterTransaksi()">
+                            <i class="mdi mdi-magnify"></i>
+                        </button>
+                        <button class="btn btn-outline-secondary btn-sm" onclick="resetFilter()">
+                            <i class="mdi mdi-refresh"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped" id="transaksiTable">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>No. Transaksi</th>
+                                <th>Tanggal</th>
+                                <th>Kasir</th>
+                                <th>Jumlah Item</th>
+                                <th>Total Harga</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int no = 1;
+                                var data = (List<dynamic>)ViewBag.DataLaporan;
+                                decimal totalPenjualan = 0;
+                                if (data != null && data.Count > 0)
+                                {
+                                    foreach (var item in data)
+                                    {
+                                        totalPenjualan += (decimal)item.TotalHarga;
+                                        <tr>
+                                            <td>@no</td>
+                                            <td><strong>@item.NoTransaksi</strong></td>
+                                            <td>@((DateTime)item.TanggalTransaksi).ToString("dd/MM/yyyy HH:mm")</td>
+                                            <td>@item.NamaKasir</td>
+                                            <td class="text-center">@item.JumlahItem</td>
+                                            <td class="text-end"><strong>Rp @string.Format("{0:N0}", item.TotalHarga)</strong></td>
+                                        </tr>
+                                        no++;
+                                    }
+                                    <tr style="background-color: #f0f0f0; font-weight: bold;">
+                                        <td colspan="5" class="text-end">TOTAL PENJUALAN:</td>
+                                        <td class="text-end">Rp @string.Format("{0:N0}", totalPenjualan)</td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="6" class="text-center text-muted">Tidak ada data transaksi</td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    @media print {
+        .btn, .btn-sm, #filterTglMulai, #filterTglAkhir {
+            display: none !important;
+        }
+    }
+</style>
+
+<script>
+    function filterTransaksi() {
+        const tglMulai = document.getElementById('filterTglMulai').value;
+        const tglAkhir = document.getElementById('filterTglAkhir').value;
+
+        if (tglMulai && tglAkhir && new Date(tglMulai) > new Date(tglAkhir)) {
+            alert('Tanggal mulai tidak boleh lebih besar dari tanggal akhir');
+            return;
+        }
+
+        const rows = document.getElementById('transaksiTable').querySelector('tbody').querySelectorAll('tr');
+        rows.forEach(row => {
+            const tanggal = row.cells[2].textContent.split(' ')[0];
+            let show = true;
+
+            if (tglMulai) {
+                const tglRow = new Date(tanggal.split('/').reverse().join('-'));
+                if (tglRow < new Date(tglMulai)) show = false;
+            }
+            if (show && tglAkhir) {
+                const tglRow = new Date(tanggal.split('/').reverse().join('-'));
+                if (tglRow > new Date(tglAkhir)) show = false;
+            }
+
+            row.style.display = show ? '' : 'none';
+        });
+    }
+
+    function resetFilter() {
+        document.getElementById('filterTglMulai').value = '';
+        document.getElementById('filterTglAkhir').value = '';
+        document.getElementById('transaksiTable').querySelector('tbody').querySelectorAll('tr').forEach(row => row.style.display = '');
+    }
+
+    function exportToExcel() {
+        alert('Fitur export Excel sedang dalam pengembangan');
+    }
+</script>

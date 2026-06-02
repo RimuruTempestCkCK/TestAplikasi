@@ -1,0 +1,132 @@
+@{
+    ViewBag.Title = "Laporan Stok Terkini";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Error!</strong> @TempData["ErrorMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-12 grid-margin">
+        <div class="row">
+            <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+                <h3 class="font-weight-bold">
+                    <i class="mdi mdi-package-variant me-2"></i>Laporan Stok Terkini
+                </h3>
+                <h6 class="font-weight-normal mb-0">
+                    Kondisi stok produk saat ini &mdash; @DateTime.Now.ToString("dddd, dd MMMM yyyy", new System.Globalization.CultureInfo("id-ID"))
+                </h6>
+            </div>
+            <div class="col-12 col-xl-4">
+                <div class="justify-content-end d-flex gap-2">
+                    <button class="btn btn-primary btn-sm" onclick="window.print()">
+                        <i class="mdi mdi-printer me-1"></i> Cetak
+                    </button>
+                    <button class="btn btn-success btn-sm" onclick="exportToExcel()">
+                        <i class="mdi mdi-download me-1"></i> Export
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <p class="card-title mb-0">
+                        <i class="mdi mdi-filter me-2"></i>Stok Produk Terkini
+                    </p>
+                    <input type="text" class="form-control form-control-sm" id="filterProduk" placeholder="Cari produk..." style="width: 250px;">
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped" id="stokTable">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Produk</th>
+                                <th>Kategori</th>
+                                <th>Harga</th>
+                                <th>Stok</th>
+                                <th>Status</th>
+                                <th>Nilai Stok</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int no = 1;
+                                var data = (List<dynamic>)ViewBag.DataLaporan;
+                                decimal totalNilai = 0;
+                                if (data != null && data.Count > 0)
+                                {
+                                    foreach (var item in data)
+                                    {
+                                        decimal nilaiStok = ((decimal)item.Harga) * ((int)item.TotalStok);
+                                        totalNilai += nilaiStok;
+                                        <tr>
+                                            <td>@no</td>
+                                            <td><strong>@item.NamaProduk</strong></td>
+                                            <td>@item.Kategori</td>
+                                            <td class="text-end">Rp @string.Format("{0:N0}", item.Harga)</td>
+                                            <td class="text-center">
+                                                <span class="badge @(((int)item.TotalStok) > 0 ? "bg-success" : "bg-danger")">
+                                                    @item.TotalStok unit
+                                                </span>
+                                            </td>
+                                            <td>@item.Status</td>
+                                            <td class="text-end"><strong>Rp @string.Format("{0:N0}", nilaiStok)</strong></td>
+                                        </tr>
+                                        no++;
+                                    }
+                                    <tr style="background-color: #f0f0f0; font-weight: bold;">
+                                        <td colspan="6" class="text-end">TOTAL NILAI STOK:</td>
+                                        <td class="text-end">Rp @string.Format("{0:N0}", totalNilai)</td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="7" class="text-center text-muted">Tidak ada data stok</td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    @media print {
+        .btn, .btn-sm, #filterProduk {
+            display: none !important;
+        }
+    }
+</style>
+
+<script>
+    document.getElementById('filterProduk').addEventListener('keyup', function() {
+        const filter = this.value.toLowerCase();
+        document.getElementById('stokTable').querySelector('tbody').querySelectorAll('tr').forEach(row => {
+            if (row.cells.length > 1) {
+                const produk = row.cells[1].textContent.toLowerCase();
+                const kategori = row.cells[2].textContent.toLowerCase();
+                const show = produk.includes(filter) || kategori.includes(filter);
+                row.style.display = show ? '' : 'none';
+            }
+        });
+    });
+
+    function exportToExcel() {
+        alert('Fitur export Excel sedang dalam pengembangan');
+    }
+</script>

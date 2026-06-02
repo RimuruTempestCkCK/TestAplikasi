@@ -28,34 +28,20 @@
           href="@Url.Content("~/Content/templete/dist/assets/images/favicon.png")" />
 
     <style>
-        /* Penyesuaian agar tampilan lebih 'clean' */
+        /* Brand Text */
         .brand-text {
-            font-size: 1.8rem; /* Sedikit dikecilkan agar proporsional di navbar */
+            font-size: 1.8rem;
             font-weight: 700;
-            color: #4B49AC; /* Warna utama khas Skydash */
-            margin-bottom: 0px; /* Diubah ke 0 agar sejajar vertikal */
+            color: #4B49AC;
+            margin-bottom: 0;
             letter-spacing: -1px;
             display: inline-block;
             vertical-align: middle;
         }
 
-            .brand-text span {
-                color: #7DA0FA; /* Warna sekunder untuk variasi .exe */
-            }
-
-/*        .auth-form-light {
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        .brand-text span {
+            color: #7DA0FA;
         }
-
-        .form-control {
-            border-radius: 8px !important;
-        }
-
-        .auth-form-btn {
-            border-radius: 8px !important;
-            box-shadow: 0 4px 10px rgba(75, 73, 172, 0.3);
-        }*/
     </style>
 </head>
 <body>
@@ -384,11 +370,30 @@
                     @if (role == "Admin" || role == "Pimpinan")
                     {
                         <li class="nav-item">
-                            <a class="nav-link"
-                               href="@Url.Action("Laporan", role == "Pimpinan" ? "Pimpinan" : "Admin")">
+                            <a class="nav-link" data-bs-toggle="collapse" href="#laporan-menu" aria-expanded="false" aria-controls="laporan-menu">
                                 <i class="icon-paper menu-icon"></i>
                                 <span class="menu-title">Laporan</span>
+                                <i class="menu-arrow"></i>
                             </a>
+                            <div class="collapse" id="laporan-menu">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="@Url.Action("LaporanTransaksi", role == "Pimpinan" ? "Pimpinan" : "Admin")">
+                                            Laporan Transaksi
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="@Url.Action("LaporanStok", role == "Pimpinan" ? "Pimpinan" : "Admin")">
+                                            Laporan Stok Terkini
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="@Url.Action("LaporanPenambahStok", role == "Pimpinan" ? "Pimpinan" : "Admin")">
+                                            Laporan Penambahan Stok
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
                     }
 

@@ -200,6 +200,13 @@
     <Content Include="Views\Kasir\Transaksi.cshtml" />
     <Content Include="Views\Kasir\StrukTransaksi.cshtml" />
     <Content Include="Views\Kasir\RiwayatTransaksi.cshtml" />
+    <Content Include="Views\Admin\LaporanTransaksi.cshtml" />
+    <Content Include="Views\Admin\LaporanStok.cshtml" />
+    <Content Include="Views\Admin\LaporanPenambahStok.cshtml" />
+    <Content Include="Views\Pimpinan\LaporanTransaksi.cshtml" />
+    <Content Include="Views\Pimpinan\LaporanStok.cshtml" />
+    <Content Include="Views\Pimpinan\LaporanPenambahStok.cshtml" />
+    <Content Include="Views\Admin\LaporanTransaksi.cshtml.bak" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
