@@ -22,7 +22,10 @@
             <div class="col-12 col-xl-8 mb-4 mb-xl-0">
                 <h3 class="font-weight-bold">Selamat Datang, @Session["Nama"]</h3>
                 <h6 class="font-weight-normal mb-0">
-                    Login sebagai <span class="text-primary">Kasir</span> &mdash; @DateTime.Now.ToString("dddd, dd MMMM yyyy")
+                    Login sebagai <span class="text-primary">Kasir</span> &mdash; @DateTime.Now.ToString(
+                    "dddd, dd MMMM yyyy",
+                    new System.Globalization.CultureInfo("id-ID")
+                    )
                 </h6>
             </div>
             <div class="col-12 col-xl-4">
@@ -51,7 +54,9 @@
         <div class="card card-dark-blue">
             <div class="card-body">
                 <p class="mb-4">Pendapatan Hari Ini</p>
-                <p class="fs-30 mb-2">Rp @((decimal)ViewBag.PendapatanHariIni).ToString("N0")</p>
+                <p class="fs-30 mb-2">
+                    Rp @string.Format("{0:N0}", ViewBag.PendapatanHariIni)
+                </p>
                 <p class="mb-0 text-white-50">dari kasir ini</p>
             </div>
         </div>
@@ -69,7 +74,9 @@
         <div class="card card-light-danger">
             <div class="card-body">
                 <p class="mb-4">Total Pendapatan</p>
-                <p class="fs-30 mb-2">Rp @((decimal)ViewBag.TotalPendapatan).ToString("N0")</p>
+                <p class="fs-30 mb-2">
+                    Rp @string.Format("{0:N0}", ViewBag.TotalPendapatan)
+                </p>
                 <p class="mb-0 text-white-50">semua waktu</p>
             </div>
         </div>
