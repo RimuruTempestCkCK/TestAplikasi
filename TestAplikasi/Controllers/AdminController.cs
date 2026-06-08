@@ -19,19 +19,40 @@ namespace TestAplikasi.Controllers
             return Session["Id"] != null;
         }
 
-        private bool IsAdmin()
+        //private bool IsAdmin()
+        //{
+        //    return Session["Role"] != null &&
+        //           Session["Role"].ToString() == "Admin";
+        //}
+
+        private bool CanAccessReport()
         {
-            return Session["Role"] != null &&
-                   Session["Role"].ToString() == "Admin";
+            if (Session["Role"] == null)
+                return false;
+
+            string role = Session["Role"].ToString();
+
+            return role == "Admin" || role == "Pimpinan";
         }
+
+        //private ActionResult CheckAccess()
+        //{
+        //    if (!IsLoggedIn())
+        //        return RedirectToAction("Login", "Account");
+
+        //    if (!IsAdmin())
+        //        return RedirectToAction("Dashboard", "Pimpinan");
+
+        //    return null;
+        //}
 
         private ActionResult CheckAccess()
         {
             if (!IsLoggedIn())
                 return RedirectToAction("Login", "Account");
 
-            if (!IsAdmin())
-                return RedirectToAction("Dashboard", "Pimpinan");
+            if (!CanAccessReport())
+                return RedirectToAction("Dashboard", "Kasir");
 
             return null;
         }
@@ -199,10 +220,15 @@ namespace TestAplikasi.Controllers
             return View();
         }
 
+        public ActionResult Debug()
+        {
+            return Content("Admin Controller is working!");
+        }
+
         // =============================================
         // USER - GET
         // =============================================
-        public ActionResult User()
+        public ActionResult ManageUser()
         {
             var access = CheckAccess();
             if (access != null) return access;
@@ -287,7 +313,7 @@ namespace TestAplikasi.Controllers
                         {
                             TempData["ErrorMessage"] =
                                 "Username sudah digunakan.";
-                            return RedirectToAction("User");
+                            return RedirectToAction("ManageUser");
                         }
                     }
 
@@ -318,7 +344,7 @@ namespace TestAplikasi.Controllers
                     "Gagal menambahkan user: " + ex.Message;
             }
 
-            return RedirectToAction("User");
+            return RedirectToAction("ManageUser");
         }
 
         // =============================================
@@ -361,7 +387,7 @@ namespace TestAplikasi.Controllers
                         {
                             TempData["ErrorMessage"] =
                                 "Username sudah digunakan user lain.";
-                            return RedirectToAction("User");
+                            return RedirectToAction("ManageUser");
                         }
                     }
 
@@ -416,7 +442,7 @@ namespace TestAplikasi.Controllers
                     "Gagal memperbarui user: " + ex.Message;
             }
 
-            return RedirectToAction("User");
+            return RedirectToAction("ManageUser");
         }
 
         // =============================================
@@ -436,7 +462,7 @@ namespace TestAplikasi.Controllers
                 {
                     TempData["ErrorMessage"] =
                         "Tidak bisa menghapus akun sendiri.";
-                    return RedirectToAction("User");
+                    return RedirectToAction("ManageUser");
                 }
 
                 using (SqlConnection conn =
@@ -463,7 +489,7 @@ namespace TestAplikasi.Controllers
                     "Gagal menghapus user: " + ex.Message;
             }
 
-            return RedirectToAction("User");
+            return RedirectToAction("ManageUser");
         }
 
         // =============================================
@@ -768,8 +794,8 @@ namespace TestAplikasi.Controllers
                     conn.Open();
 
                     string query = @"
-                        SELECT t.Id, t.NoTransaksi, t.TanggalTransaksi, 
-                               u.NamaLengkap AS NamaKasir, t.TotalHarga, t.JumlahItem
+                        SELECT t.Id, t.NomorTransaksi, t.TanggalTransaksi, 
+                               u.NamaLengkap AS NamaKasir, t.TotalHarga, t.Bayar, t.Kembalian
                         FROM dbo.Transaksi t
                         JOIN dbo.Users u ON u.Id = t.KasirId
                         ORDER BY t.TanggalTransaksi DESC";
@@ -783,11 +809,12 @@ namespace TestAplikasi.Controllers
                                 listTransaksi.Add(new
                                 {
                                     Id = Convert.ToInt32(reader["Id"]),
-                                    NoTransaksi = reader["NoTransaksi"]?.ToString(),
+                                    NomorTransaksi = reader["NomorTransaksi"]?.ToString(),
                                     TanggalTransaksi = Convert.ToDateTime(reader["TanggalTransaksi"]),
                                     NamaKasir = reader["NamaKasir"]?.ToString(),
                                     TotalHarga = Convert.ToDecimal(reader["TotalHarga"]),
-                                    JumlahItem = Convert.ToInt32(reader["JumlahItem"])
+                                    Bayar = Convert.ToDecimal(reader["Bayar"]),
+                                    Kembalian = Convert.ToDecimal(reader["Kembalian"])
                                 });
                             }
                         }
@@ -820,12 +847,11 @@ namespace TestAplikasi.Controllers
                     conn.Open();
 
                     string query = @"
-                        SELECT p.Id, p.NamaProduk, p.Harga, p.Kategori,
-                               ISNULL(SUM(s.Jumlah), 0) AS TotalStok,
-                               p.Status
+                        SELECT p.Id, p.NamaProduk, p.Harga, p.HargaModal, p.HargaJual,
+                               ISNULL(SUM(s.Jumlah), 0) AS TotalStok
                         FROM dbo.Produk p
                         LEFT JOIN dbo.StokProduk s ON s.ProdukId = p.Id
-                        GROUP BY p.Id, p.NamaProduk, p.Harga, p.Kategori, p.Status
+                        GROUP BY p.Id, p.NamaProduk, p.Harga, p.HargaModal, p.HargaJual
                         ORDER BY p.NamaProduk";
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
@@ -839,9 +865,9 @@ namespace TestAplikasi.Controllers
                                     Id = Convert.ToInt32(reader["Id"]),
                                     NamaProduk = reader["NamaProduk"]?.ToString(),
                                     Harga = Convert.ToDecimal(reader["Harga"]),
-                                    Kategori = reader["Kategori"]?.ToString(),
-                                    TotalStok = Convert.ToInt32(reader["TotalStok"]),
-                                    Status = reader["Status"]?.ToString()
+                                    HargaModal = Convert.ToDecimal(reader["HargaModal"]),
+                                    HargaJual = Convert.ToDecimal(reader["HargaJual"]),
+                                    TotalStok = Convert.ToInt32(reader["TotalStok"])
                                 });
                             }
                         }

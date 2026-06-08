@@ -330,7 +330,7 @@
                     @if (role == "Admin")
                     {
                         <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("User", "Admin")">
+                            <a class="nav-link" href="@Url.Action("ManageUser", "Admin")">
                                 <i class="icon-head menu-icon"></i>
                                 <span class="menu-title">User</span>
                             </a>
@@ -369,6 +369,7 @@
                     <!-- Laporan -->
                     @if (role == "Admin" || role == "Pimpinan")
                     {
+                        @{ var reportController = role == "Pimpinan" ? "Pimpinan" : "Admin"; }
                         <li class="nav-item">
                             <a class="nav-link" data-bs-toggle="collapse" href="#laporan-menu" aria-expanded="false" aria-controls="laporan-menu">
                                 <i class="icon-paper menu-icon"></i>
@@ -378,18 +379,18 @@
                             <div class="collapse" id="laporan-menu">
                                 <ul class="nav flex-column sub-menu">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="@Url.Action("LaporanTransaksi", role == "Pimpinan" ? "Pimpinan" : "Admin")">
-                                            Laporan Transaksi
+                                        <a class="nav-link" href="@Url.Action("LaporanTransaksi", reportController)">
+                                            Transaksi
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="@Url.Action("LaporanStok", role == "Pimpinan" ? "Pimpinan" : "Admin")">
-                                            Laporan Stok Terkini
+                                        <a class="nav-link" href="@Url.Action("LaporanStok", reportController)">
+                                            Stok Terkini
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="@Url.Action("LaporanPenambahStok", role == "Pimpinan" ? "Pimpinan" : "Admin")">
-                                            Laporan Penambahan Stok
+                                        <a class="nav-link" href="@Url.Action("LaporanPenambahStok", reportController)">
+                                            Penambahan Stok
                                         </a>
                                     </li>
                                 </ul>

@@ -25,42 +25,27 @@ namespace TestAplikasi
 
         protected void Application_Error()
         {
-            Exception exception =
-                Server.GetLastError();
-
-            HttpException httpException =
-                exception as HttpException;
-
-            if (httpException != null)
+            Exception exception = Server.GetLastError();
+ 
+            if (exception != null)
             {
-                int statusCode =
-                    httpException.GetHttpCode();
-
-                // Handle halaman tidak ditemukan
-                if (statusCode == 404)
+                HttpException httpException = exception as HttpException;
+ 
+                // Cek jika adalah 404 error
+                if (httpException != null && httpException.GetHttpCode() == 404)
                 {
-                    Response.Clear();
-
                     Server.ClearError();
-
-                    RouteData routeData =
-                        new RouteData();
-
-                    routeData.Values["controller"] =
-                        "Error";
-
-                    routeData.Values["action"] =
-                        "NotFound";
-
-                    IController controller =
-                        new Controllers.ErrorController();
-
-                    controller.Execute(
-                        new RequestContext(
-                            new HttpContextWrapper(Context),
-                            routeData
-                        )
-                    );
+                    
+                    Response.StatusCode = 404;
+                    Response.TrySkipIisCustomErrors = true;
+                    
+                    RouteData routeData = new RouteData();
+                    routeData.Values.Add("controller", "Error");
+                    routeData.Values.Add("action", "NotFound");
+ 
+                    IController errorController = new ErrorController();
+                    errorController.Execute(
+                        new RequestContext(new HttpContextWrapper(Context), routeData));
                 }
             }
         }

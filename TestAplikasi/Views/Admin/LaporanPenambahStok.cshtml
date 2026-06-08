@@ -16,7 +16,7 @@
         <div class="row">
             <div class="col-12 col-xl-8 mb-4 mb-xl-0">
                 <h3 class="font-weight-bold">
-                    <i class="mdi mdi-plus-box me-2"></i>Laporan Penambahan Stok
+                    <i class="icon-plus menu-icon"></i> Laporan Penambahan Stok
                 </h3>
                 <h6 class="font-weight-normal mb-0">
                     Riwayat penambahan stok produk &mdash; @DateTime.Now.ToString("dddd, dd MMMM yyyy", new System.Globalization.CultureInfo("id-ID"))
@@ -25,10 +25,7 @@
             <div class="col-12 col-xl-4">
                 <div class="justify-content-end d-flex gap-2">
                     <button class="btn btn-primary btn-sm" onclick="window.print()">
-                        <i class="mdi mdi-printer me-1"></i> Cetak
-                    </button>
-                    <button class="btn btn-success btn-sm" onclick="exportToExcel()">
-                        <i class="mdi mdi-download me-1"></i> Export
+                        <i class="icon-printer me-2"></i> Cetak
                     </button>
                 </div>
             </div>
@@ -41,17 +38,15 @@
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <p class="card-title mb-0">
-                        <i class="mdi mdi-filter me-2"></i>Daftar Penambahan Stok
-                    </p>
+                    <p class="card-title mb-0">Daftar Penambahan Stok</p>
                     <div class="d-flex gap-2">
                         <input type="date" class="form-control form-control-sm" id="filterTglMulai" style="width: 150px;">
                         <input type="date" class="form-control form-control-sm" id="filterTglAkhir" style="width: 150px;">
                         <button class="btn btn-outline-primary btn-sm" onclick="filterTanggal()">
-                            <i class="mdi mdi-magnify"></i>
+                            <i class="icon-search"></i>
                         </button>
                         <button class="btn btn-outline-secondary btn-sm" onclick="resetFilter()">
-                            <i class="mdi mdi-refresh"></i>
+                            <i class="icon-reload"></i>
                         </button>
                     </div>
                 </div>
@@ -62,9 +57,9 @@
                                 <th>No</th>
                                 <th>Tanggal</th>
                                 <th>Nama Produk</th>
-                                <th>Harga Satuan</th>
-                                <th>Jumlah</th>
-                                <th>Nilai Stok</th>
+                                <th class="text-end">Harga Satuan</th>
+                                <th class="text-center">Jumlah</th>
+                                <th class="text-end">Nilai Stok</th>
                                 <th>Keterangan</th>
                             </tr>
                         </thead>
@@ -89,7 +84,7 @@
                                         </tr>
                                         no++;
                                     }
-                                    <tr style="background-color: #f0f0f0; font-weight: bold;">
+                                    <tr style="background-color: #f8f9fa; font-weight: bold;">
                                         <td colspan="5" class="text-end">TOTAL NILAI PENAMBAHAN:</td>
                                         <td class="text-end">Rp @string.Format("{0:N0}", totalNilai)</td>
                                         <td></td>
@@ -109,14 +104,6 @@
         </div>
     </div>
 </div>
-
-<style>
-    @media print {
-        .btn, .btn-sm, #filterTglMulai, #filterTglAkhir {
-            display: none !important;
-        }
-    }
-</style>
 
 <script>
     function filterTanggal() {
@@ -152,9 +139,5 @@
         document.getElementById('filterTglMulai').value = '';
         document.getElementById('filterTglAkhir').value = '';
         document.getElementById('penambahTable').querySelector('tbody').querySelectorAll('tr').forEach(row => row.style.display = '');
-    }
-
-    function exportToExcel() {
-        alert('Fitur export Excel sedang dalam pengembangan');
     }
 </script>
