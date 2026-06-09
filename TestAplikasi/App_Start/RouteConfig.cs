@@ -12,9 +12,16 @@ namespace TestAplikasi
                 "{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "AdminDashboard",
-                url: "Admin/Dashboard",
-                defaults: new { controller = "Admin", action = "Dashboard" },
+                name: "Admin_Default",
+                url: "Admin/{action}/{id}",
+                defaults: new { controller = "Admin", action = "Dashboard", id = UrlParameter.Optional },
+                namespaces: new[] { "TestAplikasi.Controllers" }
+            );
+
+            routes.MapRoute(
+                name: "Pimpinan_Default",
+                url: "Pimpinan/{action}/{id}",
+                defaults: new { controller = "Pimpinan", action = "Dashboard", id = UrlParameter.Optional },
                 namespaces: new[] { "TestAplikasi.Controllers" }
             );
 

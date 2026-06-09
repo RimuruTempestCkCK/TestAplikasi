@@ -131,6 +131,7 @@
     </Compile>
     <Compile Include="Models\DashboardModel.cs" />
     <Compile Include="Models\ProdukModel.cs" />
+    <Compile Include="Models\ReportModels.cs" />
     <Compile Include="Models\StokProdukModel.cs" />
     <Compile Include="Models\TransaksiModel.cs" />
     <Compile Include="Models\UserMode.cs" />

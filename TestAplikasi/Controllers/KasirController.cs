@@ -13,7 +13,7 @@ namespace TestAplikasi.Controllers
             ConfigurationManager.ConnectionStrings["DBConnection"].ConnectionString;
 
         private bool IsLoggedIn() => Session["Id"] != null;
-        private bool IsKasir() => Session["Role"] != null && Session["Role"].ToString() == "Kasir";
+        private bool IsKasir() => Session["Role"] != null && string.Equals(Session["Role"].ToString(), "Kasir", StringComparison.OrdinalIgnoreCase);
 
         private ActionResult CheckAccess()
         {

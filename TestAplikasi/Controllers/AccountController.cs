@@ -56,14 +56,14 @@ namespace TestAplikasi.Controllers
                         Session["Username"] = reader["Username"].ToString();
                         Session["FotoProfil"] = reader["FotoProfil"]?.ToString();
 
-                        string role = reader["Role"].ToString();
+                        string role = reader["Role"]?.ToString();
                         reader.Close();
 
-                        if (role == "Admin")
+                        if (string.Equals(role, "Admin", StringComparison.OrdinalIgnoreCase))
                             return RedirectToAction("Dashboard", "Admin");
-                        else if (role == "Pimpinan")
+                        else if (string.Equals(role, "Pimpinan", StringComparison.OrdinalIgnoreCase))
                             return RedirectToAction("Dashboard", "Pimpinan");
-                        else if (role == "Kasir")
+                        else if (string.Equals(role, "Kasir", StringComparison.OrdinalIgnoreCase))
                             return RedirectToAction("Dashboard", "Kasir");
                         else
                             return RedirectToAction("Login", "Account");

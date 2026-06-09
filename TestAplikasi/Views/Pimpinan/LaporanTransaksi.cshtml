@@ -66,7 +66,7 @@
                         <tbody>
                             @{
                                 int no = 1;
-                                var data = (List<dynamic>)ViewBag.DataLaporan;
+                                var data = (List<TestAplikasi.Models.LaporanTransaksiModel>)ViewBag.DataLaporan;
                                 if (data != null && data.Count > 0)
                                 {
                                     foreach (var item in data)
@@ -74,7 +74,7 @@
                                         <tr>
                                             <td>@no</td>
                                             <td><strong>@item.NomorTransaksi</strong></td>
-                                            <td>@((DateTime)item.TanggalTransaksi).ToString("dd/MM/yyyy HH:mm")</td>
+                                            <td>@item.TanggalTransaksi.ToString("dd/MM/yyyy HH:mm")</td>
                                             <td>@item.NamaKasir</td>
                                             <td class="text-end"><strong>Rp @string.Format("{0:N0}", item.TotalHarga)</strong></td>
                                             <td class="text-end">Rp @string.Format("{0:N0}", item.Bayar)</td>

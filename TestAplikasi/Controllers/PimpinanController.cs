@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Web.Mvc;
+using TestAplikasi.Models;
 
 namespace TestAplikasi.Controllers
 {
@@ -25,7 +26,7 @@ namespace TestAplikasi.Controllers
         private bool IsPimpinan()
         {
             return Session["Role"] != null &&
-                   Session["Role"].ToString() == "Pimpinan";
+                   string.Equals(Session["Role"].ToString(), "Pimpinan", StringComparison.OrdinalIgnoreCase);
         }
 
         // =============================================
@@ -37,9 +38,10 @@ namespace TestAplikasi.Controllers
             if (!IsLoggedIn())
                 return RedirectToAction("Login", "Account");
 
+            string role = Session["Role"]?.ToString();
+
             // Jika Admin masuk ke area pimpinan
-            if (Session["Role"] != null &&
-                Session["Role"].ToString() == "Admin")
+            if (string.Equals(role, "Admin", StringComparison.OrdinalIgnoreCase))
             {
                 return RedirectToAction("Dashboard", "Admin");
             }
@@ -177,7 +179,7 @@ namespace TestAplikasi.Controllers
                     ViewBag.DataGrafik = Newtonsoft.Json.JsonConvert.SerializeObject(dataGrafik);
 
                     // Top 5 Produk Terjual
-                    var topProduk = new List<dynamic>();
+                    var topProduk = new List<DashboardProdukModel>();
                     using (SqlCommand cmd = new SqlCommand(@"
                         SELECT TOP 5 td.NamaProduk, 
                                SUM(td.Jumlah) AS TotalTerjual,
@@ -190,7 +192,7 @@ namespace TestAplikasi.Controllers
                         {
                             while (r.Read())
                             {
-                                topProduk.Add(new
+                                topProduk.Add(new DashboardProdukModel
                                 {
                                     NamaProduk = r["NamaProduk"].ToString(),
                                     TotalTerjual = Convert.ToInt32(r["TotalTerjual"]),
@@ -202,7 +204,7 @@ namespace TestAplikasi.Controllers
                     ViewBag.TopProduk = topProduk;
 
                     // Performa Kasir
-                    var performaKasir = new List<dynamic>();
+                    var performaKasir = new List<DashboardKasirModel>();
                     using (SqlCommand cmd = new SqlCommand(@"
                         SELECT TOP 10 u.NamaLengkap,
                                COUNT(t.Id) AS JumlahTransaksi,
@@ -216,7 +218,7 @@ namespace TestAplikasi.Controllers
                         {
                             while (r.Read())
                             {
-                                performaKasir.Add(new
+                                performaKasir.Add(new DashboardKasirModel
                                 {
                                     NamaKasir = r["NamaLengkap"].ToString(),
                                     JumlahTransaksi = Convert.ToInt32(r["JumlahTransaksi"]),
@@ -239,6 +241,7 @@ namespace TestAplikasi.Controllers
         // =============================================
         // GET: Pimpinan/Laporan Transaksi
         // =============================================
+        [HttpGet]
         public ActionResult LaporanTransaksi()
         {
             var access = CheckAccess();
@@ -246,7 +249,7 @@ namespace TestAplikasi.Controllers
             if (access != null)
                 return access;
 
-            var listTransaksi = new List<dynamic>();
+            var listTransaksi = new List<LaporanTransaksiModel>();
 
             try
             {
@@ -267,7 +270,7 @@ namespace TestAplikasi.Controllers
                         {
                             while (reader.Read())
                             {
-                                listTransaksi.Add(new
+                                listTransaksi.Add(new LaporanTransaksiModel
                                 {
                                     Id = Convert.ToInt32(reader["Id"]),
                                     NomorTransaksi = reader["NomorTransaksi"]?.ToString(),
@@ -288,7 +291,7 @@ namespace TestAplikasi.Controllers
             }
 
             ViewBag.DataLaporan = listTransaksi;
-            return View();
+            return View("LaporanTransaksi");
         }
 
         // =============================================
@@ -301,7 +304,7 @@ namespace TestAplikasi.Controllers
             if (access != null)
                 return access;
 
-            var listStok = new List<dynamic>();
+            var listStok = new List<LaporanStokModel>();
 
             try
             {
@@ -323,14 +326,18 @@ namespace TestAplikasi.Controllers
                         {
                             while (reader.Read())
                             {
-                                listStok.Add(new
+                                var totalStok = Convert.ToInt32(reader["TotalStok"]);
+                                var harga = Convert.ToDecimal(reader["Harga"]);
+
+                                listStok.Add(new LaporanStokModel
                                 {
                                     Id = Convert.ToInt32(reader["Id"]),
                                     NamaProduk = reader["NamaProduk"]?.ToString(),
-                                    Harga = Convert.ToDecimal(reader["Harga"]),
+                                    Harga = harga,
                                     HargaModal = Convert.ToDecimal(reader["HargaModal"]),
                                     HargaJual = Convert.ToDecimal(reader["HargaJual"]),
-                                    TotalStok = Convert.ToInt32(reader["TotalStok"])
+                                    TotalStok = totalStok,
+                                    NilaiStok = harga * totalStok
                                 });
                             }
                         }
@@ -356,7 +363,7 @@ namespace TestAplikasi.Controllers
             if (access != null)
                 return access;
 
-            var listPenambahan = new List<dynamic>();
+            var listPenambahan = new List<LaporanPenambahanStokModel>();
 
             try
             {
@@ -377,15 +384,18 @@ namespace TestAplikasi.Controllers
                         {
                             while (reader.Read())
                             {
-                                listPenambahan.Add(new
+                                var jumlah = Convert.ToInt32(reader["Jumlah"]);
+                                var harga = Convert.ToDecimal(reader["Harga"]);
+
+                                listPenambahan.Add(new LaporanPenambahanStokModel
                                 {
                                     Id = Convert.ToInt32(reader["Id"]),
                                     NamaProduk = reader["NamaProduk"]?.ToString(),
-                                    Jumlah = Convert.ToInt32(reader["Jumlah"]),
+                                    Jumlah = jumlah,
                                     Keterangan = reader["Keterangan"]?.ToString(),
                                     TanggalMasuk = Convert.ToDateTime(reader["TanggalMasuk"]),
-                                    Harga = Convert.ToDecimal(reader["Harga"]),
-                                    NilaiStok = Convert.ToDecimal(reader["Harga"]) * Convert.ToInt32(reader["Jumlah"])
+                                    Harga = harga,
+                                    NilaiStok = harga * jumlah
                                 });
                             }
                         }

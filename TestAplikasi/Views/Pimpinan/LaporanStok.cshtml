@@ -57,13 +57,13 @@
                         <tbody>
                             @{
                                 int no = 1;
-                                var data = (List<dynamic>)ViewBag.DataLaporan;
+                                var data = (List<TestAplikasi.Models.LaporanStokModel>)ViewBag.DataLaporan;
                                 decimal totalNilai = 0;
                                 if (data != null && data.Count > 0)
                                 {
                                     foreach (var item in data)
                                     {
-                                        decimal nilaiStok = ((decimal)item.Harga) * ((int)item.TotalStok);
+                                        decimal nilaiStok = item.NilaiStok;
                                         totalNilai += nilaiStok;
                                         <tr>
                                             <td>@no</td>
@@ -72,7 +72,7 @@
                                             <td class="text-end">Rp @string.Format("{0:N0}", item.HargaModal)</td>
                                             <td class="text-end">Rp @string.Format("{0:N0}", item.HargaJual)</td>
                                             <td class="text-center">
-                                                <span class="badge @(((int)item.TotalStok) > 0 ? "bg-success" : "bg-danger")">
+                                                <span class="badge @(item.TotalStok > 0 ? "bg-success" : "bg-danger")">
                                                     @item.TotalStok unit
                                                 </span>
                                             </td>
