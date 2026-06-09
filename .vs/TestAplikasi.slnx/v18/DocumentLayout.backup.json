@@ -68,10 +68,6 @@
       "RelativeMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|solutionrelative:testaplikasi\\views\\kasir\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|c:\\users\\maxtop\\documents\\newtest\\testaplikasi\\testaplikasi\\views\\admin\\laporantransaksi.cshtml.bak||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|solutionrelative:testaplikasi\\views\\admin\\laporantransaksi.cshtml.bak||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\testaplikasi\\models\\dashboardmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8778077A-236F-48F5-8F43-D09BEB12E8AC}|TestAplikasi\\TestAplikasi.csproj|solutionrelative:testaplikasi\\models\\dashboardmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -208,7 +204,7 @@
               "RelativeDocumentMoniker": "TestAplikasi\\Views\\Shared\\_Layout.cshtml",
               "ToolTip": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Shared\\_Layout.cshtml",
               "RelativeToolTip": "TestAplikasi\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAFsBAAAAAAAAAAAowGIBAAAtAAAAAAAAAA==",
+              "ViewState": "AgIAAE0BAAAAAAAAAAAIwG4BAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2026-05-27T09:48:25.294Z",
               "EditorCaption": ""
@@ -251,7 +247,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 41,
               "Title": "LaporanTransaksi.cshtml.bak",
               "DocumentMoniker": "C:\\Users\\Maxtop\\AppData\\Local\\Temp\\CopilotBaseline\\Deleted\\-102123893\\LaporanTransaksi.cshtml.bak",
               "RelativeDocumentMoniker": "..\\..\\..\\AppData\\Local\\Temp\\CopilotBaseline\\Deleted\\-102123893\\LaporanTransaksi.cshtml.bak",
@@ -419,18 +415,6 @@
             {
               "$type": "Document",
               "DocumentIndex": 17,
-              "Title": "LaporanTransaksi.cshtml.bak",
-              "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Admin\\LaporanTransaksi.cshtml.bak",
-              "RelativeDocumentMoniker": "TestAplikasi\\Views\\Admin\\LaporanTransaksi.cshtml.bak",
-              "ToolTip": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Admin\\LaporanTransaksi.cshtml.bak",
-              "RelativeToolTip": "TestAplikasi\\Views\\Admin\\LaporanTransaksi.cshtml.bak",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-06-02T09:43:40.441Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
               "Title": "DashboardModel.cs",
               "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Models\\DashboardModel.cs",
               "RelativeDocumentMoniker": "TestAplikasi\\Models\\DashboardModel.cs",
@@ -442,7 +426,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 19,
               "Title": "RiwayatTransaksi.cshtml",
               "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Kasir\\RiwayatTransaksi.cshtml",
               "RelativeDocumentMoniker": "TestAplikasi\\Views\\Kasir\\RiwayatTransaksi.cshtml",
@@ -454,7 +438,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 18,
               "Title": "Dashboard.cshtml",
               "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Pimpinan\\Dashboard.cshtml",
               "RelativeDocumentMoniker": "TestAplikasi\\Views\\Pimpinan\\Dashboard.cshtml",
@@ -466,7 +450,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 20,
               "Title": "Login.cshtml",
               "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Account\\Login.cshtml",
               "RelativeDocumentMoniker": "TestAplikasi\\Views\\Account\\Login.cshtml",
@@ -478,7 +462,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 24,
               "Title": "Error.cshtml",
               "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Shared\\Error.cshtml",
               "RelativeDocumentMoniker": "TestAplikasi\\Views\\Shared\\Error.cshtml",
@@ -490,7 +474,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 21,
               "Title": "Web.config",
               "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Web.config",
               "RelativeDocumentMoniker": "TestAplikasi\\Web.config",
@@ -503,7 +487,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 22,
               "Title": "Global.asax.cs",
               "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Global.asax.cs",
               "RelativeDocumentMoniker": "TestAplikasi\\Global.asax.cs",
@@ -515,7 +499,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 23,
               "Title": "ErrorController.cs",
               "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Controllers\\ErrorController.cs",
               "RelativeDocumentMoniker": "TestAplikasi\\Controllers\\ErrorController.cs",
@@ -527,7 +511,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 27,
               "Title": "ProdukModel.cs",
               "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Models\\ProdukModel.cs",
               "RelativeDocumentMoniker": "TestAplikasi\\Models\\ProdukModel.cs",
@@ -539,7 +523,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 28,
               "Title": "KasirController.cs",
               "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Controllers\\KasirController.cs",
               "RelativeDocumentMoniker": "TestAplikasi\\Controllers\\KasirController.cs",
@@ -551,7 +535,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 26,
               "Title": "StokProdukModel.cs",
               "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Models\\StokProdukModel.cs",
               "RelativeDocumentMoniker": "TestAplikasi\\Models\\StokProdukModel.cs",
@@ -563,7 +547,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 25,
               "Title": "TransaksiModel.cs",
               "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Models\\TransaksiModel.cs",
               "RelativeDocumentMoniker": "TestAplikasi\\Models\\TransaksiModel.cs",
@@ -575,7 +559,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 29,
               "Title": "Transaksi.cshtml",
               "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Kasir\\Transaksi.cshtml",
               "RelativeDocumentMoniker": "TestAplikasi\\Views\\Kasir\\Transaksi.cshtml",
@@ -587,7 +571,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 30,
               "Title": "StrukTransaksi.cshtml",
               "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Kasir\\StrukTransaksi.cshtml",
               "RelativeDocumentMoniker": "TestAplikasi\\Views\\Kasir\\StrukTransaksi.cshtml",
@@ -599,7 +583,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 32,
               "Title": "Stok.cshtml",
               "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Admin\\Stok.cshtml",
               "RelativeDocumentMoniker": "TestAplikasi\\Views\\Admin\\Stok.cshtml",
@@ -611,7 +595,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 31,
               "Title": "User.cshtml",
               "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Admin\\User.cshtml",
               "RelativeDocumentMoniker": "TestAplikasi\\Views\\Admin\\User.cshtml",
@@ -623,7 +607,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 33,
               "Title": "Produk.cshtml",
               "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Admin\\Produk.cshtml",
               "RelativeDocumentMoniker": "TestAplikasi\\Views\\Admin\\Produk.cshtml",
@@ -635,7 +619,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 34,
               "Title": "UserMode.cs",
               "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Models\\UserMode.cs",
               "RelativeDocumentMoniker": "TestAplikasi\\Models\\UserMode.cs",
@@ -647,7 +631,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 35,
               "Title": "Web.config",
               "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Web.config",
               "RelativeDocumentMoniker": "TestAplikasi\\Views\\Web.config",
@@ -659,7 +643,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 36,
               "Title": "Profile.cshtml",
               "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Account\\Profile.cshtml",
               "RelativeDocumentMoniker": "TestAplikasi\\Views\\Account\\Profile.cshtml",
@@ -671,7 +655,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 37,
               "Title": "Laporan.cshtml",
               "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Pimpinan\\Laporan.cshtml",
               "RelativeDocumentMoniker": "TestAplikasi\\Views\\Pimpinan\\Laporan.cshtml",
@@ -683,7 +667,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 38,
               "Title": "Laporan.cshtml",
               "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Admin\\Laporan.cshtml",
               "RelativeDocumentMoniker": "TestAplikasi\\Views\\Admin\\Laporan.cshtml",
@@ -695,7 +679,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 39,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "TestAplikasi\\Views\\Home\\Index.cshtml",
@@ -707,7 +691,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 40,
               "Title": "_ViewStart.cshtml",
               "DocumentMoniker": "C:\\Users\\Maxtop\\Documents\\NewTest\\TestAplikasi\\TestAplikasi\\Views\\_ViewStart.cshtml",
               "RelativeDocumentMoniker": "TestAplikasi\\Views\\_ViewStart.cshtml",

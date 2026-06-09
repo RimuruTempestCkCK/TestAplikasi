@@ -50,6 +50,7 @@
         string role = Session["Role"] != null
             ? Session["Role"].ToString()
             : "";
+        string reportController = (role == "Pimpinan") ? "Pimpinan" : "Admin";
     }
 
 
@@ -369,7 +370,6 @@
                     <!-- Laporan -->
                     @if (role == "Admin" || role == "Pimpinan")
                     {
-                        @{ var reportController = role == "Pimpinan" ? "Pimpinan" : "Admin"; }
                         <li class="nav-item">
                             <a class="nav-link" data-bs-toggle="collapse" href="#laporan-menu" aria-expanded="false" aria-controls="laporan-menu">
                                 <i class="icon-paper menu-icon"></i>
