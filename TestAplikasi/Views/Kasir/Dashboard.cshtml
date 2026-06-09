@@ -1,8 +1,9 @@
-﻿@{
+@{
     ViewBag.Title = "Dashboard Kasir";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     var listTx = ViewBag.ListTxTerakhir as List<TestAplikasi.Models.TransaksiModel>;
+    var topProduk = ViewBag.TopProduk as List<TestAplikasi.Models.DashboardProdukModel>;
     string labelGrafik = ViewBag.LabelGrafik ?? "[]";
     string dataGrafik = ViewBag.DataGrafik ?? "[]";
 }
@@ -15,23 +16,19 @@
     </div>
 }
 
-@*{{-- Header --}}*@
 <div class="row">
     <div class="col-md-12 grid-margin">
         <div class="row">
             <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                <h3 class="font-weight-bold">Selamat Datang, @Session["Nama"]</h3>
+                <h3 class="font-weight-bold">Halo, @Session["Nama"]!</h3>
                 <h6 class="font-weight-normal mb-0">
-                    Login sebagai <span class="text-primary">Kasir</span> &mdash; @DateTime.Now.ToString(
-        "dddd, dd MMMM yyyy",
-        new System.Globalization.CultureInfo("id-ID")
-        )
+                    Siap melayani pelanggan hari ini? &mdash; <span class="text-primary">@DateTime.Now.ToString("dddd, dd MMMM yyyy", new System.Globalization.CultureInfo("id-ID"))</span>
                 </h6>
             </div>
             <div class="col-12 col-xl-4">
                 <div class="justify-content-end d-flex">
-                    <a href="@Url.Action("Transaksi","Kasir")" class="btn btn-primary btn-sm">
-                        <i class="mdi mdi-plus me-1"></i> Transaksi Baru
+                    <a href="@Url.Action("Transaksi","Kasir")" class="btn btn-primary btn-icon-text">
+                        <i class="mdi mdi-plus btn-icon-prepend"></i> Transaksi Baru
                     </a>
                 </div>
             </div>
@@ -39,25 +36,22 @@
     </div>
 </div>
 
-@*{{-- Kartu Statistik --}}*@
 <div class="row">
     <div class="col-md-3 grid-margin stretch-card">
         <div class="card card-tale">
             <div class="card-body">
-                <p class="mb-4">Transaksi Hari Ini</p>
+                <p class="mb-4">Unit Terjual Hari Ini</p>
                 <p class="fs-30 mb-2">@ViewBag.TxHariIni</p>
-                <p class="mb-0 text-white-50">transaksi</p>
+                <p>Total transaksi Anda hari ini</p>
             </div>
         </div>
     </div>
     <div class="col-md-3 grid-margin stretch-card">
         <div class="card card-dark-blue">
             <div class="card-body">
-                <p class="mb-4">Pendapatan Hari Ini</p>
-                <p class="fs-30 mb-2">
-                    Rp @string.Format("{0:N0}", ViewBag.PendapatanHariIni)
-                </p>
-                <p class="mb-0 text-white-50">dari kasir ini</p>
+                <p class="mb-4">Omset Hari Ini</p>
+                <p class="fs-30 mb-2">Rp @string.Format("{0:N0}", ViewBag.PendapatanHariIni)</p>
+                <p>Pendapatan yang Anda hasilkan</p>
             </div>
         </div>
     </div>
@@ -66,7 +60,7 @@
             <div class="card-body">
                 <p class="mb-4">Total Transaksi</p>
                 <p class="fs-30 mb-2">@ViewBag.TotalTx</p>
-                <p class="mb-0 text-white-50">semua waktu</p>
+                <p>Kontribusi Anda sejauh ini</p>
             </div>
         </div>
     </div>
@@ -74,32 +68,38 @@
         <div class="card card-light-danger">
             <div class="card-body">
                 <p class="mb-4">Total Pendapatan</p>
-                <p class="fs-30 mb-2">
-                    Rp @string.Format("{0:N0}", ViewBag.TotalPendapatan)
-                </p>
-                <p class="mb-0 text-white-50">semua waktu</p>
+                <p class="fs-30 mb-2">Rp @string.Format("{0:N0}", ViewBag.TotalPendapatan)</p>
+                <p>Akumulasi seluruh waktu</p>
             </div>
         </div>
     </div>
 </div>
 
-@*{{-- Grafik Penjualan 7 Hari --}}*@
 <div class="row">
-    <div class="col-md-12 grid-margin stretch-card">
+    <div class="col-md-8 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center mb-2">
-                    <p class="card-title mb-0">Grafik Penjualan 7 Hari Terakhir</p>
-                    <a href="@Url.Action("RiwayatTransaksi","Kasir")" class="text-info">Lihat Semua</a>
+                    <p class="card-title mb-0">Performa Penjualan (7 Hari)</p>
+                    <a href="@Url.Action("RiwayatTransaksi","Kasir")" class="text-info small">Selengkapnya</a>
                 </div>
-                <p class="text-muted small">Total pendapatan per hari dari transaksi Anda.</p>
-                <canvas id="grafikPenjualan" height="80"></canvas>
+                <p class="text-muted small">Grafik tren pendapatan harian dari aktivitas transaksi Anda.</p>
+                <canvas id="kasirSalesChart" height="120"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <p class="card-title">Top Produk Anda</p>
+                <p class="text-muted small">Produk yang paling sering Anda jual.</p>
+                <canvas id="kasirTopProductChart"></canvas>
+                <div id="kasirTopProductLegend" class="mt-4"></div>
             </div>
         </div>
     </div>
 </div>
 
-@*{{-- Tabel Transaksi Terakhir --}}*@
 <div class="row">
     <div class="col-md-12 grid-margin stretch-card">
         <div class="card">
@@ -107,45 +107,43 @@
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <p class="card-title mb-0">10 Transaksi Terakhir</p>
                     <a href="@Url.Action("RiwayatTransaksi","Kasir")" class="btn btn-light btn-sm">
-                        <i class="mdi mdi-history me-1"></i> Riwayat Lengkap
+                        <i class="mdi mdi-history me-1"></i> Riwayat
                     </a>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-striped table-borderless">
-                        <thead>
+                    <table class="table table-hover table-borderless">
+                        <thead class="bg-light">
                             <tr>
-                                <th>#</th>
                                 <th>No. Transaksi</th>
-                                <th>Total</th>
-                                <th>Tanggal</th>
-                                <th>Aksi</th>
+                                <th>Total Belanja</th>
+                                <th>Waktu</th>
+                                <th>Status</th>
+                                <th>Opsi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @if (listTx != null && listTx.Count > 0)
                             {
-                                int no = 1;
                                 foreach (var tx in listTx)
                                 {
                                     <tr>
-                                        <td>@no</td>
-                                        <td><span class="badge badge-info">@tx.NomorTransaksi</span></td>
-                                        <td class="font-weight-bold">Rp @tx.TotalHarga.ToString("N0")</td>
+                                        <td><span class="font-weight-bold">#@tx.NomorTransaksi</span></td>
+                                        <td class="text-primary font-weight-bold">Rp @tx.TotalHarga.ToString("N0")</td>
                                         <td>@tx.TanggalTransaksi.ToString("dd MMM yyyy, HH:mm")</td>
+                                        <td><label class="badge badge-success">Completed</label></td>
                                         <td>
                                             <a href="@Url.Action("StrukTransaksi","Kasir", new { id = tx.Id })"
-                                               class="btn btn-inverse-info btn-icon-text btn-sm">
-                                                <i class="mdi mdi-receipt btn-icon-prepend"></i> Struk
+                                               class="btn btn-outline-info btn-sm">
+                                                <i class="mdi mdi-receipt"></i> Struk
                                             </a>
                                         </td>
                                     </tr>
-                                    no++;
                                 }
                             }
                             else
                             {
                                 <tr>
-                                    <td colspan="5" class="text-center text-muted">Belum ada transaksi.</td>
+                                    <td colspan="5" class="text-center text-muted py-4">Belum ada transaksi hari ini.</td>
                                 </tr>
                             }
                         </tbody>
@@ -159,47 +157,81 @@
 @section Scripts {
     <script>
         (function () {
-            var labels = @Html.Raw(labelGrafik);
-            var data   = @Html.Raw(dataGrafik);
-
-            var ctx = document.getElementById('grafikPenjualan').getContext('2d');
-            new Chart(ctx, {
-                type: 'bar',
+            'use strict';
+            
+            // Sales Trend Chart
+            const salesLabels = @Html.Raw(labelGrafik);
+            const salesData = @Html.Raw(dataGrafik);
+            const ctxSales = document.getElementById('kasirSalesChart').getContext('2d');
+            
+            new Chart(ctxSales, {
+                type: 'line',
                 data: {
-                    labels: labels,
+                    labels: salesLabels,
                     datasets: [{
                         label: 'Pendapatan (Rp)',
-                        data: data,
-                        backgroundColor: 'rgba(54, 162, 235, 0.6)',
-                        borderColor: 'rgba(54, 162, 235, 1)',
-                        borderWidth: 1,
-                        borderRadius: 4
+                        data: salesData,
+                        borderColor: '#4B49AC',
+                        backgroundColor: 'rgba(75, 73, 172, 0.1)',
+                        fill: true,
+                        tension: 0.4,
+                        pointRadius: 4,
+                        pointBackgroundColor: '#4B49AC'
                     }]
                 },
                 options: {
                     responsive: true,
-                    plugins: {
-                        legend: { display: false },
-                        tooltip: {
-                            callbacks: {
-                                label: function(ctx) {
-                                    return 'Rp ' + ctx.parsed.y.toLocaleString('id-ID');
-                                }
-                            }
-                        }
-                    },
+                    plugins: { legend: { display: false } },
                     scales: {
                         y: {
                             beginAtZero: true,
                             ticks: {
-                                callback: function(v) {
-                                    return 'Rp ' + v.toLocaleString('id-ID');
-                                }
+                                callback: function(v) { return 'Rp ' + v.toLocaleString('id-ID'); }
                             }
-                        }
+                        },
+                        x: { grid: { display: false } }
                     }
                 }
             });
+
+            // Top Products Chart
+            const topLabels = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(topProduk?.Select(p => p.NamaProduk).ToList() ?? new List<string>()));
+            const topData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(topProduk?.Select(p => p.TotalTerjual).ToList() ?? new List<int>()));
+            const ctxTop = document.getElementById('kasirTopProductChart');
+
+            if (topLabels.length > 0) {
+                const chartTop = new Chart(ctxTop, {
+                    type: 'doughnut',
+                    data: {
+                        labels: topLabels,
+                        datasets: [{
+                            data: topData,
+                            backgroundColor: ["#4B49AC", "#FFC100", "#248AFD", "#FF4747", "#57B657"],
+                            borderColor: "white",
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        cutout: '70%',
+                        responsive: true,
+                        plugins: { legend: { display: false } }
+                    }
+                });
+
+                const legendBox = document.getElementById('kasirTopProductLegend');
+                let legendHtml = '<ul class="list-unstyled">';
+                chartTop.data.labels.forEach((label, i) => {
+                    legendHtml += `
+                        <li class="d-flex align-items-center mb-1">
+                            <span class="me-2" style="width: 10px; height: 10px; border-radius: 50%; background-color: ${chartTop.data.datasets[0].backgroundColor[i]}"></span>
+                            <span class="text-muted small">${label}</span>
+                            <span class="ms-auto font-weight-bold small">${chartTop.data.datasets[0].data[i]}</span>
+                        </li>
+                    `;
+                });
+                legendHtml += '</ul>';
+                legendBox.innerHTML = legendHtml;
+            }
         })();
     </script>
 }

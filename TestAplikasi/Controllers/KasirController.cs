@@ -99,6 +99,34 @@ namespace TestAplikasi.Controllers
                     ViewBag.LabelGrafik = Newtonsoft.Json.JsonConvert.SerializeObject(labelGrafik);
                     ViewBag.DataGrafik = Newtonsoft.Json.JsonConvert.SerializeObject(dataGrafik);
 
+                    // Top 5 Produk Terjual oleh Kasir ini
+                    var topProduk = new List<DashboardProdukModel>();
+                    using (SqlCommand cmd = new SqlCommand(@"
+                        SELECT TOP 5 td.NamaProduk, 
+                               SUM(td.Jumlah) AS TotalTerjual,
+                               SUM(td.Subtotal) AS TotalPendapatan
+                        FROM dbo.TransaksiDetail td
+                        JOIN dbo.Transaksi t ON t.Id = td.TransaksiId
+                        WHERE t.KasirId = @KasirId
+                        GROUP BY td.NamaProduk
+                        ORDER BY TotalTerjual DESC", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@KasirId", kasirId);
+                        using (SqlDataReader r = cmd.ExecuteReader())
+                        {
+                            while (r.Read())
+                            {
+                                topProduk.Add(new DashboardProdukModel
+                                {
+                                    NamaProduk = r["NamaProduk"].ToString(),
+                                    TotalTerjual = Convert.ToInt32(r["TotalTerjual"]),
+                                    TotalPendapatan = Convert.ToDecimal(r["TotalPendapatan"])
+                                });
+                            }
+                        }
+                    }
+                    ViewBag.TopProduk = topProduk;
+
                     // 10 transaksi terakhir (kasir ini)
                     var listTx = new List<TransaksiModel>();
                     using (SqlCommand cmd = new SqlCommand(@"

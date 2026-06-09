@@ -68,6 +68,8 @@ namespace TestAplikasi.Controllers
             ViewBag.PendapatanHariIni = 0m;
             ViewBag.TxBulanIni = 0;
             ViewBag.PendapatanBulanIni = 0m;
+            ViewBag.PendapatanBulanLalu = 0m;
+            ViewBag.Growth = 0m;
             ViewBag.TotalTx = 0;
             ViewBag.TotalPendapatan = 0m;
             ViewBag.TotalProduk = 0;
@@ -75,8 +77,8 @@ namespace TestAplikasi.Controllers
             ViewBag.JumlahKasir = 0;
             ViewBag.LabelGrafik = "[]";
             ViewBag.DataGrafik = "[]";
-            ViewBag.TopProduk = new List<dynamic>();
-            ViewBag.PerformaKasir = new List<dynamic>();
+            ViewBag.TopProduk = new List<DashboardProdukModel>();
+            ViewBag.PerformaKasir = new List<DashboardKasirModel>();
 
             try
             {
@@ -89,7 +91,7 @@ namespace TestAplikasi.Controllers
                         SELECT COUNT(*) FROM dbo.Transaksi
                         WHERE CAST(TanggalTransaksi AS DATE) = CAST(GETDATE() AS DATE)", conn))
                     {
-                        ViewBag.TxHariIni = (int)cmd.ExecuteScalar();
+                        ViewBag.TxHariIni = Convert.ToInt32(cmd.ExecuteScalar());
                     }
 
                     // Total Pendapatan Hari Ini
@@ -97,7 +99,7 @@ namespace TestAplikasi.Controllers
                         SELECT ISNULL(SUM(TotalHarga),0) FROM dbo.Transaksi
                         WHERE CAST(TanggalTransaksi AS DATE) = CAST(GETDATE() AS DATE)", conn))
                     {
-                        ViewBag.PendapatanHariIni = (decimal)cmd.ExecuteScalar();
+                        ViewBag.PendapatanHariIni = Convert.ToDecimal(cmd.ExecuteScalar());
                     }
 
                     // Total Transaksi Bulan Ini
@@ -106,7 +108,7 @@ namespace TestAplikasi.Controllers
                         WHERE MONTH(TanggalTransaksi) = MONTH(GETDATE())
                           AND YEAR(TanggalTransaksi) = YEAR(GETDATE())", conn))
                     {
-                        ViewBag.TxBulanIni = (int)cmd.ExecuteScalar();
+                        ViewBag.TxBulanIni = Convert.ToInt32(cmd.ExecuteScalar());
                     }
 
                     // Total Pendapatan Bulan Ini
@@ -115,42 +117,56 @@ namespace TestAplikasi.Controllers
                         WHERE MONTH(TanggalTransaksi) = MONTH(GETDATE())
                           AND YEAR(TanggalTransaksi) = YEAR(GETDATE())", conn))
                     {
-                        ViewBag.PendapatanBulanIni = (decimal)cmd.ExecuteScalar();
+                        ViewBag.PendapatanBulanIni = Convert.ToDecimal(cmd.ExecuteScalar());
                     }
+
+                    // Total Pendapatan Bulan Lalu (untuk growth)
+                    using (SqlCommand cmd = new SqlCommand(@"
+                        SELECT ISNULL(SUM(TotalHarga),0) FROM dbo.Transaksi
+                        WHERE MONTH(TanggalTransaksi) = MONTH(DATEADD(MONTH, -1, GETDATE()))
+                          AND YEAR(TanggalTransaksi) = YEAR(DATEADD(MONTH, -1, GETDATE()))", conn))
+                    {
+                        ViewBag.PendapatanBulanLalu = Convert.ToDecimal(cmd.ExecuteScalar());
+                    }
+
+                    // Hitung Growth
+                    decimal current = Convert.ToDecimal(ViewBag.PendapatanBulanIni);
+                    decimal last = Convert.ToDecimal(ViewBag.PendapatanBulanLalu);
+                    ViewBag.Growth = last > 0 ? ((current - last) / last) * 100 : 0m;
 
                     // Total Transaksi Semua Waktu
                     using (SqlCommand cmd = new SqlCommand(@"
                         SELECT COUNT(*) FROM dbo.Transaksi", conn))
                     {
-                        ViewBag.TotalTx = (int)cmd.ExecuteScalar();
+                        ViewBag.TotalTx = Convert.ToInt32(cmd.ExecuteScalar());
                     }
 
                     // Total Pendapatan Semua Waktu
                     using (SqlCommand cmd = new SqlCommand(@"
                         SELECT ISNULL(SUM(TotalHarga),0) FROM dbo.Transaksi", conn))
                     {
-                        ViewBag.TotalPendapatan = (decimal)cmd.ExecuteScalar();
+                        ViewBag.TotalPendapatan = Convert.ToDecimal(cmd.ExecuteScalar());
                     }
 
                     // Total Produk
                     using (SqlCommand cmd = new SqlCommand(@"
                         SELECT COUNT(*) FROM dbo.Produk", conn))
                     {
-                        ViewBag.TotalProduk = (int)cmd.ExecuteScalar();
+                        ViewBag.TotalProduk = Convert.ToInt32(cmd.ExecuteScalar());
                     }
 
                     // Total Stok
                     using (SqlCommand cmd = new SqlCommand(@"
                         SELECT ISNULL(SUM(Jumlah),0) FROM dbo.StokProduk", conn))
                     {
-                        ViewBag.TotalStok = (int)cmd.ExecuteScalar();
+                        ViewBag.TotalStok = Convert.ToInt32(cmd.ExecuteScalar());
                     }
 
                     // Jumlah Kasir Aktif
                     using (SqlCommand cmd = new SqlCommand(@"
                         SELECT COUNT(*) FROM dbo.Users WHERE Role = 'Kasir' AND Status = 'Aktif'", conn))
                     {
-                        ViewBag.JumlahKasir = (int)cmd.ExecuteScalar();
+                        ViewBag.JumlahKasir = Convert.ToInt32(cmd.ExecuteScalar());
                     }
 
                     // Data grafik: Transaksi 7 hari terakhir

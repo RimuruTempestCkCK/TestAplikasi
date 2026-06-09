@@ -136,13 +136,22 @@ namespace TestAplikasi.Controllers
                         ViewBag.JumlahKasir = (int)cmd.ExecuteScalar();
                     }
 
+                    // Stok Menipis (Kurang dari 10)
+                    using (SqlCommand cmd = new SqlCommand(@"
+                        SELECT COUNT(*) FROM dbo.StokProduk WHERE Jumlah < 10", conn))
+                    {
+                        ViewBag.StokMenipis = (int)cmd.ExecuteScalar();
+                    }
+
                     // Data grafik: Transaksi 7 hari terakhir (semua kasir)
                     var labelGrafik = new List<string>();
                     var dataGrafik = new List<decimal>();
+                    var dataTxGrafik = new List<int>();
 
                     using (SqlCommand cmd = new SqlCommand(@"
                         SELECT CAST(TanggalTransaksi AS DATE) AS Tgl,
-                               ISNULL(SUM(TotalHarga),0) AS Total
+                               ISNULL(SUM(TotalHarga),0) AS Total,
+                               COUNT(*) AS JmlTx
                         FROM dbo.Transaksi
                         WHERE TanggalTransaksi >= DATEADD(DAY, -6, CAST(GETDATE() AS DATE))
                         GROUP BY CAST(TanggalTransaksi AS DATE)
@@ -154,12 +163,14 @@ namespace TestAplikasi.Controllers
                             {
                                 labelGrafik.Add(Convert.ToDateTime(r["Tgl"]).ToString("dd MMM"));
                                 dataGrafik.Add(Convert.ToDecimal(r["Total"]));
+                                dataTxGrafik.Add(Convert.ToInt32(r["JmlTx"]));
                             }
                         }
                     }
 
                     ViewBag.LabelGrafik = Newtonsoft.Json.JsonConvert.SerializeObject(labelGrafik);
                     ViewBag.DataGrafik = Newtonsoft.Json.JsonConvert.SerializeObject(dataGrafik);
+                    ViewBag.DataTxGrafik = Newtonsoft.Json.JsonConvert.SerializeObject(dataTxGrafik);
 
                     // Top 5 Produk Terjual (berdasarkan jumlah penjualan)
                     var topProduk = new List<DashboardProdukModel>();
