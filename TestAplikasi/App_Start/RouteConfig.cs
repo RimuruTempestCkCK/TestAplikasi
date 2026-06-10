@@ -30,8 +30,8 @@ namespace TestAplikasi
                 url: "{controller}/{action}/{id}",
                 defaults: new
                 {
-                    controller = "Account",
-                    action = "Login",
+                    controller = "Home",
+                    action = "Landing",
                     id = UrlParameter.Optional
                 },
                 namespaces: new[] { "TestAplikasi.Controllers" }

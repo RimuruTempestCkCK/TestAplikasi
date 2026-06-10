@@ -1,0 +1,913 @@
+@{
+    ViewBag.Title = "Selamat Datang";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>SiKasir.exe - Modern POS System</title>
+    
+    <!-- Vendor Styles -->
+    <link rel="stylesheet" href="@Url.Content("~/Content/templete/dist/assets/vendors/feather/feather.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Content/templete/dist/assets/vendors/ti-icons/css/themify-icons.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Content/templete/dist/assets/vendors/css/vendor.bundle.base.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Content/templete/dist/assets/vendors/font-awesome/css/font-awesome.min.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Content/templete/dist/assets/vendors/mdi/css/materialdesignicons.min.css")">
+    
+    <!-- Main Style -->
+    <link rel="stylesheet" href="@Url.Content("~/Content/templete/dist/assets/css/style.css")">
+    <link rel="shortcut icon" href="@Url.Content("~/Content/templete/dist/assets/images/favicon.png")" />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            background-color: #f4f6fb;
+            overflow-x: hidden;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        /* ── Animations ── */
+        @@keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(36px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @@keyframes float {
+            0%,100% { transform: translateY(0px); }
+            50%      { transform: translateY(-18px); }
+        }
+        @@keyframes pulse-ring {
+            0%   { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(125,160,250,0.5); }
+            70%  { transform: scale(1);    box-shadow: 0 0 0 14px rgba(125,160,250,0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(125,160,250,0); }
+        }
+        @@keyframes ticker {
+            0%   { opacity:0; transform:translateY(8px); }
+            15%  { opacity:1; transform:translateY(0); }
+            85%  { opacity:1; transform:translateY(0); }
+            100% { opacity:0; transform:translateY(-8px); }
+        }
+
+        .animate-up { animation: fadeInUp 0.75s ease-out forwards; opacity: 0; }
+        .delay-1 { animation-delay: 0.18s; }
+        .delay-2 { animation-delay: 0.36s; }
+        .delay-3 { animation-delay: 0.54s; }
+        .delay-4 { animation-delay: 0.72s; }
+
+        /* ── Navbar ── */
+        .navbar {
+            box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+            background: rgba(255,255,255,0.92) !important;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 14px 0;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+        .navbar-brand {
+            font-size: 1.7rem;
+            font-weight: 800;
+            color: #4B49AC !important;
+            letter-spacing: -0.5px;
+        }
+        .navbar-brand span { color: #7DA0FA; }
+
+        .nav-badge {
+            font-size: 0.65rem;
+            background: #7DA0FA;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-weight: 700;
+            vertical-align: middle;
+            margin-left: 6px;
+            letter-spacing: 0.5px;
+        }
+
+        .auth-btn {
+            border-radius: 10px;
+            padding: 10px 28px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 0.3px;
+            background: linear-gradient(135deg, #4B49AC, #7DA0FA);
+            border: none;
+            color: white !important;
+            box-shadow: 0 4px 14px rgba(75,73,172,0.35);
+            transition: all 0.25s;
+        }
+        .auth-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(75,73,172,0.45);
+            color: white !important;
+        }
+
+        /* ── Hero ── */
+        .hero-section {
+            padding: 130px 0 100px;
+            background: linear-gradient(145deg, rgba(61, 59, 158, 0.95) 0%, rgba(75, 73, 172, 0.9) 40%, rgba(106, 142, 245, 0.8) 80%, rgba(125, 160, 250, 0.7) 100%), 
+                        url('@Url.Content("~/Content/templete/dist/assets/images/hero-bg.png")');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            border-bottom-left-radius: 70px;
+            border-bottom-right-radius: 70px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute; top: -15%; right: -8%;
+            width: 520px; height: 520px;
+            background: rgba(255,255,255,0.07);
+            border-radius: 50%;
+        }
+        .hero-section::after {
+            content: '';
+            position: absolute; bottom: -10%; left: -5%;
+            width: 320px; height: 320px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+        }
+
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.25);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 24px;
+            backdrop-filter: blur(6px);
+        }
+        .hero-eyebrow .dot {
+            width: 7px; height: 7px;
+            background: #7effa0;
+            border-radius: 50%;
+            animation: pulse-ring 2s infinite;
+        }
+
+        .hero-title {
+            font-size: 3.6rem;
+            font-weight: 800;
+            line-height: 1.08;
+            margin-bottom: 22px;
+            letter-spacing: -1px;
+        }
+        .hero-title em {
+            font-style: normal;
+            background: linear-gradient(90deg, #fff 0%, #c6d9ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.15rem;
+            opacity: 0.88;
+            margin-bottom: 42px;
+            line-height: 1.7;
+            max-width: 480px;
+        }
+
+        .btn-cta-primary {
+            padding: 15px 36px;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 12px;
+            background: #ffb703;
+            border: none;
+            color: #1a1a2e !important;
+            box-shadow: 0 8px 24px rgba(255,183,3,0.45);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: inline-flex; align-items: center; gap: 8px;
+        }
+        .btn-cta-primary:hover { transform: scale(1.05) translateY(-2px); box-shadow: 0 12px 30px rgba(255,183,3,0.55); color: #1a1a2e !important; }
+
+        .btn-cta-ghost {
+            padding: 15px 32px;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.12);
+            border: 1.5px solid rgba(255,255,255,0.35);
+            color: white !important;
+            backdrop-filter: blur(6px);
+            transition: all 0.25s;
+        }
+        .btn-cta-ghost:hover { background: rgba(255,255,255,0.22); color: white !important; }
+
+        /* ── Hero image ── */
+        .hero-image-container {
+            position: relative;
+            animation: float 5.5s ease-in-out infinite;
+        }
+        .hero-img {
+            width: 100%;
+            border-radius: 28px;
+            box-shadow: 0 30px 70px rgba(0,0,0,0.35);
+            border: 6px solid rgba(255,255,255,0.18);
+            display: block;
+        }
+
+        .img-overlay-card {
+            position: absolute;
+            bottom: -24px; left: -24px;
+            background: white;
+            padding: 16px 20px;
+            border-radius: 16px;
+            box-shadow: 0 12px 36px rgba(0,0,0,0.14);
+            color: #333;
+            display: flex; align-items: center; gap: 14px;
+            z-index: 2;
+            min-width: 210px;
+        }
+        .img-overlay-icon {
+            width: 42px; height: 42px;
+            border-radius: 12px;
+            background: #e8f8ee;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .img-overlay-card h6 { font-size: 0.85rem; font-weight: 700; color: #333; margin-bottom: 2px; }
+        .img-overlay-card small { font-size: 0.75rem; color: #777; }
+
+        .img-overlay-card-top {
+            position: absolute;
+            top: -20px; right: -20px;
+            background: white;
+            padding: 12px 18px;
+            border-radius: 14px;
+            box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+            display: flex; align-items: center; gap: 10px;
+            z-index: 2;
+        }
+        .img-overlay-card-top .stat-num { font-size: 1.3rem; font-weight: 800; color: #4B49AC; }
+        .img-overlay-card-top .stat-label { font-size: 0.7rem; color: #999; font-weight: 500; }
+
+        /* ── Stats bar ── */
+        .stats-bar {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(75,73,172,0.08);
+            padding: 36px 20px;
+            margin-top: -50px;
+            position: relative;
+            z-index: 10;
+        }
+        .stat-item { text-align: center; }
+        .stat-item .num { font-size: 2rem; font-weight: 800; color: #4B49AC; letter-spacing: -1px; }
+        .stat-item .lbl { font-size: 0.82rem; color: #999; font-weight: 500; margin-top: 4px; }
+        .stat-divider { width: 1px; background: #eee; }
+
+        /* ── Section labels ── */
+        .section-eyebrow {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: #4B49AC;
+            margin-bottom: 12px;
+        }
+        .section-title {
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: #1a1a2e;
+            letter-spacing: -0.5px;
+            line-height: 1.15;
+        }
+
+        /* ── Feature cards ── */
+        .feature-card {
+            border: none;
+            border-radius: 24px;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            background: white;
+            height: 100%;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+            overflow: hidden;
+        }
+        .feature-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 24px 50px rgba(75,73,172,0.14);
+        }
+        .feature-card-top {
+            height: 6px;
+            width: 100%;
+        }
+        .feature-icon {
+            width: 72px; height: 72px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 18px;
+            font-size: 2rem;
+            margin-bottom: 24px;
+            transition: all 0.35s;
+        }
+        .feature-card:hover .feature-icon { transform: scale(1.1) rotate(6deg); }
+        .feature-card .card-body { padding: 28px; }
+        .feature-card h4 { font-size: 1.1rem; font-weight: 700; color: #1a1a2e; margin-bottom: 12px; }
+        .feature-card p { font-size: 0.9rem; color: #888; line-height: 1.75; margin: 0; }
+
+        .feature-tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 20px;
+            margin-bottom: 16px;
+            letter-spacing: 0.5px;
+        }
+
+        /* ── How it works ── */
+        .how-section { background: white; border-radius: 32px; padding: 60px 48px; }
+        .step-num {
+            width: 52px; height: 52px;
+            border-radius: 16px;
+            background: linear-gradient(135deg,#4B49AC,#7DA0FA);
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 800;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 6px 18px rgba(75,73,172,0.3);
+        }
+        .step-connector { width: 2px; background: linear-gradient(to bottom,#7DA0FA,transparent); height: 36px; margin: 6px auto; }
+
+        /* ── Testimonial ── */
+        .testimonial-track {
+            display: flex;
+            width: max-content;
+            gap: 24px;
+            animation: scroll-left 40s linear infinite;
+            padding: 20px 0;
+        }
+        .testimonial-track:hover {
+            animation-play-state: paused;
+        }
+        @@keyframes scroll-left {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-50% - 12px)); }
+        }
+        .testimonial-card {
+            background: white;
+            border-radius: 24px;
+            padding: 32px;
+            box-shadow: 0 6px 24px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            width: 380px;
+            flex-shrink: 0;
+        }
+        .testimonial-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(75,73,172,0.12); }
+        .avatar-ring {
+            width: 52px; height: 52px; border-radius: 50%;
+            border: 3px solid #7DA0FA;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-size: 1.1rem;
+            color: #4B49AC;
+            background: #f0f0ff;
+        }
+        .stars { color: #ffb703; font-size: 0.85rem; letter-spacing: 2px; }
+
+        /* ── CTA band ── */
+        .cta-band {
+            border-radius: 32px;
+            padding: 80px 60px;
+            background: linear-gradient(145deg, rgba(61, 59, 158, 0.92) 0%, rgba(75, 73, 172, 0.85) 50%, rgba(125, 160, 250, 0.75) 100%), 
+                        url('@Url.Content("~/Content/templete/dist/assets/images/cta-bg.png")');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(75, 73, 172, 0.15);
+        }
+        .cta-band::before {
+            content: '';
+            position: absolute; top: -40%; right: -10%;
+            width: 380px; height: 380px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.07);
+        }
+        .cta-band::after {
+            content: '';
+            position: absolute; bottom: -30%; left: -8%;
+            width: 260px; height: 260px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+        }
+
+        /* ── Footer ── */
+        .footer {
+            padding: 80px 0 40px;
+            background: #fff;
+            margin-top: 100px;
+            border-top: 1px solid #f0f0f8;
+        }
+        .footer-brand { font-size: 1.6rem; font-weight: 800; color: #4B49AC; }
+        .footer-brand span { color: #7DA0FA; }
+        .footer a { text-decoration: none; transition: color 0.2s; }
+        .footer a.text-muted:hover { color: #4B49AC !important; }
+        .social-btn {
+            width: 38px; height: 38px;
+            border-radius: 10px;
+            background: #f4f6fb;
+            display: inline-flex; align-items: center; justify-content: center;
+            color: #4B49AC;
+            transition: all 0.25s;
+            font-size: 1rem;
+        }
+        .social-btn:hover { background: #4B49AC; color: white !important; transform: translateY(-3px); }
+
+        /* ── Misc ── */
+        .gradient-text {
+            background: linear-gradient(135deg, #4B49AC, #7DA0FA);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ── Back to Top ── */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: #4B49AC;
+            color: white !important;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 10px 25px rgba(75, 73, 172, 0.3);
+            cursor: pointer;
+            z-index: 999;
+            transition: all 0.3s;
+            opacity: 0;
+            visibility: hidden;
+            border: none;
+            text-decoration: none !important;
+        }
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .back-to-top:hover {
+            background: #7DA0FA;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(75, 73, 172, 0.4);
+        }
+
+        @@media (max-width: 768px) {
+            .hero-title { font-size: 2.4rem; }
+            .hero-section { padding: 100px 0 80px; border-bottom-left-radius: 40px; border-bottom-right-radius: 40px; }
+            .stats-bar { margin-top: 24px; }
+            .how-section { padding: 36px 24px; }
+            .cta-band { padding: 48px 28px; }
+            .img-overlay-card-top { display: none; }
+            .section-title { font-size: 1.9rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-scroller">
+
+        <!-- ════ NAVBAR ════ -->
+        <nav class="navbar navbar-expand-lg fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="#">SiKasir<span>.exe</span>
+                    @* <span class="nav-badge">v2.0</span> *@
+                </a>
+                <div class="ms-auto d-flex align-items-center gap-3">
+                    <a href="#features" class="text-muted font-weight-600 d-none d-lg-inline" style="font-size:0.9rem;font-weight:600;text-decoration:none;">Fitur</a>
+                    <a href="#how" class="text-muted font-weight-600 d-none d-lg-inline" style="font-size:0.9rem;font-weight:600;text-decoration:none;">Cara Kerja</a>
+                    <a href="@Url.Action("Login", "Account")" class="btn auth-btn">Masuk ke Sistem</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- ════ HERO ════ -->
+        <section class="hero-section">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 animate-up">
+                        <div class="hero-eyebrow">
+                            <span class="dot"></span>
+                            Dipercaya 5.000+ Pengusaha Indonesia
+                        </div>
+                        <h1 class="hero-title">Kasir Pintar untuk <em>Bisnis yang Lebih Maju</em></h1>
+                        <p class="hero-subtitle">Kelola penjualan, stok, dan laporan keuangan dalam satu platform. Cocok untuk warung, toko retail, hingga jaringan multi-cabang.</p>
+                        <div class="d-flex flex-wrap gap-3">
+                            <a href="@Url.Action("Login", "Account")" class="btn btn-cta-primary">
+                                <i class="ti-bolt-alt"></i> Mulai Gratis
+                            </a>
+                            <a href="#features" class="btn btn-cta-ghost">Lihat Fitur</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mt-5 mt-lg-0 animate-up delay-2">
+                        <div class="hero-image-container" style="padding: 0 10px;">
+                            <img src="@Url.Content("~/Content/templete/dist/assets/images/hero-pos.png")" alt="SiKasir POS System" class="hero-img">
+
+                            <div class="img-overlay-card d-none d-sm-flex animate-up delay-3">
+                                <div class="img-overlay-icon">
+                                    <i class="ti-check" style="color:#28a745;font-size:1.2rem;"></i>
+                                </div>
+                                <div>
+                                    <h6>Transaksi Berhasil</h6>
+                                    <small>Baru saja &middot; Rp 250.000</small>
+                                </div>
+                            </div>
+
+                            <div class="img-overlay-card-top d-none d-sm-flex animate-up delay-4">
+                                <div>
+                                    <div class="stat-num">98%</div>
+                                    <div class="stat-label">Kepuasan Pengguna</div>
+                                </div>
+                                <div style="width:2px;height:36px;background:#f0f0f8;margin:0 4px;"></div>
+                                <i class="ti-star" style="color:#ffb703;font-size:1.4rem;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ════ STATS BAR ════ -->
+        <div class="container animate-up delay-3" style="margin-top: 60px;">
+            <div class="stats-bar">
+                <div class="row align-items-center">
+                    <div class="col-6 col-md-3 stat-item">
+                        <div class="num">5.000+</div>
+                        <div class="lbl">Pengguna Aktif</div>
+                    </div>
+                    <div class="col-6 col-md-3 stat-item">
+                        <div class="num">120Jt+</div>
+                        <div class="lbl">Transaksi Diproses</div>
+                    </div>
+                    <div class="col-6 col-md-3 stat-item mt-4 mt-md-0">
+                        <div class="num">34</div>
+                        <div class="lbl">Provinsi di Indonesia</div>
+                    </div>
+                    <div class="col-6 col-md-3 stat-item mt-4 mt-md-0">
+                        <div class="num">99.9%</div>
+                        <div class="lbl">Uptime Sistem</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ════ FEATURES ════ -->
+        <section id="features" class="container py-5 mt-5">
+            <div class="text-center mb-5 animate-up">
+                <p class="section-eyebrow">Kenapa SiKasir.exe?</p>
+                <h2 class="section-title">Semua yang Dibutuhkan<br>Bisnis Anda, dalam Satu Tempat</h2>
+            </div>
+            <div class="row mt-4 g-4">
+                <!-- Card 1 -->
+                <div class="col-md-4 animate-up delay-1">
+                    <div class="card feature-card">
+                        <div class="feature-card-top" style="background: linear-gradient(90deg,#4B49AC,#7DA0FA);"></div>
+                        <div class="card-body">
+                            <div class="feature-icon" style="background:#f0f0ff;color:#4B49AC;">
+                                <i class="ti-layout-grid2"></i>
+                            </div>
+                            <span class="feature-tag" style="background:#f0f0ff;color:#4B49AC;">Real-time</span>
+                            <h4>Dashboard Interaktif</h4>
+                            <p>Pantau omzet, produk terlaris, dan performa cabang melalui grafik yang diperbarui secara real-time, langsung dari satu layar.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="col-md-4 animate-up delay-2">
+                    <div class="card feature-card">
+                        <div class="feature-card-top" style="background: linear-gradient(90deg,#4B49AC,#7DA0FA);"></div>
+                        <div class="card-body">
+                            <div class="feature-icon" style="background:#f0f0ff;color:#4B49AC;">
+                                <i class="ti-package"></i>
+                            </div>
+                            <span class="feature-tag" style="background:#f0f0ff;color:#4B49AC;">Otomatis</span>
+                            <h4>Manajemen Stok</h4>
+                            <p>Kelola stok antar cabang secara otomatis. Notifikasi stok menipis dikirim langsung agar bisnis Anda tidak pernah berhenti karena kehabisan barang.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="col-md-4 animate-up delay-3">
+                    <div class="card feature-card">
+                        <div class="feature-card-top" style="background: linear-gradient(90deg,#4B49AC,#7DA0FA);"></div>
+                        <div class="card-body">
+                            <div class="feature-icon" style="background:#f0f0ff;color:#4B49AC;">
+                                <i class="ti-receipt"></i>
+                            </div>
+                            <span class="feature-tag" style="background:#f0f0ff;color:#4B49AC;">1-Klik</span>
+                            <h4>Laporan Keuangan</h4>
+                            <p>Cetak laporan harian, bulanan, hingga tahunan dengan sekali klik. Ekspor langsung ke Excel atau PDF siap kirim ke akuntan Anda.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 4 -->
+                <div class="col-md-4 animate-up delay-1">
+                    <div class="card feature-card">
+                        <div class="feature-card-top" style="background: linear-gradient(90deg,#4B49AC,#7DA0FA);"></div>
+                        <div class="card-body">
+                            <div class="feature-icon" style="background:#f0f0ff;color:#4B49AC;">
+                                <i class="ti-user"></i>
+                            </div>
+                            <span class="feature-tag" style="background:#f0f0ff;color:#4B49AC;">CRM</span>
+                            <h4>Data Pelanggan</h4>
+                            <p>Simpan riwayat pembelian pelanggan, buat program loyalitas, dan kirim promo spesial untuk meningkatkan repeat order.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 5 -->
+                <div class="col-md-4 animate-up delay-2">
+                    <div class="card feature-card">
+                        <div class="feature-card-top" style="background: linear-gradient(90deg,#4B49AC,#7DA0FA);"></div>
+                        <div class="card-body">
+                            <div class="feature-icon" style="background:#f0f0ff;color:#4B49AC;">
+                                <i class="ti-credit-card"></i>
+                            </div>
+                            <span class="feature-tag" style="background:#f0f0ff;color:#4B49AC;">Multi-Bayar</span>
+                            <h4>Berbagai Metode Pembayaran</h4>
+                            <p>Terima tunai, QRIS, transfer bank, dan kartu debit/kredit dalam satu sistem tanpa perlu mesin EDC tambahan.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 6 -->
+                <div class="col-md-4 animate-up delay-3">
+                    <div class="card feature-card">
+                        <div class="feature-card-top" style="background: linear-gradient(90deg,#4B49AC,#7DA0FA);"></div>
+                        <div class="card-body">
+                            <div class="feature-icon" style="background:#f0f0ff;color:#4B49AC;">
+                                <i class="ti-mobile"></i>
+                            </div>
+                            <span class="feature-tag" style="background:#f0f0ff;color:#4B49AC;">Anywhere</span>
+                            <h4>Akses dari Mana Saja</h4>
+                            <p>Pantau dan kelola bisnis Anda dari smartphone atau laptop kapanpun dan dimanapun, tanpa batas perangkat.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ════ HOW IT WORKS ════ -->
+        <section id="how" class="container mb-5 animate-up">
+            <div class="how-section">
+                <div class="row align-items-center">
+                    <div class="col-lg-5 mb-5 mb-lg-0">
+                        <p class="section-eyebrow">Cara Kerja</p>
+                        <h2 class="section-title mb-4">Mulai dalam 3 Langkah Mudah</h2>
+                        <p class="text-muted" style="font-size:0.95rem;line-height:1.8;">Tidak perlu pelatihan teknis. SiKasir.exe dirancang agar siapapun bisa langsung pakai sejak hari pertama.</p>
+                    </div>
+                    <div class="col-lg-6 offset-lg-1">
+                        <div class="d-flex gap-4 mb-4 align-items-start">
+                            <div class="step-num flex-shrink-0">1</div>
+                            <div>
+                                <h5 class="font-weight-bold mb-1" style="color:#1a1a2e;">Daftar & Atur Toko</h5>
+                                <p class="text-muted mb-0" style="font-size:0.9rem;line-height:1.7;">Buat akun, isi nama toko, dan unggah produk Anda. Proses ini hanya butuh 5 menit.</p>
+                            </div>
+                        </div>
+                        <div style="width:2px;height:28px;background:linear-gradient(to bottom,#7DA0FA,#e0e7ff);margin-left:25px;margin-bottom:0;"></div>
+                        <div class="d-flex gap-4 mb-4 align-items-start">
+                            <div class="step-num flex-shrink-0">2</div>
+                            <div>
+                                <h5 class="font-weight-bold mb-1" style="color:#1a1a2e;">Mulai Transaksi</h5>
+                                <p class="text-muted mb-0" style="font-size:0.9rem;line-height:1.7;">Pilih produk, pilih metode bayar, dan transaksi selesai. Struk langsung tersimpan otomatis.</p>
+                            </div>
+                        </div>
+                        <div style="width:2px;height:28px;background:linear-gradient(to bottom,#7DA0FA,transparent);margin-left:25px;margin-bottom:0;"></div>
+                        <div class="d-flex gap-4 align-items-start">
+                            <div class="step-num flex-shrink-0">3</div>
+                            <div>
+                                <h5 class="font-weight-bold mb-1" style="color:#1a1a2e;">Pantau & Kembangkan</h5>
+                                <p class="text-muted mb-0" style="font-size:0.9rem;line-height:1.7;">Analisis laporan penjualan, cek stok, dan buat keputusan bisnis berdasarkan data nyata.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ════ TESTIMONIALS ════ -->
+        <section class="container-fluid px-0 mb-5 animate-up" style="overflow:hidden;">
+            <div class="text-center mb-5 container">
+                <p class="section-eyebrow">Testimoni</p>
+                <h2 class="section-title">Kata Mereka yang Sudah Merasakannya</h2>
+            </div>
+            
+            <div class="testimonial-track">
+                <!-- Set 1 -->
+                <div class="testimonial-card">
+                    <div class="stars mb-3">
+                        <i class="ti-star"></i><i class="ti-star"></i><i class="ti-star"></i><i class="ti-star"></i><i class="ti-star"></i>
+                    </div>
+                    <p class="text-muted mb-4" style="font-size:0.9rem;line-height:1.8;">"Sejak pakai SiKasir.exe, pembukuan toko saya jauh lebih rapi. Laporan harian langsung bisa saya kirim ke WhatsApp. Luar biasa!"</p>
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="avatar-ring">BR</div>
+                        <div>
+                            <div style="font-weight:700;font-size:0.9rem;color:#1a1a2e;">Budi Raharjo</div>
+                            <div style="font-size:0.78rem;color:#aaa;">Pemilik Toko Sembako, Bandung</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card" style="border: 2px solid #7DA0FA;">
+                    <div class="stars mb-3">
+                        <i class="ti-star"></i><i class="ti-star"></i><i class="ti-star"></i><i class="ti-star"></i><i class="ti-star"></i>
+                    </div>
+                    <p class="text-muted mb-4" style="font-size:0.9rem;line-height:1.8;">"Kami punya 3 cabang. SiKasir.exe membantu kami memantau stok dan penjualan semua cabang dari satu layar saja."</p>
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="avatar-ring" style="border-color:#4B49AC;">SR</div>
+                        <div>
+                            <div style="font-weight:700;font-size:0.9rem;color:#1a1a2e;">Sari Ramadhani</div>
+                            <div style="font-size:0.78rem;color:#aaa;">Owner Minimarket, Surabaya</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars mb-3">
+                        <i class="ti-star"></i><i class="ti-star"></i><i class="ti-star"></i><i class="ti-star"></i><i class="ti-star"></i>
+                    </div>
+                    <p class="text-muted mb-4" style="font-size:0.9rem;line-height:1.8;">"Karyawan saya yang tidak melek teknologi pun bisa langsung pakai. Antarmukanya sangat ramah pengguna."</p>
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="avatar-ring" style="border-color:#28a745;">AN</div>
+                        <div>
+                            <div style="font-weight:700;font-size:0.9rem;color:#1a1a2e;">Ahmad Nugroho</div>
+                            <div style="font-size:0.78rem;color:#aaa;">Pemilik Cafe, Yogyakarta</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Set 2 (Duplikasi untuk efek loop) -->
+                <div class="testimonial-card">
+                    <div class="stars mb-3">
+                        <i class="ti-star"></i><i class="ti-star"></i><i class="ti-star"></i><i class="ti-star"></i><i class="ti-star"></i>
+                    </div>
+                    <p class="text-muted mb-4" style="font-size:0.9rem;line-height:1.8;">"Sejak pakai SiKasir.exe, pembukuan toko saya jauh lebih rapi. Laporan harian langsung bisa saya kirim ke WhatsApp. Luar biasa!"</p>
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="avatar-ring">BR</div>
+                        <div>
+                            <div style="font-weight:700;font-size:0.9rem;color:#1a1a2e;">Budi Raharjo</div>
+                            <div style="font-size:0.78rem;color:#aaa;">Pemilik Toko Sembako, Bandung</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card" style="border: 2px solid #7DA0FA;">
+                    <div class="stars mb-3">
+                        <i class="ti-star"></i><i class="ti-star"></i><i class="ti-star"></i><i class="ti-star"></i><i class="ti-star"></i>
+                    </div>
+                    <p class="text-muted mb-4" style="font-size:0.9rem;line-height:1.8;">"Kami punya 3 cabang. SiKasir.exe membantu kami memantau stok dan penjualan semua cabang dari satu layar saja."</p>
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="avatar-ring" style="border-color:#4B49AC;">SR</div>
+                        <div>
+                            <div style="font-weight:700;font-size:0.9rem;color:#1a1a2e;">Sari Ramadhani</div>
+                            <div style="font-size:0.78rem;color:#aaa;">Owner Minimarket, Surabaya</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars mb-3">
+                        <i class="ti-star"></i><i class="ti-star"></i><i class="ti-star"></i><i class="ti-star"></i><i class="ti-star"></i>
+                    </div>
+                    <p class="text-muted mb-4" style="font-size:0.9rem;line-height:1.8;">"Karyawan saya yang tidak melek teknologi pun bisa langsung pakai. Antarmukanya sangat ramah pengguna."</p>
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="avatar-ring" style="border-color:#28a745;">AN</div>
+                        <div>
+                            <div style="font-weight:700;font-size:0.9rem;color:#1a1a2e;">Ahmad Nugroho</div>
+                            <div style="font-size:0.78rem;color:#aaa;">Pemilik Cafe, Yogyakarta</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ════ CTA BAND ════ -->
+        <section class="container my-5 animate-up">
+            <div class="cta-band">
+                <div style="position:relative;z-index:1;">
+                    <p style="font-size:0.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-bottom:14px;">Bergabung Sekarang</p>
+                    <h2 class="font-weight-bold text-white mb-3" style="font-size:2.4rem;letter-spacing:-0.5px;">Siap Bawa Bisnis Anda<br>ke Level Berikutnya?</h2>
+                    <p style="color:rgba(255,255,255,0.78);font-size:1.05rem;margin-bottom:40px;">Daftar gratis hari ini tidak perlu kartu kredit.</p>
+                    <div class="d-flex justify-content-center gap-3 flex-wrap">
+                        <a href="@Url.Action("Login", "Account")" class="btn btn-cta-primary">
+                            <i class="ti-bolt-alt"></i> Mulai Gratis Sekarang
+                        </a>
+                        <a href="#features" class="btn btn-cta-ghost">Pelajari Fitur</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ════ FOOTER ════ -->
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 mb-5 mb-md-0">
+                        <div class="footer-brand mb-3">SiKasir<span>.exe</span></div>
+                        <p class="text-muted" style="font-size:0.88rem;line-height:1.8;max-width:280px;">Solusi kasir digital terpercaya untuk UMKM dan bisnis retail Indonesia. Mudah, cepat, dan terjangkau.</p>
+                        <div class="mt-4 d-flex gap-2">
+                            <a href="#" class="social-btn"><i class="ti-facebook"></i></a>
+                            <a href="#" class="social-btn"><i class="ti-twitter-alt"></i></a>
+                            <a href="#" class="social-btn"><i class="ti-instagram"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-2 offset-md-1 mb-4 mb-md-0">
+                        <h6 class="font-weight-bold mb-4" style="font-size:0.85rem;color:#1a1a2e;">Perusahaan</h6>
+                        <ul class="list-unstyled">
+                            <li class="mb-3"><a href="#" class="text-muted" style="font-size:0.85rem;">Tentang Kami</a></li>
+                            <li class="mb-3"><a href="#" class="text-muted" style="font-size:0.85rem;">Karir</a></li>
+                            <li class="mb-3"><a href="#" class="text-muted" style="font-size:0.85rem;">Kontak</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-6 col-md-2 mb-4 mb-md-0">
+                        <h6 class="font-weight-bold mb-4" style="font-size:0.85rem;color:#1a1a2e;">Produk</h6>
+                        <ul class="list-unstyled">
+                            <li class="mb-3"><a href="#" class="text-muted" style="font-size:0.85rem;">Fitur</a></li>
+                            <li class="mb-3"><a href="#" class="text-muted" style="font-size:0.85rem;">Harga</a></li>
+                            <li class="mb-3"><a href="#" class="text-muted" style="font-size:0.85rem;">Testimoni</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <h6 class="font-weight-bold mb-4" style="font-size:0.85rem;color:#1a1a2e;">Bantuan</h6>
+                        <ul class="list-unstyled">
+                            <li class="mb-3"><a href="#" class="text-muted" style="font-size:0.85rem;">Pusat Bantuan</a></li>
+                            <li class="mb-3"><a href="#" class="text-muted" style="font-size:0.85rem;">Panduan Pengguna</a></li>
+                            <li class="mb-3"><a href="#" class="text-muted" style="font-size:0.85rem;">Syarat & Ketentuan</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <hr class="my-5" style="border-color:#f0f0f8;">
+                <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+                    <div class="text-muted" style="font-size:0.82rem;">&copy; @DateTime.Now.Year SiKasir.exe - Dikembangkan oleh Firdinal Juliandre.</div>
+                    <div class="d-flex gap-4">
+                        <a href="#" class="text-muted" style="font-size:0.82rem;">Privasi</a>
+                        <a href="#" class="text-muted" style="font-size:0.82rem;">Ketentuan</a>
+                        <a href="#" class="text-muted" style="font-size:0.82rem;">Cookie</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- ── Back to Top Button ── -->
+    <button id="backToTop" class="back-to-top" title="Kembali ke Atas">
+        <i class="ti-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="@Url.Content("~/Content/templete/dist/assets/vendors/js/vendor.bundle.base.js")"></script>
+    <script src="@Url.Content("~/Content/templete/dist/assets/js/off-canvas.js")"></script>
+    <script src="@Url.Content("~/Content/templete/dist/assets/js/template.js")"></script>
+
+    <script>
+        // Scroll-triggered animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.style.animationPlayState = 'running';
+                    observer.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.animate-up').forEach(el => {
+            el.style.animationPlayState = 'paused';
+            observer.observe(el);
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            const backToTop = document.getElementById('backToTop');
+            
+            if (window.scrollY > 30) {
+                navbar.style.boxShadow = '0 4px 20px rgba(0,0,0,0.08)';
+            } else {
+                navbar.style.boxShadow = '0 1px 0 rgba(0,0,0,0.06)';
+            }
+
+            // Show/hide Back to Top button
+            if (window.scrollY > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+
+        // Back to Top functionality
+        document.getElementById('backToTop').addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>
